@@ -1,0 +1,593 @@
+﻿蚁群算法，实践中发现，与参数的设置有很大的关系
+有时参数设置不对，总是找不到最优路径，有时设置好相关参数值，很快就出结果了
+例如demo.txt中的数据，试过很久，才发现下面的设置很快出结果，否则没有结果，不知原因
+粒子群算法在学习中，粒子群算法与蚁群算法的对比，学习中
+发现，蚁群算法，有时会停在一个不动值上，不再变动，可能就是所谓的局部最优解，不会再变，但不是全局最优解，象极值不是最值一样。学习中，很多情况并不明确了解
+
+蚁群中蚂蚁数：200
+信息素重要程度alpha：16
+启发式因子重要程度beta：5
+信息素挥发(百分数)rho：38
+信息素初始值(百分数)：13
+delta初始值(百分数)：11
+蚁群数量(迭代数)：200
+
+
+
+暂部分公开蚁群算法源码，我也不是很明，大家一齐来学习：
+1，这代码没有时间去优化，做得出来，看到可视化结果就停止了，很多调试时的变量，临时的代码没清理，因为看得不是很明白，相当于学生作品，不成熟的，半成品
+2，调试时错漏百出，搞得明白某个变量是啥意思，就不理了，有时出现一堆-1值，也不是很明白，关键是出来的返回值是不是有用的。
+3，我开发这小软件沒钱赚的，纯个人兴趣网上免费发行。生活中很多事处理，这种不知有没有用的小软件是不确定的玩游戏一样的，不想去优化，也不知有没有用。
+→猜测估计：近似算法都是极值，如果与全局一致就成了精确算法的最值？？？映射原理？
+
+
+unit aco;
+
+interface
+
+uses
+  classes, extctrls, Messages, controls, Graphics, Windows, SysUtils, ant,
+  Forms, TSP_EA;
+
+type
+
+  TACO = class(Tcomponent)
+  private
+
+  private
+    ants: array of Tant; // 蚂蚁
+  private
+    antNum: integer; // 蚂蚁数量
+  private
+    cityNum: integer; // 城市数量
+  private
+    MAX_GEN: integer; // 运行代数
+  private
+    // bestLength: double; // 最佳长度
+  private
+    // bestTour: array of integer; // 最佳路径
+  private
+    pheromone: TDARRAY; // 信息素矩阵信息素矩阵(tau_ij)
+    // 三个参数
+  private
+    alpha: double; // 信息启发式因子，表示轨迹的相对重要性
+  private
+    beta: double; // 期望式启发因子，表示能见度的相对重要性
+  private
+    rho: double; // 表示信息挥发系数，（1-rho）表示信息残留因子，通常[0 <= rho <= 1]
+
+  public
+    pheromone0: double;
+    vfff: tform;
+    bestLength: double; // 最佳长度
+    bestTour: array of integer; // 最佳路径
+    constructor Create(n, m, gMAX_GEN: integer;
+      alpha0, beta0, rho0, pheromone00: double; fff: tform);
+    destructor Destroy; override;
+    procedure updatePheromone;
+    procedure printOptimal;
+    function init: integer;
+    function solve: integer;
+    function setg(m, gMAX_GEN: integer;
+      alpha0, beta0, rho0, pheromone00: double): integer;
+  end;
+
+var
+  distance: TDARRAY; // 距离矩阵
+  // distance: TIARRAY; // 距离矩阵
+  x: array of integer;
+  y: array of integer;
+  z: array of double;
+
+  // 蚁群中蚂蚁数：200
+  // 信息素重要程度alpha：16
+  // 启发式因子重要程度beta：5
+  // 信息素挥发(百分数)rho：38
+  // 信息素初始值(百分数)：13
+  // delta初始值(百分数)：11
+  // 蚁群数量(迭代数)：200
+implementation
+
+uses
+  Math, TSP_form;
+
+constructor TACO.Create(n, m, gMAX_GEN: integer;
+  alpha0, beta0, rho0, pheromone00: double; fff: tform);
+var
+  i: integer;
+begin
+
+  inherited Create(fff);
+  cityNum := n;
+  setlength(distance, 0, 0);
+  setlength(distance, cityNum, cityNum);
+
+  MAX_GEN := gMAX_GEN;
+  alpha := alpha0;
+  beta := beta0;
+  rho := rho0;
+  pheromone0 := pheromone00;
+  
+  antNum := m;
+  setlength(ants, antNum);
+  MAX_GEN := gMAX_GEN;
+  alpha := alpha0;
+  beta := beta0;
+  rho := rho0;
+  pheromone0 := pheromone00;
+  
+  
+  vfff := fff;
+  if bestLength = 0 then
+    bestLength := 10000000;
+end;
+
+destructor TACO.Destroy;
+var
+  i: integer;
+begin
+  inherited;
+
+end;
+
+procedure TACO.updatePheromone;
+var
+  i, j, k: integer;
+begin
+  // 信息素挥发
+  for i := 0 to cityNum - 1 do
+    for j := 0 to cityNum - 1 do
+      pheromone[i][j] := pheromone[i][j] * (1 - rho);
+  // 信息素更新
+  for i := 0 to cityNum - 1 do
+    for j := 0 to cityNum - 1 do
+    begin
+      for k := 0 to antNum - 1 do
+        pheromone[i][j] := pheromone[i][j] + ants[k].Delta[i][j];
+      if (pheromone[i, j] < 0.00001) then // 信息素下界，信息素过少不能较好的加深最佳解
+        pheromone[i, j] := 0.00001;
+      if (pheromone[i, j] > 20) then // 信息素上界，信息素过多会淹没启发信息
+        pheromone[i, j] := 20;
+    end;
+end;
+
+function TACO.init: integer;
+var
+  i, j, k, tij: integer;
+  rij: double;
+  line: string;
+  www, qq: tstringlist;
+  x: array of integer;
+  y: array of integer;
+  z: array of double;
+begin
+  // 计算距离矩阵
+  // ，针对具体问题，距离计算方法也不一样，此处用的是att48作为案例，它有48个城市，距离计算方法为伪欧氏距离，最优值为10628
+  setlength(x, cityNum);
+  setlength(y, cityNum);
+  setlength(z, cityNum);
+  for i := 0 to cityNum - 1 do
+  begin
+    x[i] := trunc(MainForm.Display.Controller.Cities[i].x);
+    y[i] := trunc(MainForm.Display.Controller.Cities[i].y);
+    z[i] := (MainForm.Display.Controller.Cities[i].z);
+  end;
+
+
+  for i := 0 to cityNum - 1 do
+  begin
+    distance[i][i] := 0; // 对角线为0
+    MainForm.Display.Controller.curdistance[i][i] := 0;
+    for j := i + 1 to cityNum - 1 do
+    begin
+      begin
+        rij := sqrt(((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) *
+          (y[i] - y[j])) / 1.0) * MainForm.Display.Controller.EdgeWeight[i][j];
+        if MainForm.Display.Controller.distance[i][j] = -1.0 then
+        begin
+          // distance[i][j] :=  rij;
+          // distance[j][i] :=  rij;
+          distance[i][j] := rij + z[i];
+          distance[j][i] := rij + z[j];
+          MainForm.Display.Controller.curdistance[i][j] := distance[i][j];
+          MainForm.Display.Controller.curdistance[j][i] := distance[j][i];
+
+        end
+        else
+        begin
+          // distance[i][j] := MainForm.Display.Controller.distance[i][j];
+          // distance[j][i] := MainForm.Display.Controller.distance[i][j];
+          distance[i][j] := MainForm.Display.Controller.distance[i][j] + z[i];
+          // 不是 代替SQRT，否则仍然要乘以权数，自定义边长则不再乘权数乎
+          distance[j][i] := MainForm.Display.Controller.distance[i][j] + z[j];
+          MainForm.Display.Controller.curdistance[i][j] := distance[i][j];
+          MainForm.Display.Controller.curdistance[j][i] := distance[j][i];
+        end;
+      end;
+    end;
+  end;
+  distance[cityNum - 1][cityNum - 1] := 0;
+  MainForm.Display.Controller.curdistance[cityNum - 1][cityNum - 1] := 0;
+  // 初始化信息素矩阵
+  setlength(pheromone, cityNum, cityNum);
+  for i := 0 to cityNum - 1 do
+  begin
+    for j := 0 to cityNum - 1 do
+      pheromone[i][j] := pheromone0; // 0.1; 信息素初始值，别人要计算的。
+  end;
+  
+  setlength(bestTour, cityNum + 1);
+  // 随机放置蚂蚁
+  for i := 0 to antNum - 1 do
+  begin
+    ants[i] := Tant.Create(cityNum, vfff, TMainForm(vfff).Delta.Value /
+      100.0, self);
+    ants[i].init(alpha, beta);
+  end;
+
+end;
+
+function TACO.solve: integer;
+var
+  i, j, k, g: integer;
+  rij: double;
+begin
+  MainForm.ProgressBar1.Visible := true;
+  MainForm.ProgressBar1.Max := MAX_GEN;
+  MainForm.ProgressBar1.Position := 0;
+  for g := 0 to MAX_GEN do
+  begin
+    MainForm.ProgressBar1.Position := MainForm.ProgressBar1.Position + 1;
+    for i := 0 to antNum - 1 do
+    begin
+      for j := 1 to cityNum - 1 do // 这句翻译错了，不是从0，而是从1
+
+        ants[i].selectNextCity(pheromone);
+
+      ants[i].getTabu().add(inttostr(ants[i].FirstCity));
+      // 此句使其成圆形路径。function TAnt.calculateTourLength: integer;之中用到。
+      if ants[i].getTourLength > 0 then
+        if (ants[i].getTourLength < bestLength) then
+        begin
+          // MainForm.Memo2.Lines.Add('旧总路长: ' + inttostr(bestLength));
+          bestLength := ants[i].getTourLength();
+          // MainForm.Memo2.Lines.Add('新总路长: ' + inttostr(bestLength));
+          for k := 0 to cityNum do
+            bestTour[k] := strtoint(ants[i].getTabu().strings[k]);
+
+        end;
+      for j := 0 to cityNum - 1 do
+      begin
+        if ants[i].getTourLength() = 0 then
+          continue;
+        ants[i].Delta[strtoint(ants[i].getTabu().strings[j])
+          ][strtoint(ants[i].getTabu().strings[j + 1])] :=
+          (1. / ants[i].getTourLength());
+        ants[i].Delta[strtoint(ants[i].getTabu().strings[j + 1])
+          ][strtoint(ants[i].getTabu().strings[j])] :=
+          (1. / ants[i].getTourLength());
+      end;
+      // beep;
+
+    end;
+
+    // 更新信息素
+    updatePheromone();
+    // 重新初始化蚂蚁
+    for i := 0 to antNum - 1 do
+    begin
+      ants[i].init(alpha, beta);
+    end;
+  end;
+  for i := 0 to antNum - 1 do
+  begin
+    Tant(ants[i]).Free;
+    ants[i] := nil;
+  end;
+  MainForm.ProgressBar1.Visible := false;
+  // 打印最佳结果
+  printOptimal;
+end;
+
+procedure TACO.printOptimal;
+var
+  i: integer;
+  www: tstringlist;
+  Atom: TAtom;
+  S: ShortString;
+  New: TTSPIndividual;
+begin
+  MainForm.Memo2.Lines.add('================');
+  MainForm.Memo2.Lines.add('总路长: ' + floattostr(bestLength));
+  MainForm.Memo2.Lines.add('路径: ');
+  for i := 0 to cityNum - 1 do
+    MainForm.Memo2.Lines.add(MainForm.PMemo[bestTour[i]]);
+  New := TTSPIndividual.Create(cityNum);
+  for i := 0 to cityNum - 1 do
+    New.RouteArray[i] := bestTour[i];
+  MainForm.R_ACO := New;
+  MainForm.Display.DrawMapWithRoute(New, 2);
+end;
+
+function TACO.setg(m, gMAX_GEN: integer;
+  alpha0, beta0, rho0, pheromone00: double): integer;
+begin
+  antNum := m;
+  setlength(ants, antNum);
+  MAX_GEN := gMAX_GEN;
+  alpha := alpha0;
+  beta := beta0;
+  rho := rho0;
+  pheromone0 := pheromone00;
+end;
+
+end.
+
+
+
+unit ant;
+
+interface
+
+uses
+  classes, extctrls, controls, Graphics, Windows, SysUtils, forms;
+
+type
+  TDARRAY = array of array of double;
+  TIARRAY = array of array of integer;
+  TSARRAY = array of array of string;
+
+  TAnt = class(Tcomponent)
+  private
+  private
+    vdelta: TDARRAY; // 信息数变化矩阵   // 信息素增量矩阵(detatao_ij)
+    // private vdistance: TDARRAY; //距离矩阵//事前根据坐标已一次性计算好的，不用再计算。//实际上是个全局表，传来传去无意义
+    vdistance: TDARRAY; // 距离矩阵//事前根据坐标已一次性计算好的，不用再计算。//实际上是个全局表，传来传去无意义
+  private
+    alpha: double; // 信息启发式因子，表示轨迹的相对重要性
+  private
+    beta: double; // 期望式启发因子，表示能见度的相对重要性
+  private
+    tabu: Tstringlist; // 禁忌表//已搜过的城市
+
+  private
+    cityNum: integer; // 城市数量
+  private
+    tourLength: double; // 路径长度//相加耳。
+  private
+    vfirstCity: integer; // 起始城市//实际上为第二城市，因为大家有一个公共的起始城市乎。
+  private
+    // currentCity: integer; // 当前城市
+    function GetFirstCity: integer;
+    procedure SetFirstCity(const Value: integer);
+    function GetCityNum: integer;
+    procedure SetCityNum(const Value: integer);
+
+    function GetDelta: TDARRAY;
+    procedure SetDelta(const Value: TDARRAY);
+  public
+    delta0: double;
+    vfff: tform;
+	taco0:Tcomponent;//TACO
+    allowedCities: Tstringlist; // 允许搜索的城市//未搜过的城市
+    currentCity: integer; // 当前城市
+    constructor Create(num: integer; fff: tform;delta00:double;taco00:Tcomponent);
+    destructor Destroy; override;
+    property FirstCity: integer read GetFirstCity write SetFirstCity;
+    property Delta: TDARRAY read GetDelta write SetDelta;
+    function calculateTourLength(): double;
+    // function init(vdistance:TDARRAY;  a:double;  b:double):integer;
+    function init(a: double; b: double): integer;
+    procedure selectNextCity(pheromone: TDARRAY);
+    function getTabu: Tstringlist;
+    function GetTourLength: double;
+    procedure SetTourLength(const Value: double);
+  end;
+
+implementation
+
+uses
+  Math, aco;
+
+{ Painter0 }
+
+constructor TAnt.Create(num: integer; fff: tform;delta00:double;taco00:Tcomponent);
+begin
+  inherited Create(fff);
+  cityNum := num;
+  tourLength := 0;
+  allowedCities := Tstringlist.Create;
+  tabu := Tstringlist.Create;
+  delta0:=delta00;
+  taco0:=taco00;
+end;
+
+destructor TAnt.Destroy;
+begin
+  inherited;
+  allowedCities.free;
+  tabu.free;
+
+end;
+
+function TAnt.GetFirstCity: integer;
+begin
+  result := vfirstCity;
+end;
+
+procedure TAnt.SetFirstCity(const Value: integer);
+begin
+  vfirstCity := Value;
+
+end;
+
+function TAnt.GetCityNum: integer;
+begin
+  result := cityNum;
+end;
+
+procedure TAnt.SetCityNum(const Value: integer);
+begin
+  cityNum := Value;
+
+end;
+
+function TAnt.GetTourLength: double;
+begin
+  result := calculateTourLength();
+end;
+
+procedure TAnt.SetTourLength(const Value: double);
+begin
+  tourLength := Value;
+
+end;
+
+function TAnt.calculateTourLength: double;
+var
+  i: integer;
+  len: double;
+begin
+  len := 0;
+  for i := 0 to cityNum - 1 do
+  begin
+    len := len + aco.distance[strtoint(tabu.Strings[i])][strtoint(tabu.Strings[i + 1])];
+  end;
+end;
+
+function TAnt.init(a: double; b: double): integer;
+var
+  i, j: integer;
+begin
+  alpha := a;
+  beta := b;
+  allowedCities.Clear;
+  tabu.Clear;
+  // distance := vdistance;
+  setlength(vdelta, cityNum, cityNum);
+  for i := 0 to cityNum - 1 do
+  begin
+    allowedCities.add(inttostr(i));
+    for j := 0 to cityNum - 1 do
+      Delta[i][j] := delta0;
+      //Delta[i][j] := TACO(taco0).pheromone0;
+      //Delta[i][j] :=   TMainForm( fff).
+  end;
+
+  Randomize;
+
+  FirstCity := Random(cityNum);
+  for i := 0 to allowedCities.Count - 1 do
+  begin
+    if strtoint(allowedCities.Strings[i]) = FirstCity then
+    begin
+      allowedCities.Delete(i);
+      break;
+    end;
+  end;
+
+  tabu.add(inttostr(FirstCity));
+  currentCity := FirstCity;
+
+end;
+
+procedure TAnt.selectNextCity(pheromone: TDARRAY);
+var
+  p: array of double;
+  sum, sleectP, sum1: double;
+  i, j, selectCity: integer;
+  flag: boolean;
+begin
+  setlength(p, cityNum);
+  sum := 0.0;
+  // 计算分母部分
+  for i := 0 to allowedCities.Count - 1 do
+  begin
+    sum := sum + power(pheromone[currentCity][strtoint(allowedCities.Strings[i])
+      ], alpha) *
+      power(1.0 / max(distance[currentCity][strtoint(allowedCities.Strings[i])],
+      0.0001), beta);
+  end;
+  // 计算概率矩阵
+  for i := 0 to cityNum - 1 do
+  begin
+    flag := false;
+    for j := 0 to allowedCities.Count - 1 do
+    begin
+
+      if (i = strtoint(allowedCities.Strings[j])) then
+      begin
+        p[i] := (power(pheromone[currentCity][i], alpha) *
+          power(1.0 / max(distance[currentCity][i], 0.0001), beta)) / sum;
+        flag := true;
+        break;
+      end;
+    end;
+
+    if (flag = false) then
+      p[i] := 0.0;
+    //sum1 := sum1 + p[i];
+  end;
+
+  // 轮盘赌选择下一个城市
+  Randomize;
+
+  sleectP := Random; // *sum1;//(trunc(sum1));// random;
+  // sleectP :=random(trunc(sum1));// random;
+  selectCity := -1;
+  sum1 := 0.0;
+  j := 1;
+  while (1 = 1) do
+  begin
+    sum1 := 0.0;
+    for i := 0 to cityNum - 1 do
+    begin
+      sum1 := sum1 + j * p[i];
+      if (sum1 >= sleectP) then
+      begin
+        selectCity := i; // strtoint(allowedCities.Strings[i]);
+        break;
+      end;
+    end;
+    if selectCity = -1 then
+      j := j + 1
+    else
+      break;
+  end;
+  // 从允许选择的城市中去除select city
+  for i := 0 to allowedCities.Count - 1 do
+  begin
+    if strtoint(allowedCities.Strings[i]) = selectCity then
+    begin
+      allowedCities.Delete(i);
+      break;
+    end;
+  end;
+  // 在禁忌表中添加select city
+  tabu.add(inttostr(selectCity));
+  // 将当前城市改为选择的城市
+  currentCity := selectCity;
+
+end;
+
+function TAnt.GetDelta: TDARRAY;
+begin
+  result := vdelta;
+end;
+
+procedure TAnt.SetDelta(const Value: TDARRAY);
+begin
+  vdelta := Value;
+end;
+
+function TAnt.getTabu: Tstringlist;
+begin
+  result := tabu;
+end;
+
+end.
+
+
+
+
+

@@ -1,0 +1,624 @@
+﻿粒子群算法
+
+调试中发现，当粒子数高于10时易报错，不太清什么原因，因为我也是学习中，从网上下载来的源码，是不同的编程语言的，翻译成可用的，且各种参数是啥意思也是猜测的，调试中，发现，结果有时正确，有时不正确，所以，是用来学习的，或者，临时顶住实用下也无妨吧，不建议正式场合使用。
+
+暂部分公开粒子群算法源码，我也不是很明，大家一齐来学习：
+1，这代码没有时间去优化，做得出来，看到可视化结果就停止了，很多调试时的变量，临时的代码没清理，因为看得不是很明白，相当于学生作品，不成熟的，半成品
+2，调试时错漏百出，搞得明白某个变量是啥意思，就不理了，有时出现一堆-1值，也不是很明白，关键是出来的返回值是不是有用的。
+3，我开发这小软件沒钱赚的，纯个人兴趣网上免费发行。生活中很多事处理，这种不知有没有用的小软件是不确定的玩游戏一样的，不想去优化，也不知有没有用。
+→猜测估计：近似算法都是极值，如果与全局一致就成了精确算法的最值？？？映射原理？
+
+unit PSO;
+
+interface
+
+uses
+  classes, extctrls, Messages, controls, Graphics, Windows, SysUtils,
+  Forms, Vcl.ComCtrls,  TSP_form;
+
+type
+
+  TP3 = record
+    x: Longint;
+    y: Longint;
+    z: Longint;
+  end;
+
+  TP3ARRAY = array of TP3;
+  TPIARRAY = array of integer;
+  TDARRAY = array of array of double;
+  TIARRAY = array of TPIARRAY;
+  TSARRAY = array of array of string;
+
+  TPSO = class(Tcomponent)
+  private
+    distance: TDARRAY; // 距离矩阵
+  private
+    cityNum: integer; // 城市数量
+  private
+    bestLength: double; // 最佳长度
+  private
+    bestTour: array of integer; // 最佳路径
+  private
+    p: array of TNode; // 最佳路径
+  private
+    PSO_distance: TDARRAY; // 距离矩阵
+  public
+    MaxLengthInteger: double;
+    PSONum: integer; // 粒子个数，这里为了方便演示，我们只取两个，观察其运动方向
+    n: integer; // 城市数量
+    allowedCities: Tstringlist;
+    c1: double; // #define c1 2       //个体学习因子c1：
+    c2: double; // #define c2 2       //社会学习因子c2：
+    gbest: double; // #define T  5000
+    vmax: double; // 速度最大值//适应度计算函数，每个粒子都有它的适应度
+    M: integer; // 粒子个数，这里为了方便演示，我们只取两个，观察其运动方向
+    T: integer; // 迭代次数iter：  #define RM RAND_MAX
+    UP: double; // #define UP 0.45
+    LOW: double; // #define LOW 0.35
+    ws: double; // 惯性因子最大值ws:
+    w: double; // 惯性系数w： #define w 0.9
+    we: double; // 惯性因子最小值we:
+    AC: double; // 认知系数：   #define AC 0.5
+    RM: double; // 不是迭代次数iter：  #define RM RAND_MAX  随机数的最大值 ，除之为了取小数
+    Vv: double;
+    iter: integer; // 迭代次数iter：  #define RM RAND_MAX
+    vfff: tform;
+    ProgressBar: TProgressBar;
+    ProgressBarMax: integer;
+    ProgressBarPos: integer;
+    power2: array of integer; // 最佳路径
+
+    x: array of integer;
+    y: array of integer;
+    z: array of double;
+    v: array of double;
+    pbest: array of double;
+    fit: array of double;
+    fcopy: array of double;
+    popu: TIARRAY;
+    popu_copy: TIARRAY;
+    citysxyz: TP3ARRAY;
+    Pbest_popu: TIARRAY;    
+    Gbest_popu: TPIARRAY;
+    constructor Create(PSONum0: integer; fff: tform; vlst: Tstringlist);
+    destructor Destroy; override;
+    procedure printPath;
+    procedure printOptimal;
+    function init: integer;
+    function _init: integer;
+    function main: integer;
+    function PSO: integer;
+    procedure random_shuffle(PSONum0: integer; allowedCities0: Tstringlist);
+    procedure Rand_popu;
+    function fitness_alllength(cc: string; i: integer): double;
+    function fitness_alllength000(cc: string; i: integer): double;
+    function dis(ax, ay, bx, by: integer): double;
+
+    procedure btupdate(); // 更新最优解
+    procedure ppupdate(); // 更新位置
+    procedure CroPb(); // 自我学习
+    procedure CroGb(); // 社会学习
+    procedure mutation(); // 变异
+    procedure Cross(fat, mot: TPIARRAY; T: integer; fff: string); // 交叉    
+    function remove_1(v: integer): integer;
+
+  end;
+
+  // var
+  // distance: TDARRAY; // 距离矩阵
+
+implementation
+
+uses
+  Math;
+
+constructor TPSO.Create(PSONum0: integer; fff: tform; vlst: Tstringlist);
+var
+  i, k, mm: integer;
+  s: string;
+begin
+  inherited Create(fff);  
+  MaxLengthInteger := 987654321098765;  //delphi中Double所表示的数值范围？
+  cityNum := PSONum0;
+  setlength(distance, cityNum, cityNum);
+
+  vfff := fff;
+  // bestLength := 10000000;
+  bestLength := MaxLengthInteger;
+  setlength(p, cityNum);
+  allowedCities := Tstringlist.Create;
+  setlength(power2, cityNum + 1);
+  for i := 0 to cityNum do
+    power2[i] := trunc(power(2, i));
+  // n:= strtoint(trim(vlst[0].Replace('citys=', '', [])));
+  PSONum := strtoint(trim(vlst[0].Replace('PSOnum=', '', [])));
+  n := cityNum;
+
+  ws := strtoint(trim(vlst[1].Replace('PSOws=', '', []))) / 100.0; // 惯性因子最大值ws:
+  w := strtoint(trim(vlst[2].Replace('PSOw=', '', []))) / 100.0; // 惯性系数w：
+  we := strtoint(trim(vlst[3].Replace('PSOwe=', '', []))) / 100.0; // 惯性因子最小值we:
+  Vv := strtoint(trim(vlst[4].Replace('PSOVv=', '', []))) / 100.0; // 认知系数：
+  c1 := strtoint(trim(vlst[5].Replace('PSOc1=', '', []))) / 100.0; // 个体学习因子c1：
+  c2 := strtoint(trim(vlst[6].Replace('PSOc2=', '', []))) / 100.0; // 社会学习因子c2：
+  iter := strtoint(trim(vlst[7].Replace('PSOiter=', '', []))); // 迭代次数iter：
+  AC := Vv;
+
+  UP := ws;
+  LOW := we;
+  
+  mm := max(max(cityNum, n), iter); // 未搞清，以最大值先试下
+  RM := mm; // 随机数的最大值 ，除之为了取小数
+  T := iter;
+  M := PSONum;
+
+  setlength(fit, cityNum);
+  setlength(pbest, cityNum);
+  setlength(fcopy, cityNum);
+  setlength(popu, M, cityNum);
+  setlength(popu_copy, M, cityNum);
+  setlength(Pbest_popu, M, cityNum);
+  setlength(Gbest_popu, cityNum);
+
+ 
+  for k := 0 to cityNum - 1 do
+    pbest[k] := MaxLengthInteger;
+  gbest := MaxLengthInteger;
+
+end;
+
+destructor TPSO.Destroy;
+var
+  i: integer;
+begin
+  inherited;
+end;
+
+function TPSO.init: integer;
+var
+  i, j, k, tij: integer;
+  rij: double;
+  line: string;
+  www, qq: Tstringlist;
+  s, temps: string;
+begin
+
+  setlength(x, cityNum);
+  setlength(y, cityNum);
+  setlength(z, cityNum);
+
+  setlength(distance, cityNum, cityNum);
+
+  for i := 0 to cityNum - 1 do
+  begin
+    x[i] := trunc(MainForm.Display.Controller.Cities[i].x);
+    y[i] := trunc(MainForm.Display.Controller.Cities[i].y);
+    z[i] := (MainForm.Display.Controller.Cities[i].z);
+  end;
+
+  for i := 0 to cityNum - 1 do
+  begin
+    distance[i][i] := 0; // 对角线为0
+    MainForm.Display.Controller.curdistance[i][i] := 0;
+    for j := i + 1 to cityNum - 1 do
+    begin
+      rij := sqrt(((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j])
+        ) / 1.0) * MainForm.Display.Controller.EdgeWeight[i][j];
+      if MainForm.Display.Controller.distance[i][j] = -1.0 then
+      begin
+        distance[i][j] := rij + z[i];
+        distance[j][i] := rij + z[j];
+        MainForm.Display.Controller.curdistance[i][j] := distance[i][j];
+        MainForm.Display.Controller.curdistance[j][i] := distance[i][j];
+
+      end
+      else
+      begin
+        distance[i][j] := MainForm.Display.Controller.distance[i][j] + z[i];
+        // 不是 代替SQRT，否则仍然要乘以权数，自定义边长则不再乘权数乎
+        distance[j][i] := MainForm.Display.Controller.distance[i][j] + z[j];
+        MainForm.Display.Controller.curdistance[i][j] := distance[i][j];
+        MainForm.Display.Controller.curdistance[j][i] := distance[i][j];
+      end;
+    end;
+  end;
+  distance[cityNum - 1][cityNum - 1] := 0;
+  MainForm.Display.Controller.curdistance[cityNum - 1][cityNum - 1] := 0;
+  setlength(bestTour, cityNum);
+  
+
+end;
+
+function TPSO._init: integer;
+var
+  k: integer;
+begin
+
+  Rand_popu();
+end;
+
+function TPSO.PSO: integer;
+var
+  g, i, k: integer;
+  rt: double;
+  www: TP3;
+begin
+  for g := 1 to T do
+  begin
+    btupdate(); // 更新最优解
+
+    for i := 0 to M - 1 do
+      for k := 0 to cityNum - 1 do
+        popu_copy[i][k] := popu[i][k];
+    // 赋给中间变量取交叉变异
+    ppupdate();
+    // 交叉变异
+    for i := 0 to M - 1 do
+    begin
+      fcopy[i] := fitness_alllength('popu_copy', i);
+      // fcopy[i]=fitness(popu_copy[i]);
+    end;
+    // 计算交叉变异后的适应度
+    // 比较并更新位置
+    for i := 0 to M - 1 do
+      if (fcopy[i] < fit[i]) then
+      begin
+        for k := 0 to cityNum - 1 do
+          popu[i][k] := popu_copy[i][k];
+        fit[i] := fcopy[i];
+      end
+      else
+      begin
+        rt := Random() / RM;
+        if (rt <= AC) then
+        begin
+          for k := 0 to cityNum - 1 do
+            popu[i][k] := popu_copy[i][k];
+          fit[i] := fcopy[i];
+        end;
+      end;
+
+  end;
+end;
+
+function TPSO.main: integer;
+var
+  i: integer;
+begin
+  _init();
+  PSO();
+  printOptimal;
+
+end;
+
+procedure TPSO.printOptimal;
+var
+  i: integer;
+  www: Tstringlist;
+  bestLengthwww: double;
+  Atom: TAtom;
+  s: ShortString;
+  New: ITSPIndividual;
+begin
+
+  for i := 0 to cityNum - 1 do
+    bestTour[i] := Gbest_popu[i];
+
+  MainForm.PSOLine.Lines.Add('总路长: ' + floattostr(gbest));
+  MainForm.PSOLine.Lines.Add('路径: ' );
+  for i := 0 to cityNum - 1 do
+  begin
+    if Gbest_popu[i] <> -1 then
+      MainForm.PSOLine.Lines.Add(MainForm.PMemo[(Gbest_popu[i])]);
+    if Gbest_popu[i] = -1 then
+      MainForm.PSOLine.Lines.Add('P0');
+
+  end;
+  New := TTSPIndividual.Create(cityNum);
+
+  for i := 0 to cityNum - 1 do
+  begin
+    if bestTour[i] <> -1 then
+      New.RouteArray[i] := bestTour[i];
+    if bestTour[i] = -1 then
+      New.RouteArray[i] := 0;
+
+  end;
+  MainForm.R_PSO := New;
+
+  MainForm.Display.DrawMapWithRoute(New, 7);
+end;
+
+
+
+procedure TPSO.Rand_popu;
+var
+  i, j, k: integer;
+begin
+  for i := 0 to cityNum - 1 do
+    allowedCities.Add(inttostr(i));
+  for i := 0 to M - 1 do
+  begin
+    random_shuffle(cityNum - 1, allowedCities); // 随机生成全排列
+    for k := 0 to cityNum - 1 do
+      popu[i][k] := strtoint(allowedCities[k]);
+    fit[i] := fitness_alllength('popu', i); // 计算生成解的适应值
+  end;
+end;
+
+function TPSO.dis(ax, ay, bx, by: integer): double;
+begin
+  result := sqrt(power(ax - bx, 2) + power(ay - by, 2));
+end;
+
+function TPSO.remove_1(v: integer): integer;
+begin
+  if v = -1 then
+    v := 0;
+  result := v;
+
+end;
+
+function TPSO.fitness_alllength(cc: string; i: integer): double;
+var
+  sum: double;
+  j: integer;
+begin
+  sum := 0;
+  if (cc = 'popu') then
+  begin
+    for j := 0 to cityNum - 2 do
+      sum := sum + distance[remove_1(popu[i][j])][remove_1(popu[i][j + 1])];
+    sum := sum + distance[remove_1(popu[i][cityNum - 1])][remove_1(popu[i][0])];
+  end;
+  if (cc = 'popu_copy') then
+  begin
+    for j := 0 to cityNum - 2 do
+      sum := sum + distance[remove_1(popu_copy[i][j])][remove_1(popu_copy[i][j + 1])];
+    sum := sum + distance[remove_1(popu_copy[i][cityNum - 1])
+      ][remove_1(popu_copy[i][0])];
+  end;
+
+    result := sum;
+
+end;
+
+
+procedure TPSO.random_shuffle(PSONum0: integer; allowedCities0: Tstringlist);
+var
+  i, j: integer;
+  k: string;
+begin
+  i := Random(PSONum0);
+  j := i;
+  while i = j do
+    j := Random(PSONum0);
+  k := allowedCities0[i];
+  allowedCities0[i] := allowedCities0[j];
+  allowedCities0[j] := k;
+
+end;
+
+procedure TPSO.ppupdate;
+begin
+  if (c1 <> 0.0) then
+    CroPb();
+  if (c2 <> 0.0) then
+    CroGb();
+  // 这里是因为若有一个等于零则表示不学习
+  mutation();
+end;
+
+procedure TPSO.btupdate;
+var
+  i, j, k: integer;
+begin
+  for i := 0 to M - 1 do
+    if (fit[i] < pbest[i]) then
+    begin
+      pbest[i] := fit[i];
+      for k := 0 to cityNum - 1 do
+        Pbest_popu[i][k] := popu[i][k];
+      if (pbest[i] < gbest) then
+      begin
+        gbest := pbest[i];
+        for k := 0 to cityNum - 1 do
+          Gbest_popu[k] := popu[i][k];
+      end;
+    end;
+end;
+
+procedure TPSO.CroPb;
+var
+  i, j, k: integer;
+  r1, CroRate, rt: double;
+begin
+  for i := 0 to M - 1 do
+  begin
+    r1 := Random() / RM * (UP - LOW) + LOW;
+    CroRate := c1 * r1;
+    rt := Random() / RM;
+    if (CroRate >= rt) then
+      Cross(popu_copy[i], Pbest_popu[i], i, 'Pbest_popu');
+  end;
+end;
+
+procedure TPSO.CroGb;
+var
+  i, j, k: integer;
+  r2, CroRate, rt: double;
+begin
+  for i := 0 to M - 1 do
+  begin
+    r2 := Random() / RM * (UP - LOW) + LOW;
+    CroRate := c2 * r2;
+    rt := Random() / RM;
+    if (CroRate >= rt) then
+      Cross(popu_copy[i], Gbest_popu, i, 'Gbest_popu');
+  end;
+end;
+
+procedure TPSO.Cross(fat, mot: TPIARRAY; T: integer; fff: string); // 交叉
+var
+  i, j, k: integer;
+  cut_p1, cut_p2, idx: integer;
+  flag: boolean;
+  son: TPIARRAY;
+begin
+  setlength(son, cityNum);
+  for i := 0 to n - 1 do
+    son[i] := -1;
+  cut_p1 := Random(cityNum - 2) mod (cityNum - 2);
+  // cut_p1:=cut_p1;
+  cut_p2 := cut_p1 + Random(cityNum - cut_p1 - 1) mod (cityNum - cut_p1 - 1);
+  // cut_p2:=cut_p2-1;
+  // 找一段序列出来交叉
+  // while (cut_p1 >= cut_p2) do
+  begin
+    // cut_p2 := Random(cityNum-1) mod (cityNum - 1);
+    // cut_p2:=cut_p2-1;
+  end;
+
+  for i := cut_p1 to cut_p2 do
+  begin
+    // if fff='Gbest_popu' then //Pbest_popu
+    son[i] := popu_copy[T][i]; // son[i]=fat[i];
+
+  end;
+
+  if fff = 'Pbest_popu' then
+  begin
+    // 将没有交叉部分替换回来
+    if (cut_p1 <> 0) then
+    begin
+      idx := -1;
+      for i := 0 to cityNum - 1 do
+      begin
+        flag := true;
+        for k := cut_p1 to cut_p2 do
+          if (Pbest_popu[T][i] = son[k]) then
+          begin
+            flag := false;
+            break;
+          end;
+        if (flag) then
+        begin
+          idx := idx + 1;
+          son[idx] := Pbest_popu[T][i];
+          if (idx = cut_p1 - 1) and (cut_p2 = cityNum - 1) then
+            break
+          else if (idx = cut_p1 - 1) then
+            idx := cut_p2;
+        end;
+
+      end;
+    end
+    else if (cut_p2 <> cityNum - 1) then
+    begin
+      idx := cut_p2;
+      for i := 0 to cityNum - 1 do
+      begin
+        flag := true;
+        for k := cut_p1 to cut_p2 do
+          if (Pbest_popu[T][i] = son[k]) then
+          begin
+            flag := false;
+            break;
+          end;
+        if (flag) then
+        begin
+          idx := idx + 1;
+          son[idx] := Pbest_popu[T][i];
+          if (idx = cityNum - 1) then
+            break;
+        end;
+      end;
+    end;
+  end;
+  if fff = 'Gbest_popu' then
+  begin
+    // 将没有交叉部分替换回来
+    if (cut_p1 <> 0) then
+    begin
+      idx := -1;
+      for i := 0 to cityNum - 1 do
+      begin
+        flag := true;
+        for k := cut_p1 to cut_p2 do
+          if (Gbest_popu[i] = son[k]) then
+          begin
+            flag := false;
+            break;
+          end;
+        if (flag) then
+        begin
+          idx := idx + 1;
+          son[idx] := Gbest_popu[i];
+          if (idx = cut_p1 - 1) and (cut_p2 = cityNum - 1) then
+            break
+          else if (idx = cut_p1 - 1) then
+            idx := cut_p2;
+        end;
+      end;
+    end
+    else if (cut_p2 <> cityNum - 1) then
+    begin
+      idx := cut_p2;
+      for i := 0 to cityNum - 1 do
+      begin
+        flag := true;
+        for k := cut_p1 to cut_p2 do
+          if (Gbest_popu[i] = son[k]) then
+          begin
+            flag := false;
+            break;
+          end;
+        if (flag) then
+        begin
+          idx := idx + 1;
+          son[idx] := Gbest_popu[i];
+          if (idx = cityNum - 1) then
+            break;
+        end;
+      end;
+    end;
+  end;
+  for i := 0 to cityNum - 1 do
+  begin
+    //if son[i]<>-1 then
+    popu_copy[T][i] := son[i];
+    if son[i]=-1 then
+      application.ProcessMessages;
+  end;
+
+end;
+
+procedure TPSO.mutation; // 随机变异
+var
+  MRate, r: double;
+  i, p1, p2, www: integer;
+begin
+
+  MRate := w;
+  for i := 0 to M - 1 do
+  begin
+    r := Random() / RM;
+    if (r <= MRate) then
+    begin
+      p1 := Random(cityNum - 1) mod (cityNum - 1);
+      p2 := Random(cityNum - 1) mod (cityNum - 1);
+      while (p1 = p2) do
+        p2 := Random(cityNum - 1) mod (cityNum - 1);
+      // swap(popu_copy[i][p1],popu_copy[i][p2]);
+      // swap操作实现交换两个容器内所有元素的功能
+      www := popu_copy[i][p1];
+      popu_copy[i][p1] := popu_copy[i][p2];
+      popu_copy[i][p2] := www;
+    end;
+  end;
+
+end;
+
+
+
+end.
