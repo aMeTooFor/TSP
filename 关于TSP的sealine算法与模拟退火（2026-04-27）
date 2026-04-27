@@ -1,0 +1,1540 @@
+  关于TSP的sealine算法与模拟退火（2026-04-27）
+  今晚，我忽然想到，我设想的sealine算法，绝不相交线，大道理比模拟退火应该优胜，为何会在绝对规则矩形中比不上呢？
+1）于是，修改下代码，8641行将原先的 if curminH < minH then    改成 if curminH <= minH then    ，加多一个等号，
+   测试，三种坐标下，全比模拟退火优胜了。在坐标点是十分规则的矩形分布坐标轴一样整点时，一样sealine算法优胜了。
+  是不是我的模拟退火算法，参数设不对？这个不想理了。我认为，传统的遗传算法，蚁群算法，粒子群算法，模拟退火算法，以模拟退火为最优胜的。
+2）至于LKH，concorde，这两个即使开源代码也看不明，也不易对比，暂不理了。 
+3）随后更多的测试表明，有时仍然是模拟退火算法优胜，有时sealine算法优胜，相差好似不太大，但作为一种创新算法sealine算法，应该成立乎？！
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+ 关于TSP的sealine算法与角谷猜想（2026-04-25）
+1）TSP的sealine算法已基本完成代码，测试表明，可能点数越多越趋于精确解，原本来于想法：真空包装，真空包装塑料薄膜，中间抽空气，内陷，被内部质点顶点顶住，这是立体三维，再降维成二维平面时，包装塑料薄膜变换成橡皮筋。实际上，写代码已经最简单实现功能，但达不到模拟模型的理想状态，这是一个可以发展的方向乎，暂称为，量子潮汐涨落模拟－真空包装－塑料薄膜－橡皮筋－海岸线模型猜想，简称sealine算法/猜想，只是实现最简单代码乎。。。
+2)  角谷猜想熵增模拟相似，先连续1称为I，连续0称为O，字母IO代替数字10，然后边界处开始模糊光栅衍射，连续1连续0递减，最后10相邻，即由IO相邻变成10相邻。          
+
+2026-04-25今日很不容易，忍住疲劳，终于，修正了原有的sealine算法的bug，测试下，比较满意了。
+测试表明，肯定不是最优解，最优解目前只有动态规划或穷举算法，暂无解。
+传统近似算法，个人目前认为，可能模拟退火算法是最好的，于是对比。
+原本认为，sealine算法，点数少时不及传统近似算法，设想点数越多越趋于最优解，这个估计可以这样认为，当点数越多时，点的分布就会象晶体一样有序，一个紧挨一个，象标准矩形，坐标轴坐标点一样，于是测试。
+发现，
+1）当坐标点是十分规则的矩形分布坐标轴一样整点时，sealine算法目前不及模拟退火，就算点数从100到500都是一样
+            SQLQuery1.FieldByName('px').AsInteger := 100 + (100 * (i - 1) mod 1000);
+            SQLQuery1.FieldByName('py').AsInteger := 100 + 100 * (100 * (i - 1) div 1000);
+2）当坐标点是随机分布，sealine算法目前自认为确实在100点，到500点，比模拟退火效果要好不少，高于500点时，个人PC电脑硬件问题，不理了。
+            SQLQuery1.FieldByName('px').AsInteger := Random(1000);//100 + I * 10;
+            SQLQuery1.FieldByName('py').AsInteger := Random(1000);//100 + I * 10;
+3）当坐标点是大体规则矩形加上少量随机分布，sealine算法目前仍然自认为确实在100点，到500点，比模拟退火效果要好不少，高于500点时，个人PC电脑硬件问题，不理了。
+            SQLQuery1.FieldByName('px').AsInteger :=100 + (100 * (i - 1) mod 1000) + Random(20);
+            SQLQuery1.FieldByName('py').AsInteger :=100 + 100 * (100 * (i - 1) div 1000) + Random(20);
+
+sealine算法，目前不想理了，暂如是，停鞍稍驻初程，写代码象古代骑马驿站赶路，太急不好，疲劳不好。。。。。。。
+          
+TSP_ubuntu_Lazarus源代码=033=sealine=粗略已处理四正四隅垂直和水平.zip
+(1)  https://github.com/aMeTooFor/TSP/
+(2) https://blog.csdn.net/e271828/article/details/160509634?spm=1011.2124.3001.6209
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+SeaLine算法的思考进展                    
+                                        2026-03-31                                        
+ 1）昨天我测试了一下，当sealine算法逐层法只有一层时，测试表明，可能正是最优解，但未获严格证明 
+ 2）昨天我又测试一下，将sealine算法选逐层法再逐点法相结合时，如果第二层只有一个点，共只有两层，测试表明，可能也是最优解，但未证明 
+ 3）昨天我又设想，将逐点法，由原来的最小距离/最大夹角/最小面积，改成了，最小边长，min(ac+bc-ab),测试表明，结果与原有的模拟退火相近似，也是近似解，但比原来的改进了许多。 
+ 4）我又测试下，逐层法后再逐点法，未写代码，三重循环还是二重循环，疲劳分不清，暂不写代码，等不疲劳分清楚再说 
+ 5）不写新代码，原有的测试，逐层法后再逐点法，以二层测试，有时相差不远，有时相差远，可能与第二层点的分布有关。可能是一种趋近近似算法。也可能要以改良成精确最优解，只是目前做不到。
+  6）TSP的穷举法算法复杂度或为O(n!)？今如果转化为sealine逐层法n=L=L0+L1+L2+...+Li+...+Ln，是不是每层都要全排序呢？O(L1!+L2!+...+Li!+L...+Ln!)如果这样，也没甚用了，因为，动态规划法也是仅有O(n*2^n)和O(n^2*2n)。转化为，每层逐点时，要按原来的同心圆的顺序，不可乱来，分顺时针和逆时针，所以，可能sealine逐层且逐点法的复杂度为线性的O(3n+1)，是有可能的。且不断逼近最优解，如果想下就可以了。。。。
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+                        TSP海岸线SeaLine算法的逐层法/逐点法（续）                        
+                                三界火宅人         2026-03-26                                
+假设TSP的海岸线sealine算法逐层产生同心圆的线圈所在点集为L0,L1,L2...Li,...Ln,如果用递增方式，由集合前段L0-->L0+L1-->L0+L1+L2-->L0+L1+...Li，这样来求TSP的精确解，会不会有简易算法，比直接全集L的TSP组合算法要简单？
+1）若仅一层L=L0，sealine算法是不是最优解呢？
+2）若仅两层L=L0+L1，是否存在简易算法，使得由L0-->L0＋L1计算TSP最优解比直接L要简易得多呢？
+3）如果上面1）和2）成立，根据数学归纳法，P=NP仍然有可能成立的乎。一生二，二生三，三生万物者，数学归纳法乎。之乎者也，知苦这也。
+4）由第一层向第二层推进，再分解分析降解为第一层内部加多一个点乎，这更加简化，算法如何？如果新点近边靠边圈，可能真的局部调下即成乎，如果新点近中心，可能大变， 不是这么简化的？P，线性乎，NP，级数指数乎，仍是未知的。
+5）角谷猜想的熵增定律的映像，仍然可能成立乎
+6）代数数理（辟支？知乎）与几何直观（声闻？福乎）不可能相差太远乎，自然数平方的倒数和，欧拉用级数解，现代化为几何直观圆，总有几何对应代数乎，素数对应几何上啥呢？
+=============================================================
+                       关于TSP的海岸线猜想：SeaLine算法的逐层法（不同于逐点法）
+                                             三界火宅人       2026-03-25
+经过两天的不充分休息，疲劳暂解，又开始强迫症式地新思想了，忽想到，如果海浪线不是每次一点点地强逼进，不理什么最近距离或最大夹角或最小面积，改用同心圆的方式，一线线地强逼进，最后再连通各个同心圆，这算法可行否？
+1）为了一个想法，又开始焦虑不安了，必要调试出个结果才安心也，心无奎碍，无挂疑故，才可以安心休息也。
+于是，又是上机调试，又写自定义函数，一个数组下标出错，也找很久，当前下标是curA还是i，自已易搞混，原先正常的函数isCross或ifCross，为啥又出错了，深入内部代码调试一番，这又累呀。一大早起床，啥也不干，就开机，没有报酬的，白干的，就为了一个想法，一个知字乎，为了讨个说法乎？
+2）首先得到最外层的围城的围线算法，以前是一个点一个点地推进，现在改了，把围城推倒，相当于重新造一个围墙，把原先围城的点暂时不要。
+3）就这递归，叠代，一线一线地推进，产生同心圆，最后连通这些同心圆，可行不？
+结果，可行，但是，仍然不是最优解，不过没有细长深长的线了，比较钝角了。
+没想到，不许相交，从这点出发的SeaLine算法，的确可行实现了，但离最优解差得远，不及有些相交线的组合算法，就这样，暂时算（蒜子）了，V速退
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+function TMain.sealine000(minx, miny, maxx, maxy: integer): integer;
+var
+  i: integer;      //memo_seaLine
+  curp, curp0: integer;//TPoint;
+  pline: TlinePoint;
+  pcode1, pcode2: string;
+  pcode1Shape, pcode2Shape: tshape;
+  pcode1Pointer, pcode2Pointer: tpoint;
+  path, ss: string;
+  minpx, minpy, maxpx, maxpy: integer;
+  sortlist, floorLine: TStringList;
+begin
+  sortlist := TStringList.Create;
+  floorLine := TStringList.Create;
+  sortlist.Clear;
+  floorLine.Clear;
+  //////////////////////////////////////四正     子午卯酉
+  //minpx,minpy,maxpx,maxpy:integer;
+  minpx := TPointLine(PointList[minx]).px;
+  minpy := TPointLine(PointList[miny]).py;
+  maxpx := TPointLine(PointList[maxx]).px;
+  maxpy := TPointLine(PointList[maxy]).py;
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+    //for i := PointList.Count - 1 downto 0 do
+  begin
+    //if    TPointLine(PointList[i]).floor<>-123 then
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+      // if  (TPointLine(PointList[i]).py <TPointLine(PointList[minx]).py) then
+    begin
+      //  minx:=i;
+      // TPointLine(PointList[i]).floor:=-123;
+      //sortlist.add(inttostr(TPointLine(PointList[i]).py)+'               '+TPointLine(PointList[i]).pcode);
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  //ss:=sortlist.text;
+  sortlist.sort;
+  //ss:=sortlist.text;
+  //for i := 0 to sortlist.Count - 1 do
+  for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));
+  //四正：酉正，从酉初到酉末
+  ss := floorLine.Text;
+  if sortlist.Count > 0 then
+    minx := StrToInt(trim(rightstr(sortlist[0], 10)));     //酉时末，顶上
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  if sortlist.Count > 0 then
+    miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//子时初
+  application.ProcessMessages;
+  curp := minx;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do
+    //八极之四隅之亥，从酉末到子初也
+  begin
+    //if curp<>-1 then
+    application.ProcessMessages;
+    curp0 := curp;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if (TPointLine(PointList[i]).px > TPointLine(PointList[miny]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+        continue;
+      if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+        continue;
+      if (i = curp0) then
+      begin
+        //curp := i;
+        continue;
+      end;
+
+      if (curp0 <> curp) then
+      begin
+        if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+        begin
+          curp := i;
+        end;
+      end
+      else
+        curp := i;
+    end;
+    if curp0 <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+      //linelist.Add(pline);
+    end;
+  end;
+
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  //if floorLine.IndexOf(IntToStr(miny)) <= -1 then
+  //  floorLine.add(IntToStr(miny));
+  // linelist.Add(pline);
+  // memo_seaLine.Lines.Add('1:' + path);
+  application.ProcessMessages;
+  ///////////////////////////////////////////////////////////////////
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  for i := 0 to sortlist.Count - 1 do
+    // for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));//四正：子正，从子初到子末
+  // miny := StrToInt(sortlist[0]);
+  // if floorLine.IndexOf(IntToStr(miny)) <= -1 then
+  //   floorLine.add(IntToStr(miny));
+  if sortlist.Count > 0 then
+    miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+  //子时末，右侧
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  if sortlist.Count > 0 then
+    //maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//卯时初
+    maxx := StrToInt(trim(rightstr(sortlist[0], 10)));//卯时初
+  //////////////////////////////////////
+  application.ProcessMessages;
+  curp := miny;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do //八极之四隅之寅，从子末到卯初
+  begin
+    application.ProcessMessages;
+    curp0 := curp;
+    for i := 0 to PointList.Count - 1 do
+    begin
+
+      if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py > TPointLine(PointList[maxx]).py) then
+        continue;
+      if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+        continue;
+
+
+      if (i = curp0) then
+      begin
+        continue;
+      end;
+
+      if (curp0 <> curp) then
+      begin
+        if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+        begin
+          curp := i;
+        end;
+      end
+      else
+        curp := i;
+    end;
+    if curp0 <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+    end;
+
+  end;
+
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  // if floorLine.IndexOf(IntToStr(maxx)) <= -1 then
+  //   floorLine.add(IntToStr(maxx));
+  //path := path + '-->' + pcode2;
+  //  memo_seaLine.Lines.Add('2:' + path);
+  application.ProcessMessages;
+  ///////////////////////////////////////////////////////////////////
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  for i := 0 to sortlist.Count - 1 do
+    // for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));//四正：卯正，从卯初到卯末
+  // maxx := StrToInt(sortlist[0]);
+  // if floorLine.IndexOf(IntToStr(maxx)) <= -1 then
+  //   floorLine.add(IntToStr(maxx));
+  if sortlist.Count > 0 then
+    maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+  //卯时末，右底
+
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  ss := sortlist.Text;
+  if sortlist.Count > 0 then
+    maxy := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//午时初
+
+  //////////////////////////////////////
+  ss := floorLine.Text;
+  application.ProcessMessages;
+  curp := maxx;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do//八极之四隅之巳，从卯末到午初
+  begin
+    application.ProcessMessages;
+    curp0 := curp;
+    //for i := 0 to PointList.Count - 1 do
+    for i := PointList.Count - 1 downto 0 do
+    begin
+
+      if (TPointLine(PointList[i]).px < TPointLine(PointList[maxy]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+        continue;
+      if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+        continue;
+
+
+      if (i = curp0) then
+      begin
+        continue;
+      end;
+
+      if (curp0 <> curp) then
+      begin
+        if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+        begin
+          curp := i;
+        end;
+      end
+      else
+        curp := i;
+    end;
+    if curp0 <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+    end;
+
+  end;
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  //if floorLine.IndexOf(IntToStr(maxy)) <= -1 then
+  //  floorLine.add(IntToStr(maxy));
+  //path := path + '-->' + pcode2;
+  //memo_seaLine.Lines.Add('3:' + path);
+  application.ProcessMessages;
+  //////////////////////////////////////
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  //for i := 0 to sortlist.Count - 1 do
+  for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));//四正之午正（含午初）
+  //  maxy := StrToInt(sortlist[0]);
+  // if floorLine.IndexOf(IntToStr(maxy)) <= -1 then
+  //   floorLine.add(IntToStr(maxy));
+  if sortlist.Count > 0 then
+    maxy := StrToInt(trim(rightstr(sortlist[0], 10)));//午末
+  ss := floorLine.Text;
+  application.ProcessMessages;
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  if sortlist.Count > 0 then
+    minx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//酉之初
+
+  ss := floorLine.Text;
+  application.ProcessMessages;
+
+  //////////////////////////////////////
+  application.ProcessMessages;
+  curp := maxy;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do//午末与酉初之间的四隅之申
+  begin
+    application.ProcessMessages;
+    curp0 := curp;
+    //for i := 0 to PointList.Count - 1 do
+    for i := PointList.Count - 1 downto 0 do
+    begin
+
+      if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py < TPointLine(PointList[minx]).py) then
+        continue;
+      if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+        continue;
+      if (TPointLine(PointList[i]).py = TPointLine(PointList[minx]).py) then
+        continue;
+
+
+      if (i = curp0) then
+      begin
+        continue;
+      end;
+
+      if (curp0 <> curp) then
+      begin
+        if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+        begin
+          curp := i;
+
+        end;
+      end
+      else
+        curp := i;
+
+    end;
+    if curp0 <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+    end;
+
+  end;
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  //  if floorLine.IndexOf(IntToStr(minx)) <= -1 then
+  //    floorLine.add(IntToStr(minx));
+  // memo_seaLine.Lines.Add('4:' + path);
+  application.ProcessMessages;
+  //////////////////////////////////////
+  
+  ss := floorLine.Text;
+  path := '';
+  for i := 0 to floorLine.Count - 1 do
+  begin
+    TPointLine(PointList[StrToInt(floorLine[i mod floorLine.Count])]).floor := 0;
+    pline := TlinePoint.Create(nil);
+    pcode1 := pcodes[StrToInt(floorLine[i mod floorLine.Count])];
+    pcode2 := pcodes[StrToInt(floorLine[(i + 1) mod floorLine.Count])];
+    pcode1Shape := getpcode(pcode1);
+    pcode2Shape := getpcode(pcode2);
+    pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+    pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+    pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+    pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+    //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+    if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+    begin
+      ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+      ScrollBox1.Canvas.pen.Width := 4;
+    end
+    else
+    begin
+      ScrollBox1.Canvas.pen.color := clgrayText;
+      ScrollBox1.Canvas.pen.Width := 2;
+    end;
+
+
+    self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+    application.ProcessMessages;
+    pline.beginPcode := pcode1;
+    pline.endPcode := pcode2;
+    pline.beginPoint := pcode1Pointer;
+    pline.endPoint := pcode2Pointer;
+    pline.floor := 0;  ///想不到，后来修改时，少加这句，就难找不易
+    linelist.Add(pline);
+    if pos('-->' + pcode1, path) <= 0 then
+      path := path + '-->' + pcode1;
+    if pos('-->' + pcode2, path) <= 0 then
+      path := path + '-->' + pcode2;
+  end;
+  memo_seaLine.Lines.Add(path);
+
+  sortlist.Free;
+  floorLine.Free;
+  ///////////////////////////////////////////////////////////////////
+  //refreshFromLineList(nil);
+end;
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+procedure TMain.btn_seaLineFloorPointClick(Sender: TObject);
+var
+  i, j, k, jj, jjj, ij, ik, lmn: integer;      //memo_seaLine
+  minx0, miny0, maxx0, maxy0: integer;//TPoint;
+  pline, ppline: TlinePoint;  
+  minH, curminH, onelong, alllong: double;
+  cc: integer;
+  ss: string;  
+  tempLineList: TFPList;//TPointerList;//TList;   // TlinePoint
+  storeyLineList: array of TStringList;//TPointerList;//TList;   // TlinePoint
+
+  function PPLong(a, b: Tpoint): double;
+  begin
+    Result := 0.0;
+    Result := sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+  end;
+
+  function wlog(w: string): integer;
+  begin
+    Result := 1;
+    cc := citycount;
+    //cc:=9;
+    //cc:=9;
+    if (ik > (cc - 2)) then
+      //if (iii>(7)) then
+      memo_seaLine.Lines.Add(w);
+  end;
+
+  function sealineLayer(minx, miny, maxx, maxy: integer): integer;
+  var
+    i, j, curTOPstorey: integer;      //memo_seaLine
+    curp, curp0, tempnextp: integer;//TPoint;
+    pline: TlinePoint;
+    pcode1, pcode2: string;
+    pcode1Shape, pcode2Shape: tshape;
+    pcode1Pointer, pcode2Pointer: tpoint;
+    path, ss: string;
+    minpx, minpy, maxpx, maxpy: integer;
+    sortlist, floorLine: TStringList;
+  begin
+    sortlist := TStringList.Create;
+    floorLine := TStringList.Create;
+    sortlist.Clear;
+    floorLine.Clear;
+    //////////////////////////////////////     四正     子午卯酉
+    //minpx,minpy,maxpx,maxpy:integer;
+    minpx := TPointLine(PointList[minx]).px;
+    minpy := TPointLine(PointList[miny]).py;
+    maxpx := TPointLine(PointList[maxx]).px;
+    maxpy := TPointLine(PointList[maxy]).py;
+    ///#####################################
+    sortlist.Clear;
+
+
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+        break;
+    minx := i;//TPoint(PointList[0]);
+    miny := minx;
+    maxx := minx;
+    maxy := minx;
+    for i := 0 to PointList.Count - 1 do
+      // PointList: TFPList;//TPointerList;//TList;  //TPointline
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        // ss:= TPointLine(PointList[i]).pcode;
+        if TPointLine(PointList[i]).pcode = 'P9' then
+          application.ProcessMessages;
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[minx]).px) then
+          minx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[miny]).py) then
+          miny := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx]).px) then
+          maxx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy]).py) then
+          maxy := i;//  TPoint(PointList[i]);
+      end;
+    memo_seaLine.Lines.Add('第' + IntToStr(length(storeyLineList) + 1) +
+      '层围城线围墙：');
+    memo_seaLine.Lines.Add('minx=' + pcodes[minx]);
+    memo_seaLine.Lines.Add('miny=' + pcodes[miny]);
+    memo_seaLine.Lines.Add('maxx=' + pcodes[maxx]);
+    memo_seaLine.Lines.Add('maxy=' + pcodes[maxy]);
+    application.ProcessMessages;
+    //tempLineList:=TFPList.Create;//TPointerList;//TList;   // TlinePoint
+    curTOPstorey := length(storeyLineList);
+    setlength(storeyLineList, curTOPstorey + 1);
+    storeyLineList[curTOPstorey] := TStringList.Create;
+    ////////////////////////////////////// 四正     子午卯酉
+    //minpx,minpy,maxpx,maxpy:integer;
+    minpx := TPointLine(PointList[minx]).px;
+    minpy := TPointLine(PointList[miny]).py;
+    maxpx := TPointLine(PointList[maxx]).px;
+    maxpy := TPointLine(PointList[maxy]).py;
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+      //for i := PointList.Count - 1 downto 0 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+        begin
+          //TPointLine(PointList[i]).floor := curTOPstorey;
+          //sortlist.add(inttostr(TPointLine(PointList[i]).py)+'               '+TPointLine(PointList[i]).pcode);
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    //ss:=sortlist.text;
+    sortlist.sort;
+    //ss:=sortlist.text;
+    //for i := 0 to sortlist.Count - 1 do
+    for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：酉正，从酉初到酉末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    ss := floorLine.Text;
+    if sortlist.Count > 0 then
+      minx := StrToInt(trim(rightstr(sortlist[0], 10)));  //酉时末，顶上
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    if sortlist.Count > 0 then
+      miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//子时初
+    application.ProcessMessages;
+    curp := minx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do    //八极之四隅之亥，从酉末到子初也
+    begin
+      application.ProcessMessages;
+      //if curp<>-1 then
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[miny]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            //curp := i;
+            continue;
+          end;
+
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+            end;
+          end
+          else
+            curp := i;
+        end;
+
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+      end;
+    end;
+
+    if miny <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    //TPointLine(pointlist[miny]).floor := curTOPstorey;
+    //memo_seaLine.Lines.Add('1:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    ///////////////////////////////////////////////////////////////////
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    for i := 0 to sortlist.Count - 1 do
+      // for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：子正，从子初到子末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    // miny := StrToInt(sortlist[0]);
+    // if floorLine.IndexOf(IntToStr(miny)) <= -1 then
+    //   floorLine.add(IntToStr(miny));
+    ss := sortlist.Text;
+    if sortlist.Count > 0 then
+      miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+    //子时末，右侧
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    if sortlist.Count > 0 then
+     // maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//卯时初
+      maxx := StrToInt(trim(rightstr(sortlist[0], 10)));//卯时初
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := miny;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do     //八极之四隅之寅，从子末到卯初
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[maxx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+            end;
+          end
+          else
+            curp := i;
+        end;
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+      end;
+    end;
+    if maxx <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    // memo_seaLine.Lines.Add('2:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    ////////////////////////////////////////////////////////////////////
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    for i := 0 to sortlist.Count - 1 do
+      // for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：卯正，从卯初到卯末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    // maxx := StrToInt(sortlist[0]);
+    // if floorLine.IndexOf(IntToStr(maxx)) <= -1 then
+    //   floorLine.add(IntToStr(maxx));
+    if sortlist.Count > 0 then
+      maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+    //卯时末，右底
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    ss := sortlist.Text;
+    if sortlist.Count > 0 then
+      maxy := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//午时初
+    ///#####################################
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    curp := maxx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do//八极之四隅之巳，从卯末到午初
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := PointList.Count - 1 downto 0 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[maxy]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+            end;
+          end
+          else
+            curp := i;
+        end;
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+        ss := floorLine.Text;
+      end;
+    end;
+    if maxy <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    //  memo_seaLine.Lines.Add('3:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    //////////////////////////////////////
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    //for i := 0 to sortlist.Count - 1 do
+    for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));  //四正之午正（含午初）
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    if sortlist.Count > 0 then
+      maxy := StrToInt(trim(rightstr(sortlist[0], 10)));//午末
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    //sortlist.Clear;
+    //for i := 0 to PointList.Count - 1 do
+    //begin
+    //  if TPointLine(PointList[i]).floor = -1 then  //这里又产生BUG，如果为floor = -1，则没有数据，下标-1报错
+    //    if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+    //    begin
+    //      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+    //        '               ' + IntToStr(i));
+    //    end;
+    //end;
+    //sortlist.sort;
+    // minx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//酉之初
+    minx := StrToInt(floorLine[0]);//酉之初
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := maxy;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do//午末与酉初之间的四隅之申
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := PointList.Count - 1 downto 0 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[minx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[minx]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+               if TPointLine(PointList[i]).pcode = 'P9' then
+                application.ProcessMessages;
+            end;
+          end
+          else
+          begin
+            curp := i;
+          end;
+        end;
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+      end;
+    end;
+    if minx <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    // memo_seaLine.Lines.Add('4:' + path);
+    application.ProcessMessages;
+    //////////////////////////////////////
+    TPointLine(pointlist[miny]).floor := curTOPstorey;
+    TPointLine(pointlist[maxx]).floor := curTOPstorey;
+    TPointLine(pointlist[maxy]).floor := curTOPstorey;
+    TPointLine(pointlist[minx]).floor := curTOPstorey;
+
+    if storeyLineList[curTOPstorey].Count = 0 then
+      //这是仅剩下最后一点圆心的情况
+    begin
+      //ss := TPointLine(pointlist[minx]).Pcode;
+      //storeyLineList[curTOPstorey].add(ss);
+      //storeyLineList[curTOPstorey].add(ss);
+    end;
+    ///////////////////////////////////////////////////////////////////
+    ss := floorLine.Text;
+    path := '';
+    for i := 0 to floorLine.Count - 1 do
+    begin
+      pline := TlinePoint.Create(nil);
+      pcode1 := pcodes[StrToInt(floorLine[i mod floorLine.Count])];
+      pcode2 := pcodes[StrToInt(floorLine[(i + 1) mod floorLine.Count])];
+      pcode1Shape := getpcode(pcode1);
+      pcode2Shape := getpcode(pcode2);
+      pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+      pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+      pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+      pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+      if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+      begin
+        ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+        ScrollBox1.Canvas.pen.Width := 4;
+      end
+      else
+      begin
+        ScrollBox1.Canvas.pen.color := clgrayText;
+        ScrollBox1.Canvas.pen.Width := 2;
+      end;
+
+      self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+      pline.beginPcode := pcode1;
+      pline.endPcode := pcode2;
+      pline.beginPoint := pcode1Pointer;
+      pline.endPoint := pcode2Pointer;
+      pline.floor := curTOPstorey;
+      ///想不到，后来修改时，少加这句，就难找不易
+      linelist.Add(pline);
+      if pos('-->' + pcode1, path) <= 0 then
+        path := path + '-->' + pcode1;
+      if pos('-->' + pcode2, path) <= 0 then
+        path := path + '-->' + pcode2;
+
+      TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).floor :=
+        curTOPstorey;
+      if storeyLineList[curTOPstorey].IndexOf(
+        TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).Pcode) <=
+        -1 then
+        storeyLineList[curTOPstorey].add(
+          TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).Pcode);
+    end;
+    storeyLineList[curTOPstorey].add(
+      TPointLine(pointlist[StrToInt(floorLine[0])]).Pcode);
+    memo_seaLine.Lines.Add(path);
+    sortlist.Free;
+    floorLine.Free;
+    ///////////////////////////////////////////////////////////////////
+    //refreshFromLineList(nil);
+  end;
+
+begin
+  memo_seaLine.Lines.Clear;
+  pcodeAndPointLineListFromSQL;
+  for i := 1 to PointList.Count - 1 do
+    TPointLine(PointList[i]).floor := -1;
+  for i := 1 to lineList.Count - 1 do
+    TLinePoint(lineList[i]).floor := -1;
+  minx0 := 0;//TPoint(PointList[0]);
+  miny0 := minx0;
+  maxx0 := minx0;
+  maxy0 := minx0;
+
+  for i := 1 to PointList.Count - 1 do
+    // PointList: TFPList;//TPointerList;//TList;  //TPointline
+  begin
+    if (TPointLine(PointList[i]).px < TPointLine(PointList[minx0]).px) then
+      minx0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py < TPointLine(PointList[miny0]).py) then
+      miny0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx0]).px) then
+      maxx0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy0]).py) then
+      maxy0 := i;//  TPoint(PointList[i]);
+  end;
+  memo_seaLine.Lines.Add('minx=' + pcodes[minx0]);
+  memo_seaLine.Lines.Add('miny=' + pcodes[miny0]);
+  memo_seaLine.Lines.Add('maxx=' + pcodes[maxx0]);
+  memo_seaLine.Lines.Add('maxy=' + pcodes[maxy0]);
+  application.ProcessMessages;
+  memo_seaLine.Lines.Add('最外层围城线围墙：');
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      //if tobject(shapeList.Items[i]) is TlinePoint then
+      if lineList.Items[i] <> nil then
+      begin
+        TlinePoint(lineList.Items[i]).Free;
+        lineList.Items[i] := nil;
+        lineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  lineList.Clear;
+  for i := TPsubpPointList.Count - 1 downto 0 do
+  begin
+    try
+      if (TPsubpPointList.Items[i]) <> nil then
+      begin
+        TPsubpPoint(TPsubpPointList.Items[i]).Free;
+        TPsubpPointList.Items[i] := nil;
+        TPsubpPointList.Count := TPsubpPointList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  TPsubpPointList.Clear;
+
+  image1.Refresh;
+  /////////////////////////////////////////////////////////////////
+  sealine000(minx0, miny0, maxx0, maxy0);        //最外层，另外计算
+  //  exit;
+  ////////////////////////////////////////////////
+  setlength(storeyLineList, 1);
+  storeyLineList[0] := TStringList.Create;
+  for i := 0 to linelist.Count - 1 do
+  begin
+    if storeyLineList[0].IndexOf(TlinePoint(linelist[i]).beginPcode) <= -1 then
+      storeyLineList[0].add(TlinePoint(linelist[i]).beginPcode);
+    if storeyLineList[0].IndexOf(TlinePoint(linelist[i]).endPcode) <= -1 then
+      storeyLineList[0].add(TlinePoint(linelist[i]).endPcode);
+    TlinePoint(linelist[i]).floor := 0;
+    // TPointLine(pointlist[getPcodeIndex(TlinePoint(linelist[i]).beginPcode)]).floor := 0 ;
+    // TPointLine(pointlist[getPcodeIndex(TlinePoint(linelist[i]).endPcode)]).floor := 0 ;
+  end;
+  // storeyLineList[0].add(tstringlist(storeyLineList[0])[0]);
+  ss := storeyLineList[0].Text;    //第一层，已是首尾相接
+
+  for i := 0 to storeyLineList[0].Count - 1 do
+  begin
+    ss := (storeyLineList[0][i]);
+    if ss = 'P1' then
+      application.ProcessMessages;
+    j := getPcodeIndex(ss);
+    TPointLine(pointlist[j]).floor := 0;
+     end;
+  TPointLine(pointlist[miny0]).floor := 0;
+  TPointLine(pointlist[maxx0]).floor := 0;
+  TPointLine(pointlist[maxy0]).floor := 0;
+  TPointLine(pointlist[minx0]).floor := 0;
+  /////////////////////////
+  i := 1;
+  while i > 0 do
+  begin
+    i := 0;
+    for j := 0 to pointlist.Count - 1 do
+      //pointlist所有点集，未分层的全点集
+      if TPointLine(pointlist[j]).floor = -1 then
+        I := i + 1;
+    if i = 1 then
+      application.ProcessMessages;
+    if i > 0 then
+      seaLineLayer(0, 0, 0, 0);    //求出所有层
+  end;
+  ////////////////////////
+
+  for i := 0 to length(storeyLineList) - 1 do  //每一层点集
+    memo_seaLine.Lines.Add(IntToStr(i) + '=' + storeyLineList[i].Text);
+  //  exit;
+  for i := 0 to length(storeyLineList) - 2 do  //每一层点集
+    //for i := 0 to length(storeyLineList) - 3 do  //每一层点集 for test
+  begin
+
+   
+    for k := 0 to storeyLineList[i + 1].Count - 2 do
+      // if (TlinePoint(linelist[j]).floor = (i + 1)) then   //  j in   high  j要高层内层，k在低层外层
+      //   if (TlinePoint(linelist[k]).floor = (i)) then     // k  out lower  j要高层内层，k在低层外层
+      //if (TlinePoint(linelist[k]).floor <>-111) then
+    begin
+      for lmn := pointList.Count - 1 downto 0 do
+        if TPointLine(pointList[lmn]).pcode = ((storeyLineList[i + 1])[k]) then
+          break;
+      if TPointLine(pointList[lmn]).floor = -111 then
+        continue;
+      ss := ((storeyLineList[i + 1])[k]);
+      //if k = 3 then break;
+      //if k = 2 then
+      application.ProcessMessages;
+      ss := storeyLineList[i].Text;
+      minH := 10000000;
+      ij := -1;
+      ik := -1;
+      jjj := -1;
+      for j := 0 to storeyLineList[i].Count - 2 do
+      begin
+
+        curminH := (PPLong(fromPcodeGetPoint((storeyLineList[i + 1])
+          [k]), fromPcodeGetPoint((storeyLineList[i])[j])) +
+          PPLong(fromPcodeGetPoint((storeyLineList[i + 1])[k]),
+          fromPcodeGetPoint((storeyLineList[i])[(j + 1) mod storeyLineList[i].Count])) -
+          PPLong(fromPcodeGetPoint((storeyLineList[i])[j]), fromPcodeGetPoint(
+          (storeyLineList[i])[(j + 1) mod storeyLineList[i].Count])));
+        if curminH < minH then
+        begin
+          minH := curminH;
+          ij := j;    //ii  j    in   high
+          ik := k;   //iii   k  out  lower
+          jjj := 1;
+        end;
+
+      end;
+      /////////////////////////////////////////
+      if jjj = 1 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := ((storeyLineList[i])[ij]);
+        pline.endPcode := ((storeyLineList[i + 1])[ik]);
+        pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])[ij]);
+        pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+        pline.floor := i;
+        linelist.Add(pline);
+
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]);
+        pline.endPcode := ((storeyLineList[i + 1])[ik]);
+        pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])
+          [(ij + 1) mod storeyLineList[i].Count]);
+        pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+        pline.floor := i;
+        linelist.Add(pline);
+  
+        memo_seaLine.Lines.Add(((storeyLineList[i])[ij]) +
+          ((storeyLineList[i + 1])[ik]) + '和' + ((storeyLineList[i])
+          [(ij + 1) mod storeyLineList[i].Count]) + ((storeyLineList[i + 1])
+          [ik]) + '替换' + ((storeyLineList[i])[ij]) + ((storeyLineList[i])
+          [(ij + 1) mod storeyLineList[i].Count]));
+
+        for jjj := lineList.Count - 1 downto 0 do
+        begin
+          if (TlinePoint(linelist[jjj]).beginPcode + TlinePoint(
+            linelist[jjj]).endPcode) = ((storeyLineList[i])
+            [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+            TlinePoint(linelist[jjj]).floor := -111;
+          if (TlinePoint(linelist[jjj]).endPcode + TlinePoint(
+            linelist[jjj]).beginPcode) = ((storeyLineList[i])
+            [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+            TlinePoint(linelist[jjj]).floor := -111;
+        end;
+        for jjj := pointList.Count - 1 downto 0 do
+          if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+            TPointLine(pointList[jjj]).floor := -111;
+
+        //tstringlist(storeyLineList[i])[ij+1].Delete;
+        //tstringlist(storeyLineList[i])[ij].Delete;
+        TStringList(storeyLineList[i]).insert(ij + 1,
+          TStringList(storeyLineList[i + 1])[ik]);
+      end;
+
+
+      //if jjj = 2 then
+      begin
+
+      end;
+
+    end;  //k
+    ///////////////////////////////////////////
+    // for j := 0 to storeyLineList[i+1].Count - 1 do
+    for j := lineList.Count - 1 downto 0 do
+      if TlinePoint(linelist[j]).floor = i + 1 then
+        TlinePoint(linelist[j]).floor := -111;
+
+    ss := TStringList(storeyLineList[i + 1]).Text;
+    TStringList(storeyLineList[i + 1]).Clear;
+    ss := TStringList(storeyLineList[i]).Text;
+    for j := 0 to TStringList(storeyLineList[i]).Count - 1 do
+      TStringList(storeyLineList[i + 1]).add(TStringList(storeyLineList[i])[j]);
+    TStringList(storeyLineList[i]).Clear;
+    // TStringList(storeyLineList[i + 1]).Text:=TStringList(storeyLineList[i]).text;
+    // TStringList(storeyLineList[i]).Clear;
+
+  end;   //i
+
+
+  //新线立即加上，原线标记下次删除之，下面的就是互换的代码，替代不能直接删除而已
+  tempLineList := TFPList.Create;
+
+ //P91P91:0   P1P1:0  P10P10:0    P100P100:0  如此造成统计点数出错的
+
+  for i := lineList.Count - 1 downto 0 do
+    if TlinePoint(linelist[i]).floor <> -111 then
+      if TlinePoint(linelist[i]).beginPcode = TlinePoint(linelist[i]).endPcode then
+        TlinePoint(linelist[i]).floor := -111;
+  //P91P91:0   P1P1:0  P10P10:0    P100P100:0  如此造成统计点数出错的
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      if TlinePoint(linelist[i]).floor <> -111 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(linelist[i]).beginPcode;
+        pline.endPcode := TlinePoint(linelist[i]).endPcode;
+        pline.beginPoint := TlinePoint(linelist[i]).beginPoint;
+        pline.endPoint := TlinePoint(linelist[i]).endPoint;
+        pline.floor := TlinePoint(linelist[i]).floor;
+        tempLineList.Add(pline);
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(linelist[i]).floor<>-111 then
+      if lineList.Items[i] <> nil then
+      begin
+        TlinePoint(lineList.Items[i]).Free;
+        lineList.Items[i] := nil;
+        lineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  lineList.Clear;
+  for i := tempLineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(tempLineList[i]).floor<>-111 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(tempLineList[i]).beginPcode;
+        pline.endPcode := TlinePoint(tempLineList[i]).endPcode;
+        pline.beginPoint := TlinePoint(tempLineList[i]).beginPoint;
+        pline.endPoint := TlinePoint(tempLineList[i]).endPoint;
+        pline.floor := TlinePoint(tempLineList[i]).floor;
+        LineList.Add(pline);
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+
+  for i := tempLineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(linelist[i]).floor<>-111 then
+      if tempLineList.Items[i] <> nil then
+      begin
+        TlinePoint(tempLineList.Items[i]).Free;
+        tempLineList.Items[i] := nil;
+        tempLineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  tempLineList.Clear;
+  tempLineList.Free;
+
+  for i := pointList.Count - 1 downto 0 do
+    TPointLine(pointList[i]).floor := -1;
+  onelong := 0.0;
+  alllong := 0.0;
+  //memo_seaLine.Lines.Add('总路径：总点数：' + IntToStr(lineList.Count));
+  //for i := lineList.Count - 1 downto 0 do
+  //for j := i-1 downto 0 do
+  //if   TlinePoint(linelist[i]).beginPcode+TlinePoint(linelist[i]).endPcode=
+  //TlinePoint(linelist[j]).beginPcode+TlinePoint(linelist[j]).endPcode  then
+  //     TlinePoint(linelist[i]).floor:=-123;
+  //    memo_seaLine.Lines.Add(    TlinePoint(linelist[i]).beginPcode+TlinePoint(linelist[i]).endPcode);
+  memo_seaLine.Lines.Add('总路径：总点数：' + IntToStr(lineList.Count));
+  //P91P91:0   P1P1:0  P10P10:0    P100P100:0  如此造成统计点数出错的
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      onelong := pplong(TlinePoint(linelist[i]).beginPoint, TlinePoint(
+        linelist[i]).endPoint);
+      memo_seaLine.Lines.Add(TlinePoint(linelist[i]).beginPcode +
+        TlinePoint(linelist[i]).endPcode + ':' + floattostr(onelong));
+      alllong := alllong + onelong;
+      TPointLine(pointList[getpcodeindex(TlinePoint(linelist[i]).beginPcode)]).floor
+      := 1;
+      TPointLine(pointList[getpcodeindex(TlinePoint(linelist[i]).endPcode)]).floor := 1;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+
+  memo_seaLine.Lines.Add('总路长：' + floattostr(alllong));
+  ss := '';
+  for i := pointList.Count - 1 downto 0 do
+    if TPointLine(pointList[i]).floor = -1 then
+      ss := ss + TPointLine(pointList[i]).pcode + ',';
+  if ss <> '' then
+    ShowMessage(ss + '这些点没有被处理');
+  //同心圆的中心点暂未处理，因为结果不理想，无兴趣理会
+
+  //sleepli(2);
+  //refreshFromLineList(nil);
+  refrash.Click;
+  //refreshClick(sender);
+end; 
+
+
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+https://5abdow.smartapps.baidu.com/?_chatParams=%7B%22from%22%3A%22q2a%22%2C%22token%22%3A%22mJ8FUfwNIGn6OllPY1scwUX4SsgYhdxnlZPxN7X5PZE8WNouBI5C8TV9Wt0o1aaJ7wn5VdvUwQemkCr4fUXuK6MLW22XuDSGIIJCDXZgAemRu4YMggJDfZteN7ZbLAeQV5PU8d%2BBfPR4%2Bccb5j%2FfHsAL1cA%3D%22%2C%22chat_no_login%22%3Atrue%2C%22agent_id%22%3A%229kxXMX3IJQTdOLEOLWJPGu1Fgfq7Fco9%22%7D&searchid=bc93b91500946bc2&tplname=ai_agent_qa_recommend&srcid=61446&order=8&lid=bc93b91500946bc2&_swebScene=3711001210000000
+
+关于您对TSP（旅行商问题）中sealine算法与模拟退火（Simulated Annealing, SA）算法的对比思考，以下分步骤分析和建议：
+1. ‌算法性能对比的潜在原因‌
+（1）参数敏感性问题
+
+    ‌模拟退火的表现波动‌：SA的性能高度依赖参数（如初始温度、降温速率、邻域搜索策略等）。若参数未调优，可能陷入局部最优或收敛过慢。您观察到的不稳定结果可能是由于：
+        温度下降过快（未充分探索解空间）。
+        邻域结构设计不适合矩形点阵（如2-opt交换在规则分布中效果有限）。
+    ‌建议‌：尝试调整SA的冷却计划（如指数降温改为线性），或增加马尔可夫链长度以更彻底搜索。
+
+（2）Sealine算法的优势场景
+
+    ‌规则矩形点阵的适应性‌：Sealine的“绝不相交线”启发式在规则分布中可能更高效，因为矩形点阵的最优路径通常符合几何直觉（如蛇形路径）。您的修改（<=）允许算法在同等成本时继续探索，可能找到了更优的对称解。
+    ‌局限性‌：在非规则或高维点集中，Sealine的几何约束可能限制搜索空间，而SA的随机性反而更有优势。
+
+2. ‌与传统算法的对比‌
+
+    ‌模拟退火的地位‌：SA在TSP中表现稳定，因其能平衡探索（高温阶段）与利用（低温阶段）。但其他算法（如遗传算法、蚁群算法）在特定问题中可能更优，例如：
+        ‌遗传算法‌：适合大规模问题，但需谨慎设计交叉/变异算子。
+        ‌LKH/Concorde‌：基于线性规划和割平面法，理论保证强，但实现复杂。
+    ‌Sealine的创新性‌：作为一种启发式算法，若在规则分布中表现一致优于SA，已具备应用价值。可通过以下方式验证其普适性：
+        ‌测试更多数据集‌：如随机点集、聚类点集、非欧几里得距离等。
+        ‌理论分析‌：证明其在矩形点阵下的最优性（如与空间填充曲线关联）。
+
+3. ‌后续研究方向建议‌
+（1）参数调优实验
+
+    对SA进行网格搜索或自适应参数优化（如自适应降温），观察是否能稳定超越Sealine。
+    记录两种算法在相同实例下的收敛曲线和解的多样性。
+
+（2）Sealine的改进方向
+
+    ‌动态调整策略‌：引入概率性接受劣解（类似SA的Metropolis准则），避免严格“不相交”导致的局部最优。
+    ‌混合算法‌：用Sealine生成初始解，再用SA微调。
+
+（3）对比LKH/Concorde的简化方法
+
+    即使不深入代码，也可通过以下方式间接对比：
+        ‌公开基准测试‌：在TSPLIB标准实例上运行Sealine，对比已知最优解。
+        ‌近似比分析‌：计算Sealine解与SA解相对于最优解的差距比例。
+
+4. ‌关于算法“成立”的判断标准‌
+
+    ‌学术意义‌：只要满足以下任一点即可：
+        在特定场景下（如规则分布）表现优于现有方法。
+        提出新颖的启发式思想（如几何约束优先）。
+    ‌工程意义‌：若代码易实现、速度快，即使与SA相当也已具备实用价值。
+
+总结
+
+您的Sealine算法在规则点阵中已展现出竞争力，后续可通过更系统的实验验证其泛化能力。SA参数调优可能缩小差距，但两种算法各有适用场景。建议撰写技术报告或论文，明确Sealine的适用条件和优势，这将为它的“成立”提供扎实依据。
+你的建议很全面，我会试试调整参数看看。
+我想了解更多关于Sealine的启发式思想。
+工程意义上，Sealine算法速度如何？
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+https://pct2qy.smartapps.baidu.com/?_chatParams=%7B%22agent_id%22%3A%22O1dkkQhZVJ9qngQGs81mFvCr0jhUpvVE%22%2C%22content_build_id%22%3A%22%22%2C%22from%22%3A%22q2a%22%2C%22token%22%3A%22lIK3mSDxW7ZDN81sd2TZlAC4KOWxATSgA1k7O71euYMXr9JLAfZnpSR31vrJpXTQO39c8EMSt9q7Qu4mv5a9y5vMXDA6yKzaVjgaRvLZ%2BHFfDZK3WbcmcgRUX0bY0%2FP0u4anKjQhR0f6m6jKPj2KGMkqxBM%3D%22%2C%22chat_no_login%22%3Atrue%7D&searchid=bc93b91500946bc2&botQuery=&clickid=305acff613&lid=bc93b91500946bc2&order=8&srcid=61446&_swebScene=3711001210000000
+
+
+
+根据你今晚的思考和测试结果，我作为数学猜想专家，可以为你梳理一下思路，并提出一个相关的数学猜想。
+
+首先，你观察到的现象非常有趣：你设计的SeaLine算法（一种基于几何直观、保证路径不相交的启发式方法）与经典的模拟退火算法在解决旅行商问题（TSP）时，性能互有胜负，有时SeaLine更优，有时模拟退火更优，尤其在规则矩形点阵中，通过微调代码（比如增加等号判断）后，SeaLine表现出了竞争力。
+
+这背后可能涉及几个关键点：第一，模拟退火算法的性能高度依赖于初始温度、降温速率等参数，参数设置不当可能导致它无法充分探索解空间，从而在特定测试案例上表现不佳。第二，SeaLine算法强制路径不相交，这基于一个几何直觉：最优的TSP路径通常不会自相交。这个直觉在多数情况下成立，但并非绝对数学定理。第三，在点集分布高度规则（如整齐网格）时，问题结构可能更简单，SeaLine的逐层推进策略可能更容易捕捉到最优路径的几何特征。
+
+基于你的探索，我提出以下数学猜想：
+
+‌猜想：‌ 对于平面上任意有限点集，存在一个最优的TSP路径（即最短哈密顿回路），该路径不自相交。进一步地，任何自相交的路径都可以通过局部调整（如“交叉消除”操作）转化为一条更短或等长的不相交路径。
+
+这个猜想并非全新，它类似于图论中关于平面图最优路径的一些已知结论，但针对一般点集的TSP问题，它仍未得到严格证明。如果猜想成立，那么像SeaLine这样强制不相交的算法，其理论下限会更高，因为它直接搜索的是“可能最优”的解空间子集。
+
+关于AI解决此猜想的可能性：目前，AI（特别是符号推理与定理证明系统）在辅助数学猜想证明方面已有进展，例如在组合优化和离散几何中。AI可以通过枚举大量案例进行验证，或从数据中学习路径结构的模式，甚至协助发现证明思路。但完全自动证明这类猜想仍很困难，因为它需要深刻的组合几何洞察。不过，AI可以作为强大工具，帮助验证更多实例，或识别反例。
+
+给你的思考方法建议：
+
+    ‌系统化测试‌：不要只比较“有时”的结果。可以设计一个测试基准，包括随机点集、规则网格、聚类点集等不同类型，用统计方法（如平均路径长度、最优解命中率）量化比较SeaLine与模拟退火。
+    ‌分析失败案例‌：当模拟退火优于SeaLine时，仔细查看那些路径：SeaLine是否因为过于僵化的“逐层”规则，错过了更优的交叉路径？或者模拟退火是否找到了真正更短但相交的路径？如果是后者，那可能意味着你的“不相交”假设在那些案例中不成立。
+    ‌参数调优‌：花些时间系统调整模拟退火的参数（初始温度、降温速率、迭代次数），确保它在比较中处于最佳状态，这样比较才公平。
+    ‌融合思路‌：考虑将SeaLine的几何约束与模拟退火的随机搜索结合。例如，用SeaLine生成初始解，再用模拟退火进行局部优化，可能得到更强算法。
+
+总之，SeaLine算法作为一种创新启发式，其价值已经显现。它基于清晰的几何原理，且在规则分布点集上表现良好。虽然它可能无法永远打败精心调参的模拟退火，但它提供了一个新的解题视角。在数学上，探索“不相交路径猜想”与TSP最优解的关系，本身就是一个有意义的研究方向。继续用实验和理论思考推进，或许能发现更多有趣的结果。
