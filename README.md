@@ -16,13 +16,19 @@
 
 刚才再测试发现，有一次随机数300点时，sealine算法象死循环一样没反应没下文，估计可能有未知的代码BUG，暂不理，烦，疲劳。。。
 测试，三种坐标，
+
 1）当坐标点是十分规则的矩形分布坐标轴一样整点时，将原先的 if curminH < minH t   改成 if curminH <= minH   sealine算法目前似乎平稳地优胜过模拟退火，就算点数从100到500都是一样
+
             SQLQuery1.FieldByName('px').AsInteger := 100 + (100 * (i - 1) mod 1000);
             SQLQuery1.FieldByName('py').AsInteger := 100 + 100 * (100 * (i - 1) div 1000);
+            
 2）当坐标点是随机分布，sealine算法目前自认为确实在100点，到500点，比模拟退火效果各有优劣，高于500点时，个人PC电脑硬件问题，不理了。
+ 
             SQLQuery1.FieldByName('px').AsInteger := Random(1000);//100 + I * 10;
             SQLQuery1.FieldByName('py').AsInteger := Random(1000);//100 + I * 10;
+            
 3）当坐标点是大体规则矩形加上少量随机分布，sealine算法目前仍然自认为确实在100点，到500点，比模拟退火效果要好不少，高于500点时，个人PC电脑硬件问题，不理了。
+
             SQLQuery1.FieldByName('px').AsInteger :=100 + (100 * (i - 1) mod 1000) + Random(20);
             SQLQuery1.FieldByName('py').AsInteger :=100 + 100 * (100 * (i - 1) div 1000) + Random(20);
 
