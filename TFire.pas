@@ -307,6 +307,7 @@ begin
 
   fff.mem_subfire.Lines.Add('总路长: ' + floattostr(bestLength0));
   printPath;
+  fff.mem_subfire.Lines.Add('总路长: ' + floattostr(bestLength0));
 end;
 
 procedure TTFire.printOptimal;

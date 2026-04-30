@@ -1,17 +1,207 @@
 object Main: TMain
-  Left = 239
+  Left = 300
   Height = 679
-  Top = 186
+  Top = 170
   Width = 865
   Caption = 'Main'
   ClientHeight = 679
   ClientWidth = 865
+  Icon.Data = {
+    561700000000010006001818100000000000E801000066000000141410000000
+    0000A80100004E020000101010000000000028010000F6030000181800000100
+    0800C80600001E050000141400000100080008060000E60B0000101000000100
+    080068050000EE11000028000000180000003000000001000400000000000000
+    0000000000000000000000000000000000000000000000008000008000000080
+    800080000000800080008080000080808000C0C0C0000000FF0000FF000000FF
+    FF00FF00000000000000FFFF0000FFFFFF00DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+    DDDDDDDDDDDDDDDDDDDDD000000D000000DDDD0111DD4CCCCC433333330DD019
+    91DD4CCCCC43BBBBBB00019990DD44444443BB00000019990DDD4CCCCC43B078
+    88701990DDDD4444444307EFE8E7090DDDDD4CCCCC407FFEFEFE70DDDDDD4CCC
+    CC408FFFE8EF80DDDDDD4CCCCC408FFFFEFE80DDDDDD4CCCCC408FFFF8EF80DD
+    DDDD4CCCCC407FFFFFFE70DDDDDD4CCCCC4307FFF8F700DDDDDD444444433078
+    887030DDDDDD4CCCCC43BB00000330DDDDDD4CCCCC43BBBBB03330DDDDDD4444
+    44433333303330DDDDDD4C8F8843B8FFB03330DDDDDDD478FF74388FF70330DD
+    DDDDDD478FF74388FF7030DDDDDDDDD478FF74388FF700DDDDDDDDDD47888743
+    888870DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDFFFFFF00FFFFFF008103C3000001
+    8300000003000000070000000F0000001F0000003F0000003F0000003F000000
+    3F0000003F0000003F0000003F0000003F0000003F0000003F0000003F008000
+    3F00C0003F00E0003F00F0003F00FFFFFF002800000014000000280000000100
+    0400000000000000000000000000000000000000000000000000000000000000
+    8000008000000080800080000000800080008080000080808000C0C0C0000000
+    FF0000FF000000FFFF00FF00000000000000FFFF0000FFFFFF00DDDDDDDDDDDD
+    DDDDDDDDDDDDD00000D00000DDDD011DDDDD4CCCC43333300DD0199D11DD4CCC
+    C43BBBB00D01990D91DD4444443B0000001990DD90DD4CCCC430788870090DDD
+    0DDD44444407FEFEF700DDDDDDDD4CCCC408FFE8E80DDDDDDDDD4CCCC408FFFE
+    F80DDDDDDDDD4CCCC408FFF8E80DDDDDDDDD4CCCC4078FF8F70DDDDDDDDD4CCC
+    C4307888700DDDDDDDDD444444330000030DDDDDDDDD4CCCC43BBBB0330DDDDD
+    DDDD444444333330330DDDDDDDDD4C8F843B8FB0330DDDDDDDDDD478F74388F7
+    030DDDDDDDDDDD478F74388F700DDDDDDDDDDDD478874388870DDDDDDDDDDDDD
+    DDDDDDDDDDDDDDDDDDDDFFFFF0F7820F1070000610DD000410FF000030F70000
+    70DD0000F0880001F0880001F0DD0001F0DD0001F0DD0001F0DD0001F0000001
+    F0000001F0000001F0008001F000C001F000E001F000FFFFF000280000001000
+    0000200000000100040000000000000000000000000000000000000000000000
+    0000000000000000800000800000008080008000000080008000808000008080
+    8000C0C0C0000000FF0000FF000000FFFF00FF00000000000000FFFF0000FFFF
+    FF00DDDDDDDDDDDDDDDDD000D0000DDDD01144443BB300DD01994CC433330000
+    199044443BB07887090D4CC43307EFEF70DD44443B08FE8E80DD4CC43B08FFEF
+    80DD4CC43B07FF8E70DD4CC43BB078870DDD44443BB30000DDDD4CC43333030D
+    DDDD44443BB3030DDDDD44443333030DDDDDD4CFC3BFB00DDDDDDD477737770D
+    DDDDFFFFDDDD8878C4300030700D0000DDDD000144330003030D0003DDDD0003
+    C43B0003330D0007DDDD000F4433001F330D001FDDDD001F843B801F330DC01F
+    DDDD280000001800000030000000010008000000000000000000000000000000
+    0000000000000000000000000000FFFFFF0000000000CB919600CB949700994D
+    4E00B25B5C00CF6B6C00C9686900D2717200E27E8000D6787900E6898A00DA82
+    8300EA8F9000E88E8F00BC747500DF8A8B00C57A7B00A0636400E3939400F09D
+    9E00E79B9C00F6AAAB00ECA4A500F7ADAE00F9B0B100EDA7A900F0ACAD00FBB5
+    B600FDB7B900FDB9BB00F4B3B400FFBDBE00FEBCBD00F5B6B7007F3F3F00B65B
+    5B00CB686800CF6B6B00CE6E6D008C4B4B00CF717000AC5D5D00A4595900CF71
+    7100D1747300D2767600D3797900B86C6C00AF67670095585800CD858500C37F
+    7F00A66C6C00F3A4A400D6A29D00C6999200F4ECE800E6D3C900C0B3AC00957D
+    6E0072615500927C6C00907B6C0085746700E5E0DC006F665E00AA9784008C81
+    76009B9187005B5246005D544800B39E7F00B5AB9B00DDCBAB00E5D0A800FEEC
+    C90086837D00B6A47D00D2BF9800DCCEB000F1E6CD008E8A8100E6D2A000B9AD
+    9100AFA89500ADA79700FFFCF400EDE2BF00E5D7A300FFF1BA00FFF2B8009D9B
+    92007D7C7700E7DC9F00FFF4BA00FFF6C500FFFCE300FFFCDF0076756B00FFFC
+    D400FFFEC600FFFFCA00FFFFDB00FFFFE100FFFFF000FFFFFB0064646300B3B5
+    AB00A0A5A2005B676300616D6B0093A7A70072898A00A8F3FB00E2F3F50091B2
+    B90058848E004DBEDD0049AFCC0058C5E10078ABB8008CABB30099B5BD007385
+    8A0057ABC50092CADB0021A1D00030B8E9003DBBE80026708B00398099006698
+    A9008FC4D6008FC3D5002396C300599CB70066AFCC0085B4C7007AA4B4007095
+    A6006C8F9F007094A5006A8B9C00597687004F67760029353E00758591001F2A
+    33004358690055697A00262F38002835430043516100495869004F5E6F004552
+    610051525600FFFFFF0000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000002020202020202020202020202020202020202020202
+    0202020202020202020202020202020202020202020202020202122C252C0529
+    24027097929647470202020299990202020228111210320529767A8989767692
+    960202998980960202022814342D312C298E868A8C858E7076999988817F7F90
+    02022D3132330505298E7A94433E2448489A88827F739002020210341210312C
+    298E9440495050393648767F7390020202023010132B2C2B05713F504C4C4C54
+    50103E7C9002020202023004140D102B365355595959594C5450134802020202
+    020211171611123110415152523A52524C544F47020202020202162318160D31
+    3541523A3A6A3A525954502402020202020216211C18141234413B625858583A
+    594C39470202020202021821201B163435534A3A58583A52594C496C02020202
+    0202183B23171511107153513A62635259554170020202020202163811343534
+    088B71454A3B52514F417297020202020202141C1F201834108B737C71414341
+    728578920202020202021B3B211F1E1A308B74747F737F857F78899B02020202
+    0202160335101035128B9091948D87768A7E789C0202020202023410513A3B03
+    10879142743A759786797E920202020202020238323B3A581C358B9C423A3A6E
+    918A7992020202020202020238324B423A4B357C9242583A46768A9702020202
+    020202020204324B3B3A3B358B97423A3A577697020202020202020202023832
+    51523A3B107564423A3A57760202020202020202020202020202020202020202
+    02020202020202020202FFFFFF00FFFFFF000103CF0000018700000003000000
+    070000000F0000001F0000003F0000003F0000003F0000003F0000003F000000
+    3F0000003F0000003F0000003F0000003F0000003F0080003F00C0003F00E000
+    3F00F0003F00FFFFFF0028000000140000002800000001000800000000000000
+    00000000000000000000000000000000000000000000FFFFFF0000000000CB91
+    9600CB949700994D4E00B25B5C00CF6B6C00C9686900D2717200E27E8000D678
+    7900E6898A00DA828300EA8F9000E88E8F00BC747500DF8A8B00C57A7B00A063
+    6400E3939400F09D9E00E79B9C00F6AAAB00ECA4A500F7ADAE00F9B0B100EDA7
+    A900F0ACAD00FBB5B600FDB7B900FDB9BB00F4B3B400FFBDBE00FEBCBD00F5B6
+    B7007F3F3F00B65B5B00CB686800CF6B6B00CE6E6D008C4B4B00CF717000AC5D
+    5D00A4595900CF717100D1747300D2767600D3797900B86C6C00AF6767009558
+    5800CD858500C37F7F00A66C6C00F3A4A400D6A29D00C6999200F4ECE800E6D3
+    C900C0B3AC00957D6E0072615500927C6C00907B6C0085746700E5E0DC006F66
+    5E00AA9784008C8176009B9187005B5246005D544800B39E7F00B5AB9B00DDCB
+    AB00E5D0A800FEECC90086837D00B6A47D00D2BF9800DCCEB000F1E6CD008E8A
+    8100E6D2A000B9AD9100AFA89500ADA79700FFFCF400EDE2BF00E5D7A300FFF1
+    BA00FFF2B8009D9B92007D7C7700E7DC9F00FFF4BA00FFF6C500FFFCE300FFFC
+    DF0076756B00FFFCD400FFFEC600FFFFCA00FFFFDB00FFFFE100FFFFF000FFFF
+    FB0064646300B3B5AB00A0A5A2005B676300616D6B0093A7A70072898A00A8F3
+    FB00E2F3F50091B2B90058848E004DBEDD0049AFCC0058C5E10078ABB8008CAB
+    B30099B5BD0073858A0057ABC50092CADB0021A1D00030B8E9003DBBE8002670
+    8B00398099006698A9008FC4D6008FC3D5002396C300599CB70066AFCC0085B4
+    C7007AA4B4007095A6006C8F9F007094A5006A8B9C00597687004F6776002935
+    3E00758591001F2A33004358690055697A00262F380028354300435161004958
+    69004F5E6F004552610051525600FFFFFF000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000202020202020202020202020202
+    0202020202020E1130082C31027E89847691760202029A990202031130312C33
+    947A8985769299020283789292022F0D10322C298D8A7A76726F92998381737F
+    9402123531322C2C8E8D404133333E9D827F73940202121031322B058F3D4F54
+    54544F3E72739402020234341231321346555959594C5434417202020202141B
+    160D311045514D5252524C501302020202021820151410103F653A583A525954
+    4902020202021B211B163435533B5858585259543D02020202021C3B1A1B1112
+    464A585862634D504102020202021B1C381111107B464A526359503D7D020202
+    02021404143412318B875D4644534E858502020202021C21211D193087747387
+    8B8E8B7E8402020202023804343434128B8E8E7B8B858A778902020202020235
+    3B3A3C347B9442583C768A798902020202020202353B583B038F94420151918A
+    89020202020202020210513A3B388F90426B3C8D850202020202020202023551
+    3A3B3571943B6B3C940202020202020202020202020202020202020202020202
+    0202FFFFF00202073002000610100000108B0000308D0000707E0000F0020001
+    F0020001F03A0001F0870001F03A0001F0790001F0020001F0020001F03B8001
+    F035C001F03AE001F08AF001F002FFFFF0022800000010000000200000000100
+    080000000000000000000000000000000000000000000000000000000000FFFF
+    FF0000000000CB919600CB949700994D4E00B25B5C00CF6B6C00C9686900D271
+    7200E27E8000D6787900E6898A00DA828300EA8F9000E88E8F00BC747500DF8A
+    8B00C57A7B00A0636400E3939400F09D9E00E79B9C00F6AAAB00ECA4A500F7AD
+    AE00F9B0B100EDA7A900F0ACAD00FBB5B600FDB7B900FDB9BB00F4B3B400FFBD
+    BE00FEBCBD00F5B6B7007F3F3F00B65B5B00CB686800CF6B6B00CE6E6D008C4B
+    4B00CF717000AC5D5D00A4595900CF717100D1747300D2767600D3797900B86C
+    6C00AF67670095585800CD858500C37F7F00A66C6C00F3A4A400D6A29D00C699
+    9200F4ECE800E6D3C900C0B3AC00957D6E0072615500927C6C00907B6C008574
+    6700E5E0DC006F665E00AA9784008C8176009B9187005B5246005D544800B39E
+    7F00B5AB9B00DDCBAB00E5D0A800FEECC90086837D00B6A47D00D2BF9800DCCE
+    B000F1E6CD008E8A8100E6D2A000B9AD9100AFA89500ADA79700FFFCF400EDE2
+    BF00E5D7A300FFF1BA00FFF2B8009D9B92007D7C7700E7DC9F00FFF4BA00FFF6
+    C500FFFCE300FFFCDF0076756B00FFFCD400FFFEC600FFFFCA00FFFFDB00FFFF
+    E100FFFFF000FFFFFB0064646300B3B5AB00A0A5A2005B676300616D6B0093A7
+    A70072898A00A8F3FB00E2F3F50091B2B90058848E004DBEDD0049AFCC0058C5
+    E10078ABB8008CABB30099B5BD0073858A0057ABC50092CADB0021A1D00030B8
+    E9003DBBE80026708B00398099006698A9008FC4D6008FC3D5002396C300599C
+    B70066AFCC0085B4C7007AA4B4007095A6006C8F9F007094A5006A8B9C005976
+    87004F67760029353E00758591001F2A33004358690055697A00262F38002835
+    430043516100495869004F5E6F004552610051525600FFFFFF00000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000020202020202
+    0202020202020298020207080605248E909196998E029D889302270F0C0A258E
+    79777783959C8081899209361333298F766F48476C84828A94020B17150E267D
+    64495F5A5770859402020D3510322C5E4466605C4D5643020202111F1A372845
+    4B6863655B4C4102020214211E192A46516A586261544F0202021621211D2E6E
+    4A016B69674F50020202182121222F7C6D3C5259553E020202021C3412312B86
+    7A715D53729E0202020220212121307F73737377789A0202020223231B142D87
+    8B8C8D907E9B0202020202383F420104754042019097020202020202393D3A3B
+    037B4E3A74900202020202020202020202020202020202020202FFFB02020011
+    211D0000877400018B8E00038402000702020007343400078B8E00078B85000F
+    8902000F0202000F3B3A000F7B94800F3C76C00F8902FFFF0202
+  }
   Position = poDefaultSizeOnly
   LCLVersion = '4.4.0.0'
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnPaint = FormPaint
   OnShow = FormShow
   object ProgressBar1: TProgressBar
     Left = 144
@@ -143,8 +333,8 @@ object Main: TMain
     Height = 679
     Top = 0
     Width = 624
-    HorzScrollBar.Page = 323
-    VertScrollBar.Page = 90
+    HorzScrollBar.Page = 454
+    VertScrollBar.Page = 554
     Align = alClient
     ClientHeight = 677
     ClientWidth = 622
@@ -152,6 +342,7 @@ object Main: TMain
     ParentBackground = False
     ParentColor = False
     TabOrder = 4
+    OnDragDrop = ScrollBox1DragDrop
     object Image1: TImage
       Left = 0
       Height = 677
@@ -178,11 +369,33 @@ object Main: TMain
       OnMouseUp = Shape1MouseUp
       OnPaint = Shape1Paint
     end
+    object desktop_file: TMemo
+      Left = 304
+      Height = 90
+      Top = 464
+      Width = 150
+      Lines.Strings = (
+        '[Desktop Entry]'
+        'Version=1.0'
+        'Encoding=UTF-8'
+        'Type=Application'
+        'Icon=/media/w/data/日记类/TSP_ubuntu_Lazarus/ttsp'
+        'Path=/media/w/data/日记类/TSP_ubuntu_Lazarus'
+        'Database=/media/w/data/日记类/TSP_ubuntu_Lazarus/TSP.sqlite3'
+        'Exec=/media/w/data/日记类/TSP_ubuntu_Lazarus/TSP'
+        'Name=TSP算法小软件－海岸线算法'
+        'Category=Application;'
+        'Categories=Development;Database;'
+      )
+      ScrollBars = ssBoth
+      TabOrder = 0
+      Visible = False
+    end
   end
   object Button5: TButton
-    Left = 344
+    Left = 384
     Height = 25
-    Top = 480
+    Top = 632
     Width = 207
     Caption = '找个TEMP控件输入中文COPY用'
     TabOrder = 5
@@ -203,12 +416,12 @@ object Main: TMain
       Height = 677
       Top = 1
       Width = 235
-      ActivePage = TabSheet1
+      ActivePage = TabSheet3
       Align = alClient
       Font.Height = -12
       Font.Name = 'Sans'
       ParentFont = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
@@ -307,9 +520,9 @@ object Main: TMain
         end
         object CheckBox_showhint: TCheckBox
           Left = 0
-          Height = 24
+          Height = 27
           Top = 61
-          Width = 169
+          Width = 191
           Caption = '显示拓扑图中标签和提示'
           Checked = True
           Font.Height = -13
@@ -366,7 +579,7 @@ object Main: TMain
           TabOrder = 7
           object RadioBtn_calc: TRadioButton
             Left = 6
-            Height = 17
+            Height = 19
             Top = 0
             Width = 178
             Caption = '精确坐标：自动计算边长'
@@ -376,16 +589,16 @@ object Main: TMain
           end
           object RadioBtn_input: TRadioButton
             Left = 6
-            Height = 18
-            Top = 17
+            Height = 19
+            Top = 19
             Width = 178
             Caption = '粗略坐标：手工输入边长'
             TabOrder = 1
           end
           object pointsXYpos: TButton
             Left = 6
-            Height = 24
-            Top = 35
+            Height = 23
+            Top = 38
             Width = 178
             AutoSize = True
             Caption = '质点总数量重新输入'
@@ -399,8 +612,8 @@ object Main: TMain
           end
           object addOnePoint: TButton
             Left = 6
-            Height = 26
-            Top = 59
+            Height = 24
+            Top = 61
             Width = 178
             AutoSize = True
             Caption = '添加一点(若删除某点用右键)'
@@ -468,7 +681,7 @@ object Main: TMain
           Hint = '只在作者自创的燃线法添加权重功能，别的算法暂没空去做了，以后再理   '
           Top = 295
           Width = 196
-          Caption = '导入自定义的顶点坐标'
+          Caption = '导入TXT自定义的顶点坐标'
           Font.Color = clRed
           Font.Height = -13
           Font.Name = 'Sans'
@@ -556,8 +769,7 @@ object Main: TMain
           Hint = '只在作者自创的燃线法添加权重功能，别的算法暂没空去做了，以后再理   '
           Top = 340
           Width = 193
-          Cancel = True
-          Caption = '导出顶点坐标到SQLite'
+          Caption = '保存顶点坐标到SQLite'
           Font.Color = clRed
           Font.Height = -13
           Font.Name = 'Sans'
@@ -578,751 +790,794 @@ object Main: TMain
           Height = 627
           Top = 0
           Width = 225
-          ActivePage = TabSheet4
+          ActivePage = TabSheet7
           Align = alClient
-          TabIndex = 0
+          TabIndex = 3
           TabOrder = 0
           OnChange = PageControl2Change
           object TabSheet4: TTabSheet
             Caption = '遗传'#13#10'算法'
             ClientHeight = 577
             ClientWidth = 215
-            object btn_gainit: TButton
-              Left = 16
-              Height = 20
-              Top = 144
-              Width = 186
-              Caption = '先：创建种群'
-              TabOrder = 0
-              OnClick = btn_gainitClick
-            end
-            object btn_GaReRun: TButton
-              Left = 16
-              Height = 20
-              Top = 166
-              Width = 104
-              Caption = '后：运行'
-              TabOrder = 1
-              OnClick = btn_GaReRunClick
-            end
-            object btn_showGa: TButton
-              Left = 16
-              Height = 20
-              Top = 185
-              Width = 120
-              Caption = '显示遗传算法路径'
-              TabOrder = 2
-              Visible = False
-              OnClick = btn_showGaClick
-            end
-            object btn_GaHelpgenerateHelp: TButton
-              Left = 125
-              Height = 20
-              Top = 166
-              Width = 75
-              Caption = '说明'
-              TabOrder = 3
-              OnClick = btn_GaHelpgenerateHelpClick
-            end
             object mem_GA: TMemo
-              Left = 16
-              Height = 354
-              Top = 206
-              Width = 184
-              Anchors = [akTop, akLeft, akRight, akBottom]
+              Left = 0
+              Height = 361
+              Top = 216
+              Width = 215
+              Align = alClient
               Lines.Strings = (
                 ''
               )
               ScrollBars = ssBoth
-              TabOrder = 4
+              TabOrder = 0
             end
-            object Label24: TLabel
-              Left = 20
-              Height = 17
-              Top = 40
-              Width = 66
-              Caption = '每次进化代数'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label25: TLabel
-              Left = 19
-              Height = 17
-              Top = 16
-              Width = 55
-              Caption = '种群数量：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label26: TLabel
-              Left = 21
-              Height = 17
-              Top = 69
-              Width = 88
-              Caption = '适应度（百分数）'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label27: TLabel
-              Left = 21
-              Height = 17
-              Top = 96
-              Width = 88
-              Caption = '交叉算子百分数：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label28: TLabel
-              Left = 21
-              Height = 17
-              Top = 120
-              Width = 88
-              Caption = '变异算子百分数：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object POP_SIZE: TSpinEditEx
-              Left = 135
-              Height = 25
-              Top = 8
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 5
-              NullValue = 0
-              Value = 100
-            end
-            object MAX_GEN: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 36
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 6
-              NullValue = 0
-              Value = 500
-            end
-            object Fitness: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 64
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 7
-              NullValue = 0
-              Value = 50
-            end
-            object PCROSS: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 88
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 8
-              NullValue = 0
-              Value = 85
-            end
-            object PMUTATE: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 112
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 9
-              NullValue = 0
-              Value = 2
+            object Panel4: TPanel
+              Left = 0
+              Height = 216
+              Top = 0
+              Width = 215
+              Align = alTop
+              ClientHeight = 216
+              ClientWidth = 215
+              TabOrder = 1
+              object btn_gainit: TButton
+                Left = 16
+                Height = 20
+                Top = 144
+                Width = 186
+                Caption = '先：创建种群'
+                TabOrder = 0
+                OnClick = btn_gainitClick
+              end
+              object btn_GaReRun: TButton
+                Left = 16
+                Height = 20
+                Top = 166
+                Width = 104
+                Caption = '后：运行'
+                TabOrder = 1
+                OnClick = btn_GaReRunClick
+              end
+              object btn_showGa: TButton
+                Left = 16
+                Height = 20
+                Top = 185
+                Width = 120
+                Caption = '显示遗传算法路径'
+                TabOrder = 2
+                Visible = False
+                OnClick = btn_showGaClick
+              end
+              object btn_GaHelpgenerateHelp: TButton
+                Left = 125
+                Height = 20
+                Top = 166
+                Width = 75
+                Caption = '说明'
+                TabOrder = 3
+                OnClick = btn_GaHelpgenerateHelpClick
+              end
+              object Label24: TLabel
+                Left = 20
+                Height = 17
+                Top = 40
+                Width = 66
+                Caption = '每次进化代数'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label25: TLabel
+                Left = 19
+                Height = 17
+                Top = 16
+                Width = 55
+                Caption = '种群数量：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label26: TLabel
+                Left = 21
+                Height = 17
+                Top = 69
+                Width = 88
+                Caption = '适应度（百分数）'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label27: TLabel
+                Left = 21
+                Height = 17
+                Top = 96
+                Width = 88
+                Caption = '交叉算子百分数：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label28: TLabel
+                Left = 21
+                Height = 17
+                Top = 120
+                Width = 88
+                Caption = '变异算子百分数：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object POP_SIZE: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 8
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 4
+                NullValue = 0
+                Value = 100
+              end
+              object MAX_GEN: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 36
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 5
+                NullValue = 0
+                Value = 500
+              end
+              object Fitness: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 64
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 6
+                NullValue = 0
+                Value = 50
+              end
+              object PCROSS: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 88
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 7
+                NullValue = 0
+                Value = 85
+              end
+              object PMUTATE: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 112
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 8
+                NullValue = 0
+                Value = 2
+              end
             end
           end
           object TabSheet5: TTabSheet
             Caption = '蚁群'#13#10'算法'
             ClientHeight = 577
             ClientWidth = 215
-            object Label13: TLabel
-              Left = 1
-              Height = 17
-              Top = 16
-              Width = 77
-              Caption = '蚁群中蚂蚁数：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label14: TLabel
-              Left = 2
-              Height = 17
-              Top = 40
-              Width = 109
-              Caption = '信息素重要程度alpha:'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label15: TLabel
-              Left = 3
-              Height = 17
-              Top = 69
-              Width = 125
-              Caption = '启发式因子重要程度beta:'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label16: TLabel
-              Left = 3
-              Height = 17
-              Top = 96
-              Width = 117
-              Caption = '信息素挥发(百分数)rbo:'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label17: TLabel
-              Left = 3
-              Height = 17
-              Top = 120
-              Width = 118
-              Caption = '信息素初始值(百分数)：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label18: TLabel
-              Left = 3
-              Height = 17
-              Top = 144
-              Width = 100
-              Caption = 'delta初始值(百分数)'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label19: TLabel
-              Left = 3
-              Height = 17
-              Top = 168
-              Width = 96
-              Caption = '蚁群数量(迭代数)：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object btn_ant_run: TButton
-              Left = 3
-              Height = 25
-              Top = 232
-              Width = 100
-              Caption = '后：运行'
-              Enabled = False
-              TabOrder = 0
-              OnClick = btn_ant_runClick
-            end
-            object antsHelp: TButton
-              Left = 120
-              Height = 26
-              Top = 232
-              Width = 80
-              Caption = '说明'
-              TabOrder = 1
-              OnClick = antsHelpClick
-            end
             object mem_ant: TMemo
-              Left = 3
-              Height = 288
-              Top = 272
-              Width = 197
-              Anchors = [akTop, akLeft, akRight, akBottom]
+              Left = 0
+              Height = 313
+              Top = 264
+              Width = 215
+              Align = alClient
               Lines.Strings = (
                 ''
               )
               ScrollBars = ssBoth
-              TabOrder = 2
+              TabOrder = 0
             end
-            object alpha: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 36
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 3
-              NullValue = 0
-              Value = 16
-            end
-            object beta: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 64
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 4
-              NullValue = 0
-              Value = 5
-            end
-            object rho: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 88
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 5
-              NullValue = 0
-              Value = 38
-            end
-            object pheromone: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 112
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 6
-              NullValue = 0
-              Value = 13
-            end
-            object Delta: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 136
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 7
-              NullValue = 0
-              Value = 11
-            end
-            object gMAX_GEN: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 160
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 8
-              NullValue = 0
-              Value = 200
-            end
-            object btn_createANT: TButton
-              Left = 3
-              Height = 25
-              Top = 200
-              Width = 197
-              Caption = '先：创建蚂蚁'
-              TabOrder = 9
-              OnClick = btn_createANTClick
-            end
-            object antNums: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 9
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 10
-              NullValue = 0
-              Value = 200
+            object Panel1: TPanel
+              Left = 0
+              Height = 264
+              Top = 0
+              Width = 215
+              Align = alTop
+              ClientHeight = 264
+              ClientWidth = 215
+              TabOrder = 1
+              object Label13: TLabel
+                Left = 0
+                Height = 17
+                Top = 7
+                Width = 77
+                Caption = '蚁群中蚂蚁数：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label14: TLabel
+                Left = 1
+                Height = 17
+                Top = 31
+                Width = 109
+                Caption = '信息素重要程度alpha:'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label15: TLabel
+                Left = 2
+                Height = 17
+                Top = 60
+                Width = 125
+                Caption = '启发式因子重要程度beta:'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label16: TLabel
+                Left = 2
+                Height = 17
+                Top = 87
+                Width = 117
+                Caption = '信息素挥发(百分数)rbo:'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label17: TLabel
+                Left = 2
+                Height = 17
+                Top = 111
+                Width = 118
+                Caption = '信息素初始值(百分数)：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label18: TLabel
+                Left = 2
+                Height = 17
+                Top = 135
+                Width = 100
+                Caption = 'delta初始值(百分数)'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label19: TLabel
+                Left = 2
+                Height = 17
+                Top = 159
+                Width = 96
+                Caption = '蚁群数量(迭代数)：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object btn_ant_run: TButton
+                Left = 2
+                Height = 25
+                Top = 223
+                Width = 100
+                Caption = '后：运行'
+                Enabled = False
+                TabOrder = 0
+                OnClick = btn_ant_runClick
+              end
+              object antsHelp: TButton
+                Left = 119
+                Height = 26
+                Top = 223
+                Width = 80
+                Caption = '说明'
+                TabOrder = 1
+                OnClick = antsHelpClick
+              end
+              object alpha: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 27
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 2
+                NullValue = 0
+                Value = 16
+              end
+              object beta: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 55
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 3
+                NullValue = 0
+                Value = 5
+              end
+              object rho: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 79
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 4
+                NullValue = 0
+                Value = 38
+              end
+              object pheromone: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 103
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 5
+                NullValue = 0
+                Value = 13
+              end
+              object Delta: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 127
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 6
+                NullValue = 0
+                Value = 11
+              end
+              object gMAX_GEN: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 151
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 7
+                NullValue = 0
+                Value = 200
+              end
+              object btn_createANT: TButton
+                Left = 2
+                Height = 25
+                Top = 191
+                Width = 197
+                Caption = '先：创建蚂蚁'
+                TabOrder = 8
+                OnClick = btn_createANTClick
+              end
+              object antNums: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 0
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 9
+                NullValue = 0
+                Value = 200
+              end
             end
           end
           object TabSheet6: TTabSheet
             Caption = '粒子群'#13#10'算法'
             ClientHeight = 577
             ClientWidth = 215
-            object Label5: TLabel
-              Left = 1
-              Height = 17
-              Top = 16
-              Width = 64
-              Caption = '粒子个数M：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label6: TLabel
-              Left = 2
-              Height = 17
-              Top = 40
-              Width = 134
-              Caption = '惯性因子最大值ws:除以100'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label7: TLabel
-              Left = 3
-              Height = 17
-              Top = 69
-              Width = 96
-              Caption = '惯性系数w:除以100'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label8: TLabel
-              Left = 3
-              Height = 17
-              Top = 96
-              Width = 135
-              Caption = '惯性因子最小值we:除以100'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label9: TLabel
-              Left = 3
-              Height = 17
-              Top = 120
-              Width = 109
-              Caption = '认知系数：AC除以100'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label10: TLabel
-              Left = 3
-              Height = 17
-              Top = 144
-              Width = 121
-              Caption = '个体学习因子c1:除以100'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label11: TLabel
-              Left = 3
-              Height = 17
-              Top = 168
-              Width = 121
-              Caption = '社会学习因子c2:除以100'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label12: TLabel
-              Left = 3
-              Height = 17
-              Top = 192
-              Width = 74
-              Caption = '迭代次数iter/T:'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object btn_PSO_run: TButton
-              Left = 2
-              Height = 25
-              Top = 231
-              Width = 118
-              Caption = '运行'
+            object Panel2: TPanel
+              Left = 0
+              Height = 272
+              Top = 0
+              Width = 215
+              Align = alTop
+              BevelOuter = bvNone
+              ClientHeight = 272
+              ClientWidth = 215
               TabOrder = 0
-              OnClick = btn_PSO_runClick
-            end
-            object PSOhelp: TButton
-              Left = 136
-              Height = 26
-              Top = 231
-              Width = 72
-              Caption = '说明'
-              TabOrder = 1
-              OnClick = PSOhelpClick
+              object Label5: TLabel
+                Left = 1
+                Height = 17
+                Top = 16
+                Width = 64
+                Caption = '粒子个数M：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label6: TLabel
+                Left = 2
+                Height = 17
+                Top = 40
+                Width = 134
+                Caption = '惯性因子最大值ws:除以100'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label7: TLabel
+                Left = 3
+                Height = 17
+                Top = 69
+                Width = 96
+                Caption = '惯性系数w:除以100'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label8: TLabel
+                Left = 3
+                Height = 17
+                Top = 96
+                Width = 135
+                Caption = '惯性因子最小值we:除以100'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label9: TLabel
+                Left = 3
+                Height = 17
+                Top = 120
+                Width = 109
+                Caption = '认知系数：AC除以100'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label10: TLabel
+                Left = 3
+                Height = 17
+                Top = 144
+                Width = 121
+                Caption = '个体学习因子c1:除以100'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label11: TLabel
+                Left = 3
+                Height = 17
+                Top = 168
+                Width = 121
+                Caption = '社会学习因子c2:除以100'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label12: TLabel
+                Left = 3
+                Height = 17
+                Top = 192
+                Width = 74
+                Caption = '迭代次数iter/T:'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object btn_PSO_run: TButton
+                Left = 2
+                Height = 25
+                Top = 231
+                Width = 118
+                Caption = '运行'
+                TabOrder = 0
+                OnClick = btn_PSO_runClick
+              end
+              object PSOhelp: TButton
+                Left = 136
+                Height = 26
+                Top = 231
+                Width = 72
+                Caption = '说明'
+                TabOrder = 1
+                OnClick = PSOhelpClick
+              end
+              object PSOnum: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 8
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 2
+                NullValue = 0
+                Value = 10
+              end
+              object PSOws: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 36
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 3
+                NullValue = 0
+                Value = 45
+              end
+              object PSOw: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 64
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 4
+                NullValue = 0
+                Value = 90
+              end
+              object PSOwe: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 88
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 5
+                NullValue = 0
+                Value = 35
+              end
+              object PSOVv: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 112
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 6
+                NullValue = 0
+                Value = 50
+              end
+              object PSOc1: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 136
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 7
+                NullValue = 0
+                Value = 200
+              end
+              object PSOc2: TSpinEditEx
+                Left = 136
+                Height = 25
+                Top = 160
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 8
+                NullValue = 0
+                Value = 200
+              end
+              object PSOiter: TSpinEditEx
+                Left = 135
+                Height = 25
+                Top = 184
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 9
+                NullValue = 0
+                Value = 30000
+              end
             end
             object PSOLine: TMemo
-              Left = 3
-              Height = 296
+              Left = 0
+              Height = 305
               Top = 272
-              Width = 197
-              Anchors = [akTop, akLeft, akRight, akBottom]
+              Width = 215
+              Align = alClient
+              Anchors = []
               ScrollBars = ssBoth
-              TabOrder = 2
-            end
-            object PSOnum: TSpinEditEx
-              Left = 135
-              Height = 25
-              Top = 8
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 3
-              NullValue = 0
-              Value = 10
-            end
-            object PSOws: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 36
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 4
-              NullValue = 0
-              Value = 45
-            end
-            object PSOw: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 64
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 5
-              NullValue = 0
-              Value = 90
-            end
-            object PSOwe: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 88
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 6
-              NullValue = 0
-              Value = 35
-            end
-            object PSOVv: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 112
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 7
-              NullValue = 0
-              Value = 50
-            end
-            object PSOc1: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 136
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 8
-              NullValue = 0
-              Value = 200
-            end
-            object PSOc2: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 160
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 9
-              NullValue = 0
-              Value = 200
-            end
-            object PSOiter: TSpinEditEx
-              Left = 135
-              Height = 25
-              Top = 184
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 10
-              NullValue = 0
-              Value = 30000
+              TabOrder = 1
             end
           end
           object TabSheet7: TTabSheet
+            AutoSize = True
             Caption = '模拟'#13#10'退火'
             ClientHeight = 577
             ClientWidth = 215
+            object Panel3: TPanel
+              Left = 0
+              Height = 162
+              Top = 0
+              Width = 215
+              Align = alTop
+              ClientHeight = 162
+              ClientWidth = 215
+              TabOrder = 0
+              object btn_subfire_run: TButton
+                Left = 0
+                Height = 25
+                Top = 120
+                Width = 133
+                Caption = '运行'
+                TabOrder = 0
+                OnClick = btn_subfire_runClick
+              end
+              object btn_fireHelp: TButton
+                Left = 141
+                Height = 26
+                Top = 121
+                Width = 64
+                Caption = '说明'
+                TabOrder = 1
+                OnClick = btn_fireHelpClick
+              end
+              object Label20: TLabel
+                Left = 5
+                Height = 17
+                Top = 8
+                Width = 99
+                Caption = '每个温度迭代次数：'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label21: TLabel
+                Left = 6
+                Height = 17
+                Top = 32
+                Width = 99
+                Caption = '退火系数（百分比）'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label22: TLabel
+                Left = 7
+                Height = 17
+                Top = 61
+                Width = 44
+                Caption = '结束温度'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object Label23: TLabel
+                Left = 7
+                Height = 17
+                Top = 88
+                Width = 44
+                Caption = '初始温度'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+              end
+              object fireEdit1: TSpinEditEx
+                Left = 132
+                Height = 25
+                Top = 0
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 2
+                NullValue = 0
+                Value = 5000
+              end
+              object fireEdit2: TSpinEditEx
+                Left = 133
+                Height = 25
+                Top = 28
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 3
+                NullValue = 0
+                Value = 1
+              end
+              object fireEdit3: TSpinEditEx
+                Left = 133
+                Height = 25
+                Top = 56
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 4
+                NullValue = 0
+                Value = 98
+              end
+              object fireEdit4: TSpinEditEx
+                Left = 133
+                Height = 25
+                Top = 80
+                Width = 79
+                AutoSelect = False
+                AutoSizeHeightIsEditHeight = False
+                AutoSize = False
+                MaxLength = 0
+                SpinButtonWidth = 17
+                TabOrder = 5
+                NullValue = 0
+                Value = 1000
+              end
+            end
             object mem_subfire: TMemo
-              Left = 3
-              Height = 394
-              Top = 168
-              Width = 197
-              Anchors = [akTop, akLeft, akRight, akBottom]
+              Left = 0
+              Height = 415
+              Top = 162
+              Width = 215
+              Align = alClient
               Lines.Strings = (
                 ''
               )
               ScrollBars = ssBoth
-              TabOrder = 0
-            end
-            object btn_subfire_run: TButton
-              Left = 3
-              Height = 25
-              Top = 128
-              Width = 133
-              Caption = '运行'
               TabOrder = 1
-              OnClick = btn_subfire_runClick
-            end
-            object btn_fireHelp: TButton
-              Left = 144
-              Height = 26
-              Top = 129
-              Width = 64
-              Caption = '说明'
-              TabOrder = 2
-              OnClick = btn_fireHelpClick
-            end
-            object Label20: TLabel
-              Left = 8
-              Height = 17
-              Top = 16
-              Width = 99
-              Caption = '每个温度迭代次数：'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label21: TLabel
-              Left = 9
-              Height = 17
-              Top = 40
-              Width = 99
-              Caption = '退火系数（百分比）'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label22: TLabel
-              Left = 10
-              Height = 17
-              Top = 69
-              Width = 44
-              Caption = '结束温度'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object Label23: TLabel
-              Left = 10
-              Height = 17
-              Top = 96
-              Width = 44
-              Caption = '初始温度'
-              Font.Height = -11
-              Font.Name = 'Sans'
-              ParentFont = False
-            end
-            object fireEdit1: TSpinEditEx
-              Left = 135
-              Height = 25
-              Top = 8
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 3
-              NullValue = 0
-              Value = 5000
-            end
-            object fireEdit2: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 36
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 4
-              NullValue = 0
-              Value = 1
-            end
-            object fireEdit3: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 64
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 5
-              NullValue = 0
-              Value = 98
-            end
-            object fireEdit4: TSpinEditEx
-              Left = 136
-              Height = 25
-              Top = 88
-              Width = 79
-              AutoSelect = False
-              AutoSizeHeightIsEditHeight = False
-              AutoSize = False
-              MaxLength = 0
-              SpinButtonWidth = 17
-              TabOrder = 6
-              NullValue = 0
-              Value = 1000
             end
           end
         end
@@ -1336,14 +1591,14 @@ object Main: TMain
           Height = 627
           Top = 0
           Width = 225
-          ActivePage = TabDyp
+          ActivePage = TabSheet11
           Align = alClient
-          TabIndex = 0
+          TabIndex = 3
           TabOrder = 0
           OnChange = PageControl3Change
           object TabDyp: TTabSheet
-            Caption = '动态规划'#13#10'算法'
-            ClientHeight = 577
+            Caption = '动态'#13#10'规划'#13#10'算法'
+            ClientHeight = 559
             ClientWidth = 215
             object btn_dyp_run: TButton
               Left = 7
@@ -1365,7 +1620,7 @@ object Main: TMain
             end
             object mem_dyp_path: TMemo
               Left = 8
-              Height = 472
+              Height = 454
               Top = 80
               Width = 179
               Anchors = [akTop, akLeft, akRight, akBottom]
@@ -1378,7 +1633,7 @@ object Main: TMain
           end
           object TabSheet9: TTabSheet
             Caption = '穷举'#13#10'算法'
-            ClientHeight = 577
+            ClientHeight = 559
             ClientWidth = 215
             object btn_branch_run: TButton
               Left = 13
@@ -1426,7 +1681,7 @@ object Main: TMain
             end
             object mem_branch: TMemo
               Left = 9
-              Height = 344
+              Height = 326
               Top = 224
               Width = 195
               Anchors = [akTop, akLeft, akRight, akBottom]
@@ -1457,19 +1712,111 @@ object Main: TMain
           end
           object TabSheet8: TTabSheet
             AutoSize = True
-            Caption = '海岸线'#13#10'算法猜想'
-            ClientHeight = 577
+            Caption = '海岸线'#13#10'算法'#13#10'猜想'
+            ClientHeight = 559
             ClientWidth = 215
             object memo_guess: TMemo
               Left = 0
-              Height = 562
+              Height = 544
               Top = 0
               Width = 214
               Anchors = [akTop, akLeft, akRight, akBottom]
               Lines.Strings = (
-                '海岸线算法猜想：'
-                '                  关于TSP的 P＝NP 解法的可能性猜想：海岸线猜想'
-                '                                                                                                  三界火宅人 /开源(元)盛世/阴汁成世          2026-03-16'
+                ' 关于TSP的sealine算法与角谷猜想（2026-04-25）'
+                '1）TSP的sealine算法已基本完成代码，测试表明，可能点数越多越趋于精确解，原本来于想法：真空包装，真空包装塑料薄膜，中间抽空气，内陷，被内部质点顶点顶住，这是立体三维，再降维成二维平面时，包装塑料薄膜变换成橡皮筋。实际上，写代码已经最简单实现功能，但达不到模拟模型的理想状态，这是一个可以发展的方向乎，暂称为，量子潮汐涨落模拟－真空包装－塑料薄膜－橡皮筋－海岸线模型猜想，简称sealine算法/猜想，只是实现最简单代码乎。。。'
+                '2)  角谷猜想熵增模拟相似，先连续1称为I，连续0称为O，字母IO代替数字10，然后边界处开始模糊光栅衍射，连续1连续0递减，最后10相邻，即由IO相邻变成10相邻。          '
+                ''
+                '2026-04-25今日很不容易，忍住疲劳，终于，修正了原有的sealine算法的bug，测试下，比较满意了。'
+                '测试表明，肯定不是最优解，最优解目前只有动态规划或穷举算法，暂无解。'
+                '传统近似算法，个人目前认为，可能模拟退火算法是最好的，于是对比。'
+                '原本认为，sealine算法，点数少时不及传统近似算法，设想点数越多越趋于最优解，这个估计可以这样认为，当点数越多时，点的分布就会象晶体一样有序，一个紧挨一个，象标准矩形，坐标轴坐标点一样，于是测试。'
+                '发现，'
+                '1）当坐标点是十分规则的矩形分布坐标轴一样整点时，sealine算法目前不及模拟退火，就算点数从100到500都是一样'
+                '            SQLQuery1.FieldByName(''px'').AsInteger := 100 + (100 * (i - 1) mod 1000);'
+                '            SQLQuery1.FieldByName(''py'').AsInteger := 100 + 100 * (100 * (i - 1) div 1000);'
+                '2）当坐标点是随机分布，sealine算法目前自认为确实在100点，到500点，比模拟退火效果要好不少，高于500点时，个人PC电脑硬件问题，不理了。'
+                '            SQLQuery1.FieldByName(''px'').AsInteger := Random(1000);//100 + I * 10;'
+                '            SQLQuery1.FieldByName(''py'').AsInteger := Random(1000);//100 + I * 10;'
+                '3）当坐标点是大体规则矩形加上少量随机分布，sealine算法目前仍然自认为确实在100点，到500点，比模拟退火效果要好不少，高于500点时，个人PC电脑硬件问题，不理了。'
+                '            SQLQuery1.FieldByName(''px'').AsInteger :=100 + (100 * (i - 1) mod 1000) + Random(20);'
+                '            SQLQuery1.FieldByName(''py'').AsInteger :=100 + 100 * (100 * (i - 1) div 1000) + Random(20);'
+                ''
+                'sealine算法，目前不想理了，暂如是，停鞍稍驻初程，写代码象古代骑马驿站赶路，太急不好，疲劳不好。。。。。。。'
+                ''
+                ''
+                '＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝'
+                ''
+                '关于TSP的P＝NP解法：海岸线猜想SeaLine（再续之四）  '
+                '                                        同心圆         2026-04-21     '
+                '         今天，终于逮住一个空闲机会，开机调试，将sealine算法代码，基本完成了。测试下，sealine逐层且逐点法，速度比原来的纯逐点法快得多，原来的纯逐层法，在连通各层同心圆时，难以更好。测试表明，当点数20时，与已知的动态规划精确解相比，sealine逐层且逐点法，有时不是最优解，但是相差可能不会太远。当点数100时，个人PC电脑用精确解动态规划已太慢了，sealine逐层且逐点法很快出结果，且比已知的传统近似算法，例如比模拟退火算法效果更好，开头测试几次确如此，是不是长期测试结果，就不知了。'
+                '1）sealine逐层且逐点法，可能点数越多越趋于最优解，未验证？'
+                '2）sealine逐层且逐点法，代码未最简化，因为太多思考，没兴趣化代码'
+                '       这段时间，太疲劳，做家务，找工作，太多不顺，很少有机会思考代码，身体体力精神疲劳，不如到野外挖野菜，放松一下，可能很久意难平，海边。。。。。。'
+                '       自已写的代码也看不明，断点再续，记不起原先的思路，一天两天也没进展。。。。。'
+                'TSP_ubuntu_Lazarus源代码=030=sealine逐层且逐点基本ok未完善.zip  '
+                '(1)  https:// github .com/aMeTooFor/TSP/tree/main '
+                '(2) https:// blog .csdn.net/e271828/article/details/160382124?spm=1011.2124.3001.6209    '
+                '————————————————'
+                '版权声明：本文为CSDN博主「云淡风轻~窗明几净~乡村小洋楼」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。'
+                '原文链接：https://blog.csdn.net/e271828/article/details/160382124'
+                ''
+                '         关于TSP的P＝NP解法：海岸线猜想SeaLine（再续之三）'
+                '     三界火宅人        2026-03-23'
+                '人因为工作惯性，想到一个想法，就会抑郁不安，非要测试试验下才安心，这种心理状态难戒也。'
+                '为了验证下，当初最初的初心：象围城围墙，象海水由外到内涌入，所有TSP点不许相交，真空薄膜保鲜膜的物理模拟，这种想法可行不可行呢？由此疲劳，多日连续思考，先是构思外围线，再一层层推进的方式，每层只推进一个点，能不能达到不用组合算法呢？'
+                '于是，连续几天，开机调试，熬夜焦虑，投入不少，发现不少规则，又不停改进。今日才得到结论：'
+                '1）以20点100点来测试，TSP的sealine算法基本是对的了，以1000点测试，个人PC机太慢了，以200点测试，结果又出现相交线，但将这相交线单独坐标提取出来测试，又不相关，分不清什么原因，不想理了，因为估计总估是存在不相交的线，但是这种线十分怪异的，特别细长深窄的，不可能最短TSP的，想不到如此细长深长的线居然不会相交。'
+                '2）可以将内部点到TSP围墙的最短距离，改为，内部点与围墙上线段的夹角最大，或面积最小，一样可以作为新的替代规则尝试，估计结果虽不一样，但是可能差不多的，所以，暂时对seaLine算法没兴趣了，V速退也。'
+                '3）为了一个想法，不计报酬地白干，这种事对于生意人的思维是绝不可接受的，只能讲明，我不是做生意的呀。'
+                '4）isCross函数，实践过才知，高中解析几何的直线方程y=kx+b，代入求解，本来肯定正确的，实际上，坐标是屏幕像素，必整数，但是，计出来的斜率k与b，由此得到的交点，可不是整数了，这时误差产生。有时，AB与AC两线段，本来就是共点A，结果计算出来是，相交于点D，D其实就是A，只是差一点点，肯定是误差造成的，难处理也。'
+                '5）查看变量值，这在lazarus中不太方便，为何读取点的坐标，前后怪异不一致，这些查起来烦不顺也，才知还是体力活有时轻松也。'
+                '6）可知，SeaLine算法，事前估计可行，实际离精确理想结果相差甚远。所以，我又自以为是的认为，角谷猜想符合物理学的熵增定律的映射规律，是不是一样值得怀疑呢？又讲明了什么呢？？？'
+                ''
+                ''
+                ''
+                '==============================================================='
+                '  关于TSP的 P＝NP 解法的可能性猜想：海岸线猜想的（可能性/可行性）（再续之二）'
+                '                                                                              三界火宅人          2026-03-22'
+                ''
+                '两天前，我提出了SeaLine的可能性，然后，又抑郁式不得不强迫症似的，自已强迫自已熬夜来写代码测试了，先用斜率法写了外围围城的算法，测试20个点时通过，然后，又写了内部围城内的围墙算法，测试，总有未知BUG，这个焦虑抑郁痛苦了，连最近连续五晚的槟榔宫大戏，广州粤剧一团的，也没心情观看了。为了这个代码，所以最好还是AI机器人去做，人类只要发出命令，AI机器人能听明去执行就行了，写代码调试测试，真的适合AI做。'
+                '1）isCross判断两线段是不是相交的，这个函数，我写了定义虚函数，交给网上AI，结果返回的函数，看不明，调试下，不満意，最后还是我用解析几何的直线方程求解，但是，测试，总是时可时不可，有时讲不清，可能要单独测试，显然又疲劳不顺，所以，不太想写代码矣。'
+                '2）最后，20个点时，测试通过，但是，证实，海岸线法目前不是最优解，仅是可行解，这算法未知如何精确。估计有可能点数多时，就趋于最优解，且估计比组合算法快得多。'
+                '3）我产生随机数100个点测试，表明，没有趋于最优解，估计可能是算法本身代码未完善，因为，竟然产生相交线，这是seaLine算法底线，不可接受的，应是代码有BUG，这个BUG，又令我心烦，暂不理，V宜速退也。'
+                ''
+                ''
+                ''
+                '＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝'
+                ''
+                '                                          关于TSP的 P＝NP 解法的可能性猜想：海岸线猜想的（可能性/可行性）（续）'
+                '                                                                                                           三界火宅人          2026-03-20'
+                ''
+                '前文再续，书接上一回，上回讲到，海岸线猜想，因为我疲劳，没精神理会，昨天，开着小电羊，去振文吸收田野的空气，回来又开始抑郁式思考了：'
+                '1）第一条包围线显然十分容易，但是，第二条包围线如何作呢？又要穷举法？局部组合穷举法？这与全局组合没本质区别？'
+                '2）或这样，第二包围线，以围城内最近围墙的点来第一个攻陷之？假设V字形三角形，最底下的顶点到两边两顶点的连线为锐角，这时，如果是最近点，则连线成V形线后，不会V内含点，这反证知之，假设V内有点，则顶点不是最近点矣。'
+                '3）这里，远近就是与边的垂直距离，如果是连续光滑曲线，就与平面难抵极尼莫点的移动圆的算法相同，但这是折线，不是曲线，就是垂直距离。'
+                '4）如果这最近点构成的V形三角形，两边的角不是锐角而是钝角呢？这种情况有可能不存在的。实际可能要做出算法来验证。所以就有必要实现写代码来验证是不是存在这种情况了。这时，又开始疲劳不适，眼瞓了，尽量别碰这种熬夜写代码，测试有没有BUG，焦心焦虑抑郁的事呀，这种事，或许要交给AI处理，AI机器人程序员应运而生乎。人还是要休息的。。。。。。'
+                ''
+                ''
+                '============================================================================='
+                '                                            关于TSP的 P＝NP 解法的可能性猜想：海岸线猜想   的（可能性/可行性）研究报告          '
+                '                                                                            三界火宅人          2026-03-19'
+                ''
+                '前文再续，书接上一回，上回讲到，海岸线猜想，因为我疲劳，没精神理会，这几天，休息了，又开始抑郁式思考了：'
+                '海岸线的英语，百度为：海岸线 - coastline，太难记忆了，改为，seaLine,谐音seeLine，看线，注意地面上的细线乎。'
+                '1）显然，可以轻易地产生第一条凸包线，将所有TSP点包在其中，第一条线是不必历遍全部点的，但必须包含全部点。'
+                '2）以第一条线为界，产生第二条线，也必须是包含所有点的，这种算法应不是很难，至于，象我以前做的平面难抵极尼莫点小软件，至少可以实现乎。'
+                '3）递归，叠代，继续，不断缩小包围圈，估计应可以找到一条线，历遍所有TSP点，且不相交，这点非常重要，因为，估计所有现有的算法，只要是组合式的，必易产生相交线。'
+                '4）这个算法可能不复杂，成本极低，与组合算法相比，甚至与蚁群等相比，可能估计低到离谱，是不是最优解精确解，可难尚未知或另有算法去精确，但，至少不失为一种新算法乎，甚至可能真的解决了TSP的P＝NP问题了。'
+                '5）写代码调试，肯定又是熬夜调试，焦虑抑郁的了，易疲劳，另外，又想思考我自创的，角谷猜想的熵增定律，能不能精确解。我闭门造车的，最短路径的燃线法，现在又闭门造车的TSP的海岸线算法，还有角谷猜想的熵增定律，后两个只是框架，如何精确，仍要尚未成功，仍需努力乎'
+                ''
+                ''
+                '======================================================================================================'
+                ' TSP算法小软件V7.0源代码（ubuntu24+lazarus4+sqlite3）'
+                '2024年2月 网名：窗明几净~天气几好^几何原本^欧几里得'
+                ''
+                ''
+                '                                关于TSP的 P＝NP 解法的可能性猜想：海岸线猜想'
+                '                                                                                                     三界火宅人 /开源(元)盛世/阴汁成世          2026-03-16'
                 ''
                 '网上寻TA千百度，找到如下文字，'
                 'P 问题（多项式时间可解问题）：这就像你有一串数字组成的密码锁，但你有一个神奇的解锁工具，只要用它，你可以在有限时间内尝试所有可能的组合，并且确保找到正确的密码。'
@@ -1493,9 +1840,208 @@ object Main: TMain
                 ' 用物理方法来解数学题，例如，最短路径最快路线，我闭门造车想到了“燃线法”，角谷猜想，我想到了二进制的熵增定律，现在这TSP，我又想到了真空包装薄膜－海岸线猜想。四色定理染色算法，我又想到了水的波动的涟漪模型。'
                 ' 而且在海岸线猜想中，在一步步进逼真空过程中，可能象平面难抵极－尼莫点的求解过程一样，找最近或最远的点来先实现'
                 ' 这仅是猜想，未验证也'
+                ''
+                ''
+                ''
+                ' ==========================================='
+                ' 关于TSP问题和海岸线算法的讨论确实非常具有挑战性，尤其是涉及到P与NP问题的深度思考。以下是对您提出的问题的逐步分析和建议：'
+                '1. ‌关于线段相交检测（isCross函数）‌'
+                ''
+                '    ‌问题分析‌：线段相交检测是计算几何中的基础问题，但实现时容易因浮点精度或边界条件（如共线、端点相交等）出错。'
+                '    ‌建议方案‌：'
+                '        ‌标准算法‌：推荐使用基于向量叉积的方向法（Orientation Method），分两步：'
+                '            检查两线段的外接矩形是否重叠（快速排除不相交情况）。'
+                '            利用叉积判断跨立条件（避免解析几何的浮点误差）。'
+                '        ‌开源实现‌：可直接调用成熟的几何库（如CGAL或Shapely），而非重复造轮子。'
+                '        ‌测试用例‌：需覆盖所有边界条件（共线、端点重合、垂直/水平线段等）。'
+                ''
+                '‌伪代码示例‌：'
+                ''
+                'python'
+                'Copy Code'
+                'def isCross(a1, a2, b1, b2):'
+                '    # 快速排斥实验'
+                '    if max(a1.x, a2.x) < min(b1.x, b2.x) or ...:'
+                '        return False'
+                '    # 跨立实验'
+                '    cross1 = (b1 - a1) × (a2 - a1) * (b2 - a1) × (a2 - a1)'
+                '    cross2 = (a1 - b1) × (b2 - b1) * (a2 - b1) × (b2 - b1)'
+                '    return cross1 <= 0 and cross2 <= 0  # 允许端点接触'
+                ''
+                '2. ‌海岸线算法的可行性分析‌'
+                ''
+                '    ‌当前结论‌：您的实验表明该算法是可行解但非最优解，这与许多启发式算法（如Christofides）的性质一致。'
+                '    ‌优化方向‌：'
+                '        ‌后优化步骤‌：在生成海岸线后加入局部搜索（如2-opt交换）消除交叉边。'
+                '        ‌动态调整‌：引入模拟退火或遗传算法对海岸线生成参数（如斜率阈值）进行优化。'
+                '        ‌理论验证‌：尝试证明随着n→∞，算法解与最优解的比值（近似比）是否有界。'
+                ''
+                '3. ‌100点测试中的相交问题‌'
+                ''
+                '    ‌根本原因‌：可能是算法未严格满足“简单多边形”性质（如自交或点共线）。'
+                '    ‌调试建议‌：'
+                '        ‌可视化工具‌：用Matplotlib绘制每一步的海岸线生成过程。'
+                '        ‌最小复现‌：提取导致相交的6-10个点的小数据集单独测试。'
+                '        ‌断言检查‌：在每次线段添加时实时验证相交性。'
+                ''
+                '4. ‌关于P vs NP的哲学思考‌'
+                ''
+                '    ‌海岸线算法的意义‌：即使不能证明P=NP，好的启发式算法仍有实用价值（如Google的OR-Tools）。'
+                '    ‌研究方向建议‌：'
+                '        将算法与已知的近似算法（如双生成树）对比。'
+                '        尝试从分形几何角度建模“海岸线”的数学性质。'
+                ''
+                '5. ‌心理健康与工作平衡‌'
+                ''
+                '    ‌建议‌：'
+                '        设置每天最多2小时投入此问题，保留娱乐时间（如观看粤剧）。'
+                '        考虑合作开发，将数学部分与编程部分分离。'
+                '        使用AI辅助工具（如GitHub Copilot）减少底层编码负担。'
+                ''
+                '‌下一步行动推荐‌：'
+                ''
+                '    优先修复相交性检查的BUG（可提供具体失败案例，我可帮助分析）。'
+                '    对小规模数据（n=5-10）人工验证算法每一步的正确性。'
+                '    如果目标是实用解而非理论证明，可转向研究算法在实际地图数据（如城市道路）上的表现。'
+                ''
+                '您对这个问题有着难得的深刻洞察，但数学研究如同海岸线本身——需要耐心地反复雕琢。建议暂时抽离几天，或许会有新的视角涌现。'
               )
               ScrollBars = ssVertical
               TabOrder = 0
+            end
+          end
+          object TabSheet11: TTabSheet
+            Caption = '海岸线'#13#10'算法'#13#10'开发中'
+            ClientHeight = 559
+            ClientWidth = 215
+            object memo_seaLine: TMemo
+              Left = 0
+              Height = 398
+              Top = 161
+              Width = 215
+              Align = alClient
+              Font.Height = -12
+              Font.Name = 'Sans'
+              ParentFont = False
+              ScrollBars = ssBoth
+              TabOrder = 0
+            end
+            object Panel5: TPanel
+              Left = 0
+              Height = 161
+              Top = 0
+              Width = 215
+              Align = alTop
+              ClientHeight = 161
+              ClientWidth = 215
+              TabOrder = 1
+              object btn_seaLine: TButton
+                Left = 0
+                Height = 25
+                Top = 30
+                Width = 141
+                Caption = '海岸线算法（逐点法）'
+                TabOrder = 0
+                OnClick = btn_seaLineClick
+              end
+              object setpoints1: TButton
+                Left = 0
+                Height = 25
+                Hint = '只在作者自创的燃线法添加权重功能，别的算法暂没空去做了，以后再理   '
+                Top = 3
+                Width = 144
+                Anchors = [akTop, akLeft, akRight]
+                Caption = '修改各点及设置起点终点'
+                Font.Color = clGreen
+                Font.Height = -12
+                Font.Name = 'Sans'
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 1
+                OnClick = setpointsClick
+              end
+              object btn_sealine_test: TButton
+                Left = 142
+                Height = 51
+                Top = 29
+                Width = 72
+                Caption = '测试线段'#13#10'是否相交'
+                Color = clMenuHighlight
+                TabOrder = 2
+                OnClick = btn_sealine_testClick
+              end
+              object refrash1: TButton
+                Left = 141
+                Height = 27
+                Hint = '只在作者自创的燃线法添加权重功能，别的算法暂没空去做了，以后再理   '
+                Top = 2
+                Width = 73
+                Caption = '刷新拓扑图'
+                Font.Color = clBlue
+                Font.Height = -13
+                Font.Name = 'Sans'
+                Font.Style = [fsBold]
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 3
+                OnClick = refreshClick
+              end
+              object btn_seaLineLine: TButton
+                Left = 0
+                Height = 25
+                Top = 55
+                Width = 142
+                Caption = '海岸线算法(逐层法)未完善'
+                Font.Height = -11
+                Font.Name = 'Sans'
+                ParentFont = False
+                TabOrder = 4
+                OnClick = btn_seaLineLineClick
+              end
+              object btn_seaLineFloorPoint: TButton
+                Left = 2
+                Height = 25
+                Top = 83
+                Width = 212
+                Caption = '海岸线算法(逐层且再逐点)或顺时或逆时'
+                Font.Color = clGreen
+                Font.Height = -11
+                Font.Name = 'Sans'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 5
+                OnClick = btn_seaLineFloorPointClick
+              end
+              object btn_seaLineFloorPoint1: TButton
+                Left = 3
+                Height = 25
+                Top = 108
+                Width = 212
+                Caption = '海岸线算法(逐层且再逐点)全顺时'
+                Font.Color = clGreen
+                Font.Height = -11
+                Font.Name = 'Sans'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 6
+                OnClick = btn_seaLineFloorPointClick
+              end
+              object btn_seaLineFloorPoint2: TButton
+                Left = 3
+                Height = 25
+                Top = 133
+                Width = 212
+                Caption = '海岸线算法(逐层且再逐点)全逆时'
+                Font.Color = clGreen
+                Font.Height = -11
+                Font.Name = 'Sans'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 7
+                OnClick = btn_seaLineFloorPointClick
+              end
             end
           end
         end
@@ -1744,5 +2290,235 @@ object Main: TMain
   object SelectDirectoryDialog1: TSelectDirectoryDialog
     Left = 32
     Top = 16
+  end
+  object ImageList1: TImageList
+    Left = 99
+    Top = 125
+    Bitmap = {
+      4C7A020000001000000010000000570300000000000078DAB595E96B546714C6
+      EF2C9984688DD1686C0B358AB8C42A710B255D1C1A0D11A35130188CD6313168
+      ABE828426BB3704D4CA56274E2BE735D231265A27E082A7A5B837E90D629FD10
+      F083CC9F70FF839FE7BD777667347EF085C35DCEFB9CE7DCF33CEF8CA6394BD7
+      34745D4F8496726F3F4B5ECBB11416156AA97D6A3FB147FB9596136FF3A68416
+      E34E44FCDDC7E0E3BCA3C4138B4FC69F1E1FE64F999B9ABD699A7664D321273E
+      868D2F855755336BBC0FEF604851D2A99389CFFAFD69782DC19F0D9F75FE89FE
+      B534FE6CFDE79C7FCEF9253C393AFDD342270949E7FE80FEF1955943CBE28FF7
+      7A265943CF792647BF1234155DBFC397733033E99BFC585B7F85F00508EC84CB
+      37C0E5C6AF72538AD03BF760ADDE00FB764353000E4A9DAA55769D32B567523E
+      7A5B105E8FC09FE7E0C780FDED766E7D25D6D0906025DFDE0E1D1DD0DB035DB7
+      EC3D7E9F87407B0B1CEF857F9EC099D370FD36947FEBD45F3D17F3E5DFB07429
+      9C380ED5F558A704DF76C5C197CF20B4A816EBA0D4D543F0E0126CE9826D41AC
+      09530829FCE3C7E0F662EC6FC6EA109EEE66E9C570F0AAC7C66A387016CEEF83
+      8B0330227C9F9763A8DCA61FE0FE90B377A20FFDCD2BC11E80638349BC47AE0B
+      E7635C147CDF19A265F36CAB8CB7ED225C47FA9DBDDFCC25FCDFFFD022B3BCF7
+      42DEB95813D7605C017A64186657114ED566DD32CCCAEF887C3F0BF3DA4D983A
+      8FC8F4628C2DDB653E7949FC2F9BB0023D585A4CB7CCF0E5E1F778B2E75478BD
+      F88BF3093734485D77B2AE4F7A6CAC27B27717B4FE0C3DBFC14F5BC1E325A0F2
+      A5E28FDEAB30B994C8C606AC7EF1CE8A9544DD7954A8FCB402C2661836B7CA1C
+      1F8ACE47E190F8CC5D4A48E93BB504635066FAC71EA8137F15171179740C16D7
+      383E75BB086C6E84EDE2CBC387857B077476C3D89944C77808ADAF25FAECB5D4
+      163FD5B512AD5C8271F390F8B3C9F9ABF248FF2B97413048F489E81A6CC31AB8
+      0BD3AA655692FF6A22FAE0BF60F4496DD1AF66399101B9AFDAE0E42BF23187C5
+      9775F5E2D94EA8AD273AB6C4D1E88BCF30E56C704BBC609C87A37760C16CA223
+      4F61FA02C73FCA070505F80B0BED58B3B686489FF4EAF2DA332E738B5E2E9784
+      5C8BC660DC90DEBEAE4C9EAD777492F3F2D773F0153A3F47A9E192337E52BE7D
+      7F37D6B81282EADD5B17259BBC
+    }
+  end
+  object TrayIcon1: TTrayIcon
+    BalloonFlags = bfInfo
+    PopUpMenu = pMenu
+    Icon.Data = {
+      561700000000010006001818100000000000E801000066000000141410000000
+      0000A80100004E020000101010000000000028010000F6030000181800000100
+      0800C80600001E050000141400000100080008060000E60B0000101000000100
+      080068050000EE11000028000000180000003000000001000400000000000000
+      0000000000000000000000000000000000000000000000008000008000000080
+      800080000000800080008080000080808000C0C0C0000000FF0000FF000000FF
+      FF00FF00000000000000FFFF0000FFFFFF00DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+      DDDDDDDDDDDDDDDDDDDDD000000D000000DDDD0111DD4CCCCC433333330DD019
+      91DD4CCCCC43BBBBBB00019990DD44444443BB00000019990DDD4CCCCC43B078
+      88701990DDDD4444444307EFE8E7090DDDDD4CCCCC407FFEFEFE70DDDDDD4CCC
+      CC408FFFE8EF80DDDDDD4CCCCC408FFFFEFE80DDDDDD4CCCCC408FFFF8EF80DD
+      DDDD4CCCCC407FFFFFFE70DDDDDD4CCCCC4307FFF8F700DDDDDD444444433078
+      887030DDDDDD4CCCCC43BB00000330DDDDDD4CCCCC43BBBBB03330DDDDDD4444
+      44433333303330DDDDDD4C8F8843B8FFB03330DDDDDDD478FF74388FF70330DD
+      DDDDDD478FF74388FF7030DDDDDDDDD478FF74388FF700DDDDDDDDDD47888743
+      888870DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDFFFFFF00FFFFFF008103C3000001
+      8300000003000000070000000F0000001F0000003F0000003F0000003F000000
+      3F0000003F0000003F0000003F0000003F0000003F0000003F0000003F008000
+      3F00C0003F00E0003F00F0003F00FFFFFF002800000014000000280000000100
+      0400000000000000000000000000000000000000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF00000000000000FFFF0000FFFFFF00DDDDDDDDDDDD
+      DDDDDDDDDDDDD00000D00000DDDD011DDDDD4CCCC43333300DD0199D11DD4CCC
+      C43BBBB00D01990D91DD4444443B0000001990DD90DD4CCCC430788870090DDD
+      0DDD44444407FEFEF700DDDDDDDD4CCCC408FFE8E80DDDDDDDDD4CCCC408FFFE
+      F80DDDDDDDDD4CCCC408FFF8E80DDDDDDDDD4CCCC4078FF8F70DDDDDDDDD4CCC
+      C4307888700DDDDDDDDD444444330000030DDDDDDDDD4CCCC43BBBB0330DDDDD
+      DDDD444444333330330DDDDDDDDD4C8F843B8FB0330DDDDDDDDDD478F74388F7
+      030DDDDDDDDDDD478F74388F700DDDDDDDDDDDD478874388870DDDDDDDDDDDDD
+      DDDDDDDDDDDDDDDDDDDDFFFFF0F7820F1070000610DD000410FF000030F70000
+      70DD0000F0880001F0880001F0DD0001F0DD0001F0DD0001F0DD0001F0000001
+      F0000001F0000001F0008001F000C001F000E001F000FFFFF000280000001000
+      0000200000000100040000000000000000000000000000000000000000000000
+      0000000000000000800000800000008080008000000080008000808000008080
+      8000C0C0C0000000FF0000FF000000FFFF00FF00000000000000FFFF0000FFFF
+      FF00DDDDDDDDDDDDDDDDD000D0000DDDD01144443BB300DD01994CC433330000
+      199044443BB07887090D4CC43307EFEF70DD44443B08FE8E80DD4CC43B08FFEF
+      80DD4CC43B07FF8E70DD4CC43BB078870DDD44443BB30000DDDD4CC43333030D
+      DDDD44443BB3030DDDDD44443333030DDDDDD4CFC3BFB00DDDDDDD477737770D
+      DDDDFFFFDDDD8878C4300030700D0000DDDD000144330003030D0003DDDD0003
+      C43B0003330D0007DDDD000F4433001F330D001FDDDD001F843B801F330DC01F
+      DDDD280000001800000030000000010008000000000000000000000000000000
+      0000000000000000000000000000FFFFFF0000000000CB919600CB949700994D
+      4E00B25B5C00CF6B6C00C9686900D2717200E27E8000D6787900E6898A00DA82
+      8300EA8F9000E88E8F00BC747500DF8A8B00C57A7B00A0636400E3939400F09D
+      9E00E79B9C00F6AAAB00ECA4A500F7ADAE00F9B0B100EDA7A900F0ACAD00FBB5
+      B600FDB7B900FDB9BB00F4B3B400FFBDBE00FEBCBD00F5B6B7007F3F3F00B65B
+      5B00CB686800CF6B6B00CE6E6D008C4B4B00CF717000AC5D5D00A4595900CF71
+      7100D1747300D2767600D3797900B86C6C00AF67670095585800CD858500C37F
+      7F00A66C6C00F3A4A400D6A29D00C6999200F4ECE800E6D3C900C0B3AC00957D
+      6E0072615500927C6C00907B6C0085746700E5E0DC006F665E00AA9784008C81
+      76009B9187005B5246005D544800B39E7F00B5AB9B00DDCBAB00E5D0A800FEEC
+      C90086837D00B6A47D00D2BF9800DCCEB000F1E6CD008E8A8100E6D2A000B9AD
+      9100AFA89500ADA79700FFFCF400EDE2BF00E5D7A300FFF1BA00FFF2B8009D9B
+      92007D7C7700E7DC9F00FFF4BA00FFF6C500FFFCE300FFFCDF0076756B00FFFC
+      D400FFFEC600FFFFCA00FFFFDB00FFFFE100FFFFF000FFFFFB0064646300B3B5
+      AB00A0A5A2005B676300616D6B0093A7A70072898A00A8F3FB00E2F3F50091B2
+      B90058848E004DBEDD0049AFCC0058C5E10078ABB8008CABB30099B5BD007385
+      8A0057ABC50092CADB0021A1D00030B8E9003DBBE80026708B00398099006698
+      A9008FC4D6008FC3D5002396C300599CB70066AFCC0085B4C7007AA4B4007095
+      A6006C8F9F007094A5006A8B9C00597687004F67760029353E00758591001F2A
+      33004358690055697A00262F38002835430043516100495869004F5E6F004552
+      610051525600FFFFFF0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000002020202020202020202020202020202020202020202
+      0202020202020202020202020202020202020202020202020202122C252C0529
+      24027097929647470202020299990202020228111210320529767A8989767692
+      960202998980960202022814342D312C298E868A8C858E7076999988817F7F90
+      02022D3132330505298E7A94433E2448489A88827F739002020210341210312C
+      298E9440495050393648767F7390020202023010132B2C2B05713F504C4C4C54
+      50103E7C9002020202023004140D102B365355595959594C5450134802020202
+      020211171611123110415152523A52524C544F47020202020202162318160D31
+      3541523A3A6A3A525954502402020202020216211C18141234413B625858583A
+      594C39470202020202021821201B163435534A3A58583A52594C496C02020202
+      0202183B23171511107153513A62635259554170020202020202163811343534
+      088B71454A3B52514F417297020202020202141C1F201834108B737C71414341
+      728578920202020202021B3B211F1E1A308B74747F737F857F78899B02020202
+      0202160335101035128B9091948D87768A7E789C0202020202023410513A3B03
+      10879142743A759786797E920202020202020238323B3A581C358B9C423A3A6E
+      918A7992020202020202020238324B423A4B357C9242583A46768A9702020202
+      020202020204324B3B3A3B358B97423A3A577697020202020202020202023832
+      51523A3B107564423A3A57760202020202020202020202020202020202020202
+      02020202020202020202FFFFFF00FFFFFF000103CF0000018700000003000000
+      070000000F0000001F0000003F0000003F0000003F0000003F0000003F000000
+      3F0000003F0000003F0000003F0000003F0000003F0080003F00C0003F00E000
+      3F00F0003F00FFFFFF0028000000140000002800000001000800000000000000
+      00000000000000000000000000000000000000000000FFFFFF0000000000CB91
+      9600CB949700994D4E00B25B5C00CF6B6C00C9686900D2717200E27E8000D678
+      7900E6898A00DA828300EA8F9000E88E8F00BC747500DF8A8B00C57A7B00A063
+      6400E3939400F09D9E00E79B9C00F6AAAB00ECA4A500F7ADAE00F9B0B100EDA7
+      A900F0ACAD00FBB5B600FDB7B900FDB9BB00F4B3B400FFBDBE00FEBCBD00F5B6
+      B7007F3F3F00B65B5B00CB686800CF6B6B00CE6E6D008C4B4B00CF717000AC5D
+      5D00A4595900CF717100D1747300D2767600D3797900B86C6C00AF6767009558
+      5800CD858500C37F7F00A66C6C00F3A4A400D6A29D00C6999200F4ECE800E6D3
+      C900C0B3AC00957D6E0072615500927C6C00907B6C0085746700E5E0DC006F66
+      5E00AA9784008C8176009B9187005B5246005D544800B39E7F00B5AB9B00DDCB
+      AB00E5D0A800FEECC90086837D00B6A47D00D2BF9800DCCEB000F1E6CD008E8A
+      8100E6D2A000B9AD9100AFA89500ADA79700FFFCF400EDE2BF00E5D7A300FFF1
+      BA00FFF2B8009D9B92007D7C7700E7DC9F00FFF4BA00FFF6C500FFFCE300FFFC
+      DF0076756B00FFFCD400FFFEC600FFFFCA00FFFFDB00FFFFE100FFFFF000FFFF
+      FB0064646300B3B5AB00A0A5A2005B676300616D6B0093A7A70072898A00A8F3
+      FB00E2F3F50091B2B90058848E004DBEDD0049AFCC0058C5E10078ABB8008CAB
+      B30099B5BD0073858A0057ABC50092CADB0021A1D00030B8E9003DBBE8002670
+      8B00398099006698A9008FC4D6008FC3D5002396C300599CB70066AFCC0085B4
+      C7007AA4B4007095A6006C8F9F007094A5006A8B9C00597687004F6776002935
+      3E00758591001F2A33004358690055697A00262F380028354300435161004958
+      69004F5E6F004552610051525600FFFFFF000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000202020202020202020202020202
+      0202020202020E1130082C31027E89847691760202029A990202031130312C33
+      947A8985769299020283789292022F0D10322C298D8A7A76726F92998381737F
+      9402123531322C2C8E8D404133333E9D827F73940202121031322B058F3D4F54
+      54544F3E72739402020234341231321346555959594C5434417202020202141B
+      160D311045514D5252524C501302020202021820151410103F653A583A525954
+      4902020202021B211B163435533B5858585259543D02020202021C3B1A1B1112
+      464A585862634D504102020202021B1C381111107B464A526359503D7D020202
+      02021404143412318B875D4644534E858502020202021C21211D193087747387
+      8B8E8B7E8402020202023804343434128B8E8E7B8B858A778902020202020235
+      3B3A3C347B9442583C768A798902020202020202353B583B038F94420151918A
+      89020202020202020210513A3B388F90426B3C8D850202020202020202023551
+      3A3B3571943B6B3C940202020202020202020202020202020202020202020202
+      0202FFFFF00202073002000610100000108B0000308D0000707E0000F0020001
+      F0020001F03A0001F0870001F03A0001F0790001F0020001F0020001F03B8001
+      F035C001F03AE001F08AF001F002FFFFF0022800000010000000200000000100
+      080000000000000000000000000000000000000000000000000000000000FFFF
+      FF0000000000CB919600CB949700994D4E00B25B5C00CF6B6C00C9686900D271
+      7200E27E8000D6787900E6898A00DA828300EA8F9000E88E8F00BC747500DF8A
+      8B00C57A7B00A0636400E3939400F09D9E00E79B9C00F6AAAB00ECA4A500F7AD
+      AE00F9B0B100EDA7A900F0ACAD00FBB5B600FDB7B900FDB9BB00F4B3B400FFBD
+      BE00FEBCBD00F5B6B7007F3F3F00B65B5B00CB686800CF6B6B00CE6E6D008C4B
+      4B00CF717000AC5D5D00A4595900CF717100D1747300D2767600D3797900B86C
+      6C00AF67670095585800CD858500C37F7F00A66C6C00F3A4A400D6A29D00C699
+      9200F4ECE800E6D3C900C0B3AC00957D6E0072615500927C6C00907B6C008574
+      6700E5E0DC006F665E00AA9784008C8176009B9187005B5246005D544800B39E
+      7F00B5AB9B00DDCBAB00E5D0A800FEECC90086837D00B6A47D00D2BF9800DCCE
+      B000F1E6CD008E8A8100E6D2A000B9AD9100AFA89500ADA79700FFFCF400EDE2
+      BF00E5D7A300FFF1BA00FFF2B8009D9B92007D7C7700E7DC9F00FFF4BA00FFF6
+      C500FFFCE300FFFCDF0076756B00FFFCD400FFFEC600FFFFCA00FFFFDB00FFFF
+      E100FFFFF000FFFFFB0064646300B3B5AB00A0A5A2005B676300616D6B0093A7
+      A70072898A00A8F3FB00E2F3F50091B2B90058848E004DBEDD0049AFCC0058C5
+      E10078ABB8008CABB30099B5BD0073858A0057ABC50092CADB0021A1D00030B8
+      E9003DBBE80026708B00398099006698A9008FC4D6008FC3D5002396C300599C
+      B70066AFCC0085B4C7007AA4B4007095A6006C8F9F007094A5006A8B9C005976
+      87004F67760029353E00758591001F2A33004358690055697A00262F38002835
+      430043516100495869004F5E6F004552610051525600FFFFFF00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000020202020202
+      0202020202020298020207080605248E909196998E029D889302270F0C0A258E
+      79777783959C8081899209361333298F766F48476C84828A94020B17150E267D
+      64495F5A5770859402020D3510322C5E4466605C4D5643020202111F1A372845
+      4B6863655B4C4102020214211E192A46516A586261544F0202021621211D2E6E
+      4A016B69674F50020202182121222F7C6D3C5259553E020202021C3412312B86
+      7A715D53729E0202020220212121307F73737377789A0202020223231B142D87
+      8B8C8D907E9B0202020202383F420104754042019097020202020202393D3A3B
+      037B4E3A74900202020202020202020202020202020202020202FFFB02020011
+      211D0000877400018B8E00038402000702020007343400078B8E00078B85000F
+      8902000F0202000F3B3A000F7B94800F3C76C00F8902FFFF0202
+    }
+    OnClick = TrayIcon1Click
+    Left = 40
+    Top = 80
   end
 end

@@ -11,7 +11,7 @@ uses
   LResources, LCLStrConsts,
   Classes, SysUtils, DB, SQLDB, SQLite3Conn, Forms, Controls, Graphics, Dialogs,
   ExtCtrls, StdCtrls, Buttons, ComCtrls, LCLType, Menus,//,files;//System;
-  lMessages, Variants, ButtonPanel;
+  lMessages, Variants, ButtonPanel, FPImage;
 
 type
 
@@ -19,76 +19,47 @@ type
 
   TMain = class(TForm)
     addOnePoint: TButton;
+    alpha: TSpinEditEx;
     antNums: TSpinEditEx;
+    antsHelp: TButton;
+    beta: TSpinEditEx;
     btn_about: TButton;
+    btn_ant_run: TButton;
+    btn_createANT: TButton;
     Btn_edges: TButton;
     Btn_exit: TButton;
+    btn_fireHelp: TButton;
+    btn_GaHelpgenerateHelp: TButton;
+    btn_gainit: TButton;
+    btn_GaReRun: TButton;
     btn_importPoints: TButton;
     btn_info: TButton;
+    btn_PSO_run: TButton;
+    btn_seaLine: TButton;
+    btn_seaLineFloorPoint: TButton;
+    btn_seaLineFloorPoint1: TButton;
+    btn_seaLineFloorPoint2: TButton;
+    btn_seaLineLine: TButton;
+    btn_sealine_test: TButton;
+    btn_showGa: TButton;
+    btn_subfire_run: TButton;
     Button1: TButton;
     Button3: TButton;
     CheckBox_showhint: TCheckBox;
     customLength: TButton;
     customLength_help: TButton;
+    Delta: TSpinEditEx;
     Edit1: TEdit;
     exportPoints: TButton;
     exportPointsToSQLite: TButton;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label4: TLabel;
-    mem_customlength: TMemo;
-    onebyoneHelp: TButton;
-    btn_BranchStop: TButton;
-    btn_PSO_run: TButton;
-    pointsXYpos: TButton;
-    PSOhelp: TButton;
-    btn_ant_run: TButton;
-    antsHelp: TButton;
-    btn_createANT: TButton;
-    btn_LKHini: TButton;
-    btn_gainit: TButton;
-    btn_GaReRun: TButton;
-    btn_showGa: TButton;
-    btn_GaHelpgenerateHelp: TButton;
-    btn_subfire_run: TButton;
-    btn_fireHelp: TButton;
-    Button27: TButton;
-    Button28: TButton;
-    Button29: TButton;
-    Button4: TButton;
-    Button5: TButton;
-    btn_dyp_run: TButton;
-    btn_dyp_help: TButton;
-    btn_branch_run: TButton;
-    branch_edit: TEdit;
-    alpha: TSpinEditEx;
-    beta: TSpinEditEx;
-    OpenDialog2: TOpenDialog;
-    RadioBtn_calc: TRadioButton;
-    RadioBtn_input: TRadioButton;
-    RadioGroup3: TRadioGroup;
-    refrash: TButton;
-    rho: TSpinEditEx;
-    pheromone: TSpinEditEx;
-    Delta: TSpinEditEx;
-    gMAX_GEN: TSpinEditEx;
     fireEdit1: TSpinEditEx;
     fireEdit2: TSpinEditEx;
     fireEdit3: TSpinEditEx;
     fireEdit4: TSpinEditEx;
-    PSOws: TSpinEditEx;
-    POP_SIZE: TSpinEditEx;
-    MAX_GEN: TSpinEditEx;
     Fitness: TSpinEditEx;
-    PCROSS: TSpinEditEx;
-    PMUTATE: TSpinEditEx;
-    PSOw: TSpinEditEx;
-    PSOwe: TSpinEditEx;
-    PSOVv: TSpinEditEx;
-    PSOc1: TSpinEditEx;
-    PSOc2: TSpinEditEx;
-    PSOiter: TSpinEditEx;
-    hintPoint: TMenuItem;
+    gMAX_GEN: TSpinEditEx;
+    ImageList1: TImageList;
+    Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
@@ -99,6 +70,7 @@ type
     Label17: TLabel;
     Label18: TLabel;
     Label19: TLabel;
+    Label2: TLabel;
     Label20: TLabel;
     Label21: TLabel;
     Label22: TLabel;
@@ -108,21 +80,63 @@ type
     Label26: TLabel;
     Label27: TLabel;
     Label28: TLabel;
-    memo_guess: TMemo;
-    path1: TLabel;
-    Label3: TLabel;
-    path2: TLabel;
+    Label4: TLabel;
+    desktop_file: TMemo;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    MAX_GEN: TSpinEditEx;
+    memo_seaLine: TMemo;
+    mem_customlength: TMemo;
+    mem_subfire: TMemo;
+    onebyoneHelp: TButton;
+    btn_BranchStop: TButton;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    PCROSS: TSpinEditEx;
+    pheromone: TSpinEditEx;
+    PMUTATE: TSpinEditEx;
+    pointsXYpos: TButton;
+    btn_LKHini: TButton;
+    Button27: TButton;
+    Button28: TButton;
+    Button29: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    btn_dyp_run: TButton;
+    btn_dyp_help: TButton;
+    btn_branch_run: TButton;
+    branch_edit: TEdit;
+    OpenDialog2: TOpenDialog;
+    POP_SIZE: TSpinEditEx;
+    PSOc1: TSpinEditEx;
+    PSOc2: TSpinEditEx;
+    PSOhelp: TButton;
+    PSOiter: TSpinEditEx;
+    PSOLine: TMemo;
+    PSOnum: TSpinEditEx;
+    PSOVv: TSpinEditEx;
+    PSOw: TSpinEditEx;
+    PSOwe: TSpinEditEx;
+    PSOws: TSpinEditEx;
+    RadioBtn_calc: TRadioButton;
+    RadioBtn_input: TRadioButton;
+    RadioGroup3: TRadioGroup;
+    refrash: TButton;
+    hintPoint: TMenuItem;
+    memo_guess: TMemo;
+    path1: TLabel;
+    Label3: TLabel;
+    path2: TLabel;
     mem_GA: TMemo;
     mem_dyp_path: TMemo;
     mem_branch: TMemo;
-    PSOLine: TMemo;
     mem_ant: TMemo;
-    mem_subfire: TMemo;
     Memo9: TMemo;
     memoPoint: TMenuItem;
     lineMenu: TPopupMenu;
@@ -132,14 +146,17 @@ type
     PageControl3: TPageControl;
     PageControl4: TPageControl;
     Panel_right: TPanel;
+    refrash1: TButton;
+    rho: TSpinEditEx;
     SaveDialog1: TSaveDialog;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
-    PSOnum: TSpinEditEx;
     setpoints: TButton;
+    setpoints1: TButton;
     shiftEdges: TToggleBox;
     shiftPoints: TToggleBox;
     TabSheet1: TTabSheet;
     TabSheet10: TTabSheet;
+    TabSheet11: TTabSheet;
     TabSheet13: TTabSheet;
     TabSheet14: TTabSheet;
     TabSheet2: TTabSheet;
@@ -151,6 +168,7 @@ type
     TabDyp: TTabSheet;
     TabSheet8: TTabSheet;
     TabSheet9: TTabSheet;
+    TrayIcon1: TTrayIcon;
     updateMemo: TMenuItem;
     Linememo: TMenuItem;
     SQLTransaction2: TSQLTransaction;
@@ -194,6 +212,11 @@ type
     procedure btn_infoClick(Sender: TObject);
     procedure btn_importPointsClick(Sender: TObject);
     procedure Btn_exitClick(Sender: TObject);
+    procedure btn_seaLineClick(Sender: TObject);
+    procedure btn_seaLineFloorPointClick(Sender: TObject);
+    procedure btn_seaLineLineClick(Sender: TObject);
+    procedure btn_sealine_testClick(Sender: TObject);
+
     procedure btn_subfire_runClick(Sender: TObject);
     procedure btn_PSO_runClick(Sender: TObject);
 
@@ -206,6 +229,7 @@ type
     procedure exportPointsClick(Sender: TObject);
     procedure exportPointsToSQLiteClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -215,7 +239,9 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure PageControl2Change(Sender: TObject);
     procedure PageControl3Change(Sender: TObject);
+    procedure pointsXYposClick(Sender: TObject);
     procedure PSOhelpClick(Sender: TObject);
+    procedure ScrollBox1DragDrop(Sender, Source: TObject; X, Y: integer);
     procedure shiftPointsChange(Sender: TObject);
     procedure shiftPointsClick(Sender: TObject);
     procedure shiftEdgesClick(Sender: TObject);
@@ -229,7 +255,7 @@ type
     procedure emptyfreeClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure pointsXYposClick(Sender: TObject);
+
     procedure FormShow(Sender: TObject);
 
     procedure setpointsClick(Sender: TObject);
@@ -245,6 +271,7 @@ type
       Shift: TShiftState; X, Y: integer);
     procedure shiftPointsMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
+    procedure TrayIcon1Click(Sender: TObject);
     procedure updateMemoClick(Sender: TObject);
 
   private
@@ -307,6 +334,13 @@ type
     procedure refreshFromTWOList(Sender: TObject);
     procedure refreshFromimportPoint(Sender: TObject);
     procedure refreshCityCountAndCitiexyFromPointList(Sender: TObject);
+    function pcodeAndPointLineListFromSQL(): integer;
+    function sealine000(minx, miny, maxx, maxy: integer): integer;
+    function ifCross(pcodeA, pcodeB, pcodeC, pcodeD: string): boolean;
+    function ifCrosswww(pcodeA, pcodeB, pcodeC, pcodeD: string): boolean;
+    function getPcodeIndex(vpcode: string): integer;
+    procedure sleepli(i: integer);
+    function fromPcodeGetPoint(spcode: string): tpoint;
   end;
 
 type
@@ -351,6 +385,16 @@ type
 
 
 
+
+
+
+
+
+
+
+
+
+
   private
   protected
   public
@@ -360,12 +404,23 @@ type
     weightLine: string;
     beginPoint: tpoint;
     endPoint: tpoint;
+    floor: integer;
   end;
 
   { TPsubpPoint }
 
   TPsubpPoint = class(TComponent)
   type
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -401,11 +456,34 @@ type
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   private
   protected
   public
     pcode: string;
     pname: string;
+    floor: integer;
     px: integer;
     py: integer;
   end;
@@ -430,9 +508,9 @@ var
   //////////////////
   shapeList: TFPList;//TPointerList;//TList;
   // shapeList: TList;//TPointerList;//TList;
-  LineList: TFPList;//TPointerList;//TList;
+  LineList: TFPList;//TPointerList;//TList;   // TlinePoint
   TPsubpPointList: TFPList;
-  PointList: TFPList;//TPointerList;//TList;
+  PointList: TFPList;//TPointerList;//TList;  //TPointline
   /////////////////////
   OnPainNoPainColor: boolean;
   online: TlinePoint;
@@ -449,6 +527,102 @@ uses  msgshow, u_points, msgshow2, u_edges, showPathTree, dp, branch,
   // {$R MessageDialogs.inc}   // 这种.inc，不是pas，不知如何直接引用
 
 { TMain }
+function S_abc(A, B, C: TPoint): double;
+var
+  aa, bb, cc, s: double;
+begin
+  // 计算三边长度
+  aa := Sqrt(Sqr(B.X - C.X) + Sqr(B.Y - C.Y)); // BC边长度
+  bb := Sqrt(Sqr(A.X - C.X) + Sqr(A.Y - C.Y)); // AC边长度
+  cc := Sqrt(Sqr(A.X - B.X) + Sqr(A.Y - B.Y)); // AB边长度
+
+  // 计算半周长
+  s := (aa + bb + cc) / 2;
+
+  // 应用海伦公式计算面积
+  Result := Sqrt(s * (s - aa) * (s - bb) * (s - cc));
+end;
+
+function isCross(A, B, C, D: TPoint): boolean;
+var
+  k1, b1, k2, b2, x, y: double;
+begin
+  Result := False;
+  //if (S_abc(A, C, D) + S_abc(B, C, D)) = (S_abc(C, A, B) + S_abc(D, A, B)) then
+  //   Result := True;
+  if a.x <> b.x then
+    k1 := (a.y - b.y) / (a.x - b.x)
+  else
+    k1 := 1;
+  b1 := a.y - k1 * a.x;
+
+  if c.x <> d.x then
+    k2 := (c.y - d.y) / (c.x - d.x)
+  else
+    k2 := 1;
+  b2 := c.y - k2 * c.x;
+  if k1 <> k2 then
+    x := (b2 - b1) / (k1 - k2)
+  else
+  if (((a.x = c.x) and (a.y = c.y)) or ((b.x = c.x) and (b.y = c.y)) or
+    ((a.x = d.x) and (a.y = d.y)) or ((b.x = d.x) and (b.y = d.y))) then
+    Result := True
+  else
+    Result := False;
+  y := k1 * x + b1;
+
+  if ((x > min(a.x, b.x)) and (x < max(a.x, b.x))) then
+    if ((x > min(c.x, d.x)) and (x < max(c.x, d.x))) then
+      if ((y > min(a.y, b.y)) and (y < max(a.y, b.y))) then
+        if ((y > min(c.y, d.y)) and (y < max(c.y, d.y))) then
+          Result := True;
+  if (Result and (k1 <> k2)) then
+    if (((a.x = c.x) and (a.y = c.y)) or ((a.x = d.x) and (a.y = d.y)) or
+      ((b.x = c.x) and (b.y = c.y)) or ((b.x = d.x) and (b.y = d.y))) then
+      Result := False;
+end;
+
+
+function isCross222(A, B, C, D: TPoint; www: string): boolean;
+  //var
+  // 计算叉积
+  function crossProduct(a, b, c: TPoint): integer;
+  begin
+    Result := (b.X - a.X) * (c.Y - a.Y) - (b.Y - a.Y) * (c.X - a.X);
+  end;
+
+  // 判断点c是否在线段ab上
+  function onSegment(a, b, c: TPoint): boolean;
+  begin
+    Result := (Min(a.X, b.X) <= c.X) and (c.X <= Max(a.X, b.X)) and
+      (Min(a.Y, b.Y) <= c.Y) and (c.Y <= Max(a.Y, b.Y));
+  end;
+
+var
+  d1, d2, d3, d4: integer;
+begin
+  // 计算四个叉积值
+  d1 := crossProduct(A, B, C);
+  d2 := crossProduct(A, B, D);
+  d3 := crossProduct(C, D, A);
+  d4 := crossProduct(C, D, B);
+
+  // 判断两线段是否跨立
+  if ((d1 * d2 < 0) and (d3 * d4 < 0)) then
+    Result := True
+  // 检查特殊情况（共线或端点相交）
+  else if (d1 = 0) and onSegment(A, B, C) then
+    Result := True
+  else if (d2 = 0) and onSegment(A, B, D) then
+    Result := True
+  else if (d3 = 0) and onSegment(C, D, A) then
+    Result := True
+  else if (d4 = 0) and onSegment(C, D, B) then
+    Result := True
+  else
+    Result := False;
+end;
+
 function chineseCharToInt10(const w: string): integer;
 var
   i, len: integer;
@@ -468,6 +642,77 @@ begin
 
 end;
 
+function isCross333(A, B, C, D, E: TPoint): boolean;
+
+  // 计算叉积
+  function CrossProduct(v1, v2: TPoint): double;
+  begin
+    Result := v1.X * v2.Y - v1.Y * v2.X;
+  end;
+
+  // 判断点P是否在线段AB上
+  function IsPointOnSegment(P, A, B: TPoint): boolean;
+  begin
+    // 首先检查三点共线
+    if CrossProduct(Point(B.X - A.X, B.Y - A.Y), Point(P.X - A.X, P.Y - A.Y)) <> 0 then
+      Exit(False);
+
+    // 然后检查P的坐标在A和B之间
+    Result := (Min(A.X, B.X) <= P.X) and (P.X <= Max(A.X, B.X)) and
+      (Min(A.Y, B.Y) <= P.Y) and (P.Y <= Max(A.Y, B.Y));
+  end;
+
+  // 判断线段AB与CD是否相交
+  function SegmentsIntersect(A, B, C, D: TPoint): boolean;
+  var
+    d1, d2, d3, d4: double;
+  begin
+    d1 := CrossProduct(Point(C.X - A.X, C.Y - A.Y), Point(B.X - A.X, B.Y - A.Y));
+    d2 := CrossProduct(Point(D.X - A.X, D.Y - A.Y), Point(B.X - A.X, B.Y - A.Y));
+    d3 := CrossProduct(Point(A.X - C.X, A.Y - C.Y), Point(D.X - C.X, D.Y - C.Y));
+    d4 := CrossProduct(Point(B.X - C.X, B.Y - C.Y), Point(D.X - C.X, D.Y - C.Y));
+
+    // 跨立实验
+    if ((d1 * d2) < 0) and ((d3 * d4) < 0) then
+      Exit(True);
+
+    // 检查端点是否在另一条线段上
+    if IsPointOnSegment(A, C, D) or IsPointOnSegment(B, C, D) or
+      IsPointOnSegment(C, A, B) or IsPointOnSegment(D, A, B) then
+      Exit(True);
+
+    Result := False;
+  end;
+
+  // 判断点P是否在三角形CDE内
+  function IsPointInTriangle(P: TPoint): boolean;
+  var
+    d1, d2, d3: double;
+    hasNeg, hasPos: boolean;
+  begin
+    d1 := CrossProduct(Point(C.X - P.X, C.Y - P.Y), Point(D.X - P.X, D.Y - P.Y));
+    d2 := CrossProduct(Point(D.X - P.X, D.Y - P.Y), Point(E.X - P.X, E.Y - P.Y));
+    d3 := CrossProduct(Point(E.X - P.X, E.Y - P.Y), Point(C.X - P.X, C.Y - P.Y));
+
+    hasNeg := (d1 < 0) or (d2 < 0) or (d3 < 0);
+    hasPos := (d1 > 0) or (d2 > 0) or (d3 > 0);
+
+    Result := not (hasNeg and hasPos);
+  end;
+
+begin
+  // 1. 检查线段AB是否与三角形的任何边相交
+  if SegmentsIntersect(A, B, C, D) or SegmentsIntersect(A, B, D, E) or
+    SegmentsIntersect(A, B, E, C) then
+    Exit(True);
+
+  // 2. 检查线段端点是否在三角形内
+  if IsPointInTriangle(A) or IsPointInTriangle(B) then
+    Exit(True);
+
+  // 3. 都不满足则不相交
+  Result := False;
+end;
 
 function Int10TochineseChar(int10: string): string;
 var
@@ -808,9 +1053,10 @@ end;
 
 procedure TMain.FormShow(Sender: TObject);
 var
-  ii: integer;
+  ii, i, j: integer;
+  www: ticon;
 begin
-   wwwname := '开发者：三界火宅人/开源(元)盛世/阴汁成世 ';
+  wwwname := '开发者：三界火宅人/开源(元)盛世/阴汁成世 ';
 
   //wwwname := '开发者：窗明几净~天气几好^几何原本^欧几里得 ';
   //wwwname := '开发者：无人知/路人知/反枝苋/茼蒿/开源盛世 ';
@@ -820,7 +1066,7 @@ begin
   //窗明几净~天气几好^几何原本^欧几里得
   wwwname := wwwname + ' https://github.com/aMeTooFor/TSP';
   wwwname := wwwname + ' 广东吴川梅菉';
-  self.Caption := 'TSP算法小软件V7.0  2024年2月 ' + wwwname;
+  self.Caption := 'TSP算法小软件V9.0  2026年3月 ' + wwwname;
   Application.Title := self.Caption;
   // 四色定理染色算法小软件Version1.11        2025.6.13     开发者：不是我/不是我干的，和我无关/与我无关，身无分文/心无罣碍，路人甲/打酱油
   userid := '1';
@@ -852,6 +1098,26 @@ begin
 
   //self.WindowState:=wsMaximized;
   //application.ProcessMessages;
+  // self.Icon:=
+  //www:=ticon.Create;
+  //www:=self.TrayIcon1.Icon;
+  //for i:=0 to www.Canvas.Width-1 do
+  //  for j:=0 to www.canvas.Height-1 do
+  //for i:=0 to 555 do
+  //  for j:=0 to 555 do
+  // self.Icon.Canvas.TextOut(1,1,'wwwwwwwwwww');
+  //application.Title:='www';
+  //self.icon.LoadFromFile('TSP.ico');
+  //application.icon:=self.Icon;
+
+  // if 1=2 then
+  begin
+    desktop_file.Text := stringreplace(desktop_file.Text,
+      '/media/w/data/日记类/TSP_ubuntu_Lazarus/', extractfilepath(ParamStr(0)),
+      [rfReplaceAll]);
+    desktop_file.Lines.SaveToFile('/home/w/.local/share/applications/TSP.desktop');
+  end;
+
 end;
 
 
@@ -2038,6 +2304,9 @@ begin
   image1.Refresh;
   image1.BringToFront;
   application.ProcessMessages;
+  //   SQLConnector1.ConnectorType:='sqlite3';
+  //// SQLConnector1.DatabaseName:='/media/w/data/日记类/TSP_ubuntu_Lazarus/TSP.sqlite3';
+  // SQLConnector1.DatabaseName:='TSP.sqlite3';
   //self.ScrollBox1.Canvas.Create;
   application.ProcessMessages;
   SQLQuery1.Close;
@@ -2416,11 +2685,30 @@ begin
 
   //SQLTransaction1.Active := True;
   //self.ScrollBox1.Canvas.Destroy;
+  //  ScrollBox1.VertScrollBar.Position:=(ScrollBox1.Tag mod 10000);
+  //ScrollBox1.HorzScrollBar.Position:=trunc(ScrollBox1.Tag div 10000);
+  // ScrollBox1.Tag:= ScrollBox1.VertScrollBar.Position;
+  // ScrollBox1.Tag:= ScrollBox1.HorzScrollBar.Position;
+  //ScrollBox1.Tag:=  ScrollBox1.HorzScrollBar.Position*10000+ ScrollBox1.VertScrollBar.Position;
+
 
   self.ScrollBox1.Canvas.Brush.Color := ScrollBox1.Color;
   ScrollBox1.Canvas.FillRect(ScrollBox1.Canvas.ClipRect);
-  image1.Refresh;
-  image1.BringToFront;
+  //image1.Refresh;
+  //image1.BringToFront;
+  Application.ProcessMessages;
+  //   ScrollBox1.VertScrollBar.Position:=(ScrollBox1.Tag mod 10000);
+  // //ScrollBox1.VertScrollBar.Position:=1111;
+  // ScrollBox1.HorzScrollBar.Position:=trunc(ScrollBox1.Tag div 10000);
+  // //ScrollBox1.HorzScrollBar.Position:=1111;
+  // ScrollBox1.Tag:= ScrollBox1.VertScrollBar.Position;
+  // ScrollBox1.Tag:= ScrollBox1.HorzScrollBar.Position;
+  //ScrollBox1.Tag:=  ScrollBox1.HorzScrollBar.Position*10000+ ScrollBox1.VertScrollBar.Position;
+  Application.ProcessMessages;
+
+
+
+
   application.ProcessMessages;
   //self.ScrollBox1.Canvas.Create;
   application.ProcessMessages;
@@ -2543,8 +2831,20 @@ begin
   //   refreshoneP(sqltemp.FieldByName('fc').AsString, sqltemp.FieldByName('pcode')
   //  .AsString, 0, clMoneyGreen);
 
-  refreshCityCountAndCitiexyFromPointList(Sender);
+  //refreshCityCountAndCitiexyFromPointList(Sender);
   //P_E_ListToArray();
+
+
+
+  // ScrollBox1.VertScrollBar.Position:=(ScrollBox1.Tag mod 10000);
+  // ScrollBox1.VertScrollBar.Position:=1111;
+  // ScrollBox1.HorzScrollBar.Position:=trunc(ScrollBox1.Tag div 10000);
+  // ScrollBox1.HorzScrollBar.Position:=1111;
+  // ScrollBox1.Tag:= ScrollBox1.VertScrollBar.Position;
+  // ScrollBox1.Tag:= ScrollBox1.HorzScrollBar.Position;
+  //ScrollBox1.Tag:=  ScrollBox1.HorzScrollBar.Position*10000+ ScrollBox1.VertScrollBar.Position;
+  //Application.ProcessMessages;
+
 end;
 
 procedure TMain.refreshFromimportPoint(Sender: TObject);
@@ -2707,6 +3007,64 @@ begin
     '       可以重新输入';
 end;
 
+function TMain.pcodeAndPointLineListFromSQL(): integer;
+var
+  cc, i: integer;
+  pPoint: TPointLine;
+begin
+
+  for i := pointList.Count - 1 downto 0 do
+  begin
+    try
+      //if tobject(shapeList.Items[i]) is TlinePoint then
+      if pointList.Items[i] <> nil then
+      begin
+        TPointLine(pointList.Items[i]).Free;
+        pointList.Items[i] := nil;
+        pointList.Count := pointList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  pointList.Clear;
+
+
+  SQLQuery1.Close;
+  SQLQuery1.SQL.Text := 'select * from points where dprid=' + dprid;
+  self.SQLQuery1.Open;
+  cc := GetRecordCount(SQLQuery1);
+  CityCount := cc;
+  setlength(Cities, cc);
+
+  setlength(Pcodes, cc);
+  SQLQuery1.First;
+  i := -1;
+  while not SQLQuery1.EOF do
+  begin
+    i := i + 1;
+    Cities[i].X := SQLQuery1.FieldByName('px').AsInteger;
+    Cities[i].y := SQLQuery1.FieldByName('py').AsInteger;
+    Pcodes[i] := SQLQuery1.FieldByName('pcode').AsString;
+
+
+
+    pPoint := TPointLine.Create(nil);
+    pPoint.px := SQLQuery1.FieldByName('px').AsInteger;
+    pPoint.py := SQLQuery1.FieldByName('py').AsInteger;
+    pPoint.pname := SQLQuery1.FieldByName('pname').AsString;
+    pPoint.pcode := SQLQuery1.FieldByName('pcode').AsString;
+    pPoint.floor := -1;
+    pointlist.add(ppoint);
+
+    SQLQuery1.Next;
+  end;
+  pointsXYpos.Caption := '城市数： ' + IntToStr(CityCount) +
+    '    可以重新输入';
+end;
+
+
 
 
 procedure TMain.pointsXYposClick(Sender: TObject);
@@ -2755,6 +3113,7 @@ begin
         //SQLQuery1.SQL.Text := 'delete from  linesxy where linetext=''-1''';
         //SQLQuery1.ExecSQL;SQLTransaction1.Commit;
         ////SQLQuery1.ApplyUpdates();
+        Randomize;
         for I := 1 to StrToInt(NewString) do
         begin
 
@@ -2763,8 +3122,30 @@ begin
           SQLQuery1.FieldByName('dprid').AsString := dprid;
           SQLQuery1.FieldByName('pcode').AsString := 'P' + IntToStr(I);
           SQLQuery1.FieldByName('pname').AsString := 'P' + IntToStr(I);
-          SQLQuery1.FieldByName('px').AsInteger := 100 + I * 10;
-          SQLQuery1.FieldByName('py').AsInteger := 100 + I * 10;
+
+          //if 1 = 2 then
+          begin
+            SQLQuery1.FieldByName('px').AsInteger := Random(1000);//100 + I * 10;
+            SQLQuery1.FieldByName('py').AsInteger := Random(1000);//100 + I * 10;
+          end;
+          if 1 = 2 then
+          begin
+            SQLQuery1.FieldByName('px').AsInteger :=
+              100 + (100 * (i - 1) mod 1000) + Random(20);
+            //Random(1000);//100 + I * 10;
+            SQLQuery1.FieldByName('py').AsInteger :=
+              100 + 100 * (100 * (i - 1) div 1000) + Random(20);
+            //Random(1000);//100 + I * 10;
+          end;
+          if 1 = 2 then
+          begin
+            SQLQuery1.FieldByName('px').AsInteger :=
+              100 + (100 * (i - 1) mod 1000);
+            SQLQuery1.FieldByName('py').AsInteger :=
+              100 + 100 * (100 * (i - 1) div 1000);
+          end;
+
+
           SQLQuery1.Post;
           SQLQuery1.ApplyUpdates();
 
@@ -2842,11 +3223,20 @@ begin
     end;
   if StrToInt(NewString) > 30 then
     ShowMessage('点数大于30的，不自动生成边了，以后理，或者，TSP，暂不理边，只理点');
+
+  refreshFromSQLite(nil);
 end;
 
 procedure TMain.FormCreate(Sender: TObject);
+var
+  www: ticon;
 begin
-
+  // www:=ticon.Create;
+  //  www.LoadFromFile('ttsp');
+  //imagelist1.GetIcon(0,www);
+  //self.icon:=www;
+  //self.Icon:=trayicon1.Icon;
+  //self.Icon.Canvas.Assign(trayicon1.Icon.Canvas);
   MyLineColor := clGrayText; // clSilver;
   // refreshhClick(nil);
   AllPath := TStringList.Create;
@@ -2874,6 +3264,9 @@ begin
   exitOut := True;
   Close;
 end;
+
+
+
 
 procedure TMain.btn_subfire_runClick(Sender: TObject);
 var
@@ -3184,8 +3577,12 @@ begin
     sqltemp.SQL.Text := 'delete from edges where dprid=' + dprid +
       ' and pcode2=''' + pcode + '''';
     sqltemp.ExecSQL;
-    sqltransaction1.Commit;
-
+    //sqltransaction1.Commit;
+    //sqltemp.ApplyUpdates();
+    application.ProcessMessages;
+    SQLTransaction1.Commit;
+    SQLTransaction1.Active := True;
+    application.ProcessMessages;
     refrash.Click;
   end;
 end;
@@ -3331,9 +3728,9 @@ begin
 
   if Application.MessageBox(
     '将要清空本地数据库sqlite中的点数据，要不要继续？' +
-    #13#10 + '默认仅保存点的坐标，要不要继续？' + #13#10 +
-    '【是】：仅保存点的坐标' + #13#10 + '【否】：不保存',
-    '保存', MB_YESNO) = idYes then
+    #13#10 + '默认仅保存点的坐标，要不要继续？' +
+    #13#10 + '【是】：仅保存点的坐标' + #13#10 +
+    '【否】：不保存', '保存', MB_YESNO) = idYes then
   begin
     k := 3;
   end
@@ -3364,7 +3761,7 @@ begin
       ProgressBar1.Min := 0; // ：=1，结果出错于0时。
       ProgressBar1.Max := CityCount;
 
-      for I := 0 to CityCount-1 do
+      for I := 0 to CityCount - 1 do
       begin
 
         SQLQuery1.Append;
@@ -3406,6 +3803,11 @@ begin
     application.ProcessMessages;
     refrash.Click;
   end;
+end;
+
+procedure TMain.FormPaint(Sender: TObject);
+begin
+
 end;
 
 procedure TMain.Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
@@ -3514,8 +3916,9 @@ begin
         ScrollBox1.Canvas.Pen.Color := c;
         image1.ShowHint := False;
         application.ProcessMessages;
-        image1.Hint := online.beginPcode + '::' + online.endPcode +
-          '::' + '权' + online.weightLine;
+        //  image1.Hint := online.beginPcode + '::' + online.endPcode +
+        //    '::' + '权' + online.weightLine;
+        image1.Hint := online.beginPcode + '::' + online.endPcode;
         image1.ShowHint := True;
         application.ProcessMessages;
       end;
@@ -3725,6 +4128,11 @@ begin
   s := fn.Text;
   InputQueryLiMemo('粒子群算法说明', s, nil);
   fn.Free;
+end;
+
+procedure TMain.ScrollBox1DragDrop(Sender, Source: TObject; X, Y: integer);
+begin
+  //refreshClick(nil);
 end;
 
 procedure TMain.shiftPointsChange(Sender: TObject);
@@ -4195,23 +4603,23 @@ end;
 
 procedure TMain.btn_gainitClick(Sender: TObject);
 begin
-   mem_GA.Lines.Add('开始时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
+  mem_GA.Lines.Add('开始时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
   ga.fff := self;
   ga.GAinit;
   drawTSPpath();
   //self.mem_GA.Lines.Add('遗传算法总路长：' + floattostr(drawTSPpathLong));
-   mem_GA.Lines.Add('结束时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
+  mem_GA.Lines.Add('结束时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
   mem_GA.SelStart := Length(mem_GA.Text);
 end;
 
 procedure TMain.btn_GaReRunClick(Sender: TObject);
 begin
-   mem_GA.Lines.Add('开始时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
+  mem_GA.Lines.Add('开始时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
   ga.fff := self;
   ga.GaReRun();
   drawTSPpath();
   //self.mem_GA.Lines.Add('遗传算法总路长：' + floattostr(drawTSPpathLong));
-   mem_GA.Lines.Add('结束时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
+  mem_GA.Lines.Add('结束时间: ' + formatdatetime('yyyy-mm-dd hh:mm:ss', now()));
   mem_GA.SelStart := Length(mem_GA.Text);
 end;
 
@@ -4715,6 +5123,11 @@ begin
     '双重标志开关：先点这个按钮，再按下shift键，这两个开关，然后，鼠标左键单点，可以一次记录批量记录多个点击作为多个点坐标自动输入也';
   if (Button = mbRight) then
     ShowMessage(s);
+end;
+
+procedure TMain.TrayIcon1Click(Sender: TObject);
+begin
+
 end;
 
 procedure TMain.updateMemoClick(Sender: TObject);
@@ -5241,8 +5654,8 @@ begin
   //refreshFromTwoList(Sender);
   //if ((lineList.Count) * (shapeList.Count) * (pointList.Count)) <> 0 then
   if ((shapeList.Count) * (pointList.Count)) <> 0 then
-    refreshFromTwoList(Sender)
-  //refreshFromLineList(Sender)
+    //refreshFromTwoList(Sender)    // 不可滚动条
+    refreshFromLineList(Sender)     // 可滚动条
   else
     refreshFromSQLite(Sender);
 
@@ -5264,6 +5677,4356 @@ begin
   ResultPathEdgesRed.Free;
 end;
 
+procedure TMain.btn_seaLineClick(Sender: TObject);
+var
+  i, j, k, jj, jjj, iii, ii: integer;      //memo_seaLine
+  minx, miny, maxx, maxy, curp, curp0: integer;//TPoint;
+  pline, ppline: TlinePoint;
+  pcode1, pcode2: string;
+  pcode1Shape, pcode2Shape: tshape;
+  pcode1Pointer, pcode2Pointer: tpoint;
+  pcode00: array of string;
+  pcode01: array of string;
+  pcode02: array of string;
+  minH: array of double;
+  cc: integer;
+  ss: string;
+  ab, ac, bc, H, Sabc, minHH, minHHH, pp: real;
+  p, t, aaa, bbb, ccc, pp1, pp2: tpoint;
+  path, pathAlready: string;
+  p1, p2, p11, p22, oneline: string;
+  onelinelength, alllinelong: double;
+  tempLineList: TFPList;//TPointerList;//TList;   // TlinePoint
+
+  function wlog(w: string): integer;
+  begin
+    Result := 1;
+    cc := citycount;
+    //cc:=9;
+    //cc:=9;
+    if (iii > (cc - 2)) then
+      //if (iii>(7)) then
+      memo_seaLine.Lines.Add(w);
+  end;
+
+begin
+  memo_seaLine.Lines.Clear;
+  pcodeAndPointLineListFromSQL;
+
+  minx := 0;//TPoint(PointList[0]);
+  miny := minx;
+  maxx := minx;
+  maxy := minx;
+  for i := 1 to PointList.Count - 1 do
+    // PointList: TFPList;//TPointerList;//TList;  //TPointline
+  begin
+    if (TPointLine(PointList[i]).px < TPointLine(PointList[minx]).px) then
+      minx := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py < TPointLine(PointList[miny]).py) then
+      miny := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx]).px) then
+      maxx := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy]).py) then
+      maxy := i;//  TPoint(PointList[i]);
+  end;
+  memo_seaLine.Lines.Add('minx=' + pcodes[minx]);
+  memo_seaLine.Lines.Add('miny=' + pcodes[miny]);
+  memo_seaLine.Lines.Add('maxx=' + pcodes[maxx]);
+  memo_seaLine.Lines.Add('maxy=' + pcodes[maxy]);
+  application.ProcessMessages;
+  memo_seaLine.Lines.Add('最外层围城线围墙：');
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      //if tobject(shapeList.Items[i]) is TlinePoint then
+      if lineList.Items[i] <> nil then
+      begin
+        TlinePoint(lineList.Items[i]).Free;
+        lineList.Items[i] := nil;
+        lineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  lineList.Clear;
+  for i := TPsubpPointList.Count - 1 downto 0 do
+  begin
+    try
+      if (TPsubpPointList.Items[i]) <> nil then
+      begin
+        TPsubpPoint(TPsubpPointList.Items[i]).Free;
+        TPsubpPointList.Items[i] := nil;
+        TPsubpPointList.Count := TPsubpPointList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  TPsubpPointList.Clear;
+
+  image1.Refresh;
+  /////////////////////////////////////////////////////////////////
+  sealine000(minx, miny, maxx, maxy);
+  ////////////////////////////////////////////////
+  sleepli(2000);
+
+  //cc := 10;
+  cc := CityCount + 10;
+  ss := '';
+  for iii := 0 to CityCount - 1 do
+  begin
+    setlength(pcode00, CityCount);
+    setlength(pcode01, CityCount);
+    setlength(pcode02, CityCount);
+    setlength(minH, CityCount);
+
+    application.ProcessMessages;
+    for i := 0 to CityCount - 1 do
+    begin
+      pcode00[i] := pcodes[i];
+    end;
+    for i := lineList.Count - 1 downto 0 do
+    begin
+      if lineList.Items[i] <> nil then
+      begin
+        for j := 0 to CityCount - 1 do
+        begin
+          if pcode00[j] = TlinePoint(lineList.Items[i]).beginPcode then
+            pcode00[j] := '';
+          if pcode00[j] = TlinePoint(lineList.Items[i]).endPcode then
+            pcode00[j] := '';
+        end;
+        application.ProcessMessages;
+      end;
+    end;
+    k := 0;
+    if iii = 85 then
+      application.ProcessMessages;
+    for i := 0 to CityCount - 1 do
+    begin
+      if pcode00[i] <> '' then
+      begin
+        k := k + 1;
+        minHH := 100000000;
+        //  cc := 85;
+        for j := 0 to lineList.Count - 1 do
+        begin
+          //pcode00[i]  //TlinePoint(lineList.Items[i]).beginPcode   //endPcode
+          ccc.x := Tpointline(PointList[i]).px;
+          ccc.y := Tpointline(PointList[i]).py;
+          aaa := TlinePoint(lineList.Items[j]).beginPoint;
+          bbb := TlinePoint(lineList.Items[j]).endPoint;
+
+          ss := Tpointline(PointList[i]).Pcode;
+
+          p11 := TlinePoint(lineList.Items[j]).beginPcode;
+          p22 := TlinePoint(lineList.Items[j]).endPcode;
+
+          wlog(ss + ':' + p11 + ':' + p22);
+          jjj := 0;
+          for jj := 0 to lineList.Count - 1 do
+          begin
+            p1 := TlinePoint(lineList.Items[jj]).beginPcode;
+            p2 := TlinePoint(lineList.Items[jj]).endPcode;
+            pp1 := TlinePoint(lineList.Items[jj]).beginPoint;
+            pp2 := TlinePoint(lineList.Items[jj]).endPoint;
+
+            if ((p1 = p11) and (p2 = p22)) then
+              continue;
+            if j = jj then continue;
+
+            if 'P10:P3:P12::P3:P13' = ss + ':' + p11 + ':' + p22 +
+            '::' + p1 + ':' + p2 then
+              application.hint := ss;
+            if 'P14:P18:P7::P5:P16' = ss + ':' + p11 + ':' + p22 +
+            '::' + p1 + ':' + p2 then
+              application.hint := ss;
+            if 'P14:P9:P7::P5:P18' = ss + ':' + p11 + ':' + p22 +
+            '::' + p1 + ':' + p2 then
+              application.hint := ss;
+
+            if 'P14:P18:P7:P5:P16' = ss + ':' + p11 + ':' + p22 +
+            ':' + p1 + ':' + p2 then
+              application.hint := ss;
+            if 'P10:P3:P12::P3:P13' = ss + ':' + p11 + ':' + p22 +
+            '::' + p1 + ':' + p2 then
+              application.hint := ss;
+            //if ((iscross(ccc, aaa, pp1, pp2, ss + ':' + p11 + ':' + ':' + p1 + ':' + p2)) or
+            //  (iscross(ccc, bbb, pp1, pp2, ss + ':' + ':' + p22 + ':' + p1 + ':' + p2))) then
+            if (ifcross(p1, p2, ss, p11) or ifcross(p1, p2, ss, p22)) then
+            begin     // P12,P5       P10,P3,P13
+              application.hint := ss;
+              //continue;
+              jjj := -1;
+              wlog('iscross=' + p1 + ':' + p2 + '===' + ss + ':' + p11 + ':' + p22);
+
+              if 'iscross=P9:P7===P3:P1:P2' = 'iscross=' + p1 + ':' +
+                p2 + '===' + ss + ':' + p11 + ':' + p22 then
+                application.hint := ss;
+              break;
+            end;
+
+          end;
+          if jjj = -1 then
+            continue;
+
+          ss := Tpointline(PointList[i]).Pcode;
+          p1 := TlinePoint(lineList.Items[jj]).beginPcode;
+          p2 := TlinePoint(lineList.Items[jj]).endPcode;
+          p11 := TlinePoint(lineList.Items[j]).beginPcode;
+          p22 := TlinePoint(lineList.Items[j]).endPcode;
+
+          ab := sqrt((aaa.X - bbb.X) * (aaa.X - bbb.X) + (aaa.y - bbb.y) *
+            (aaa.y - bbb.y));
+          ac := sqrt((aaa.X - ccc.X) * (aaa.X - ccc.X) + (aaa.y - ccc.y) *
+            (aaa.y - ccc.y));
+          bc := sqrt((ccc.X - bbb.X) * (ccc.X - bbb.X) + (ccc.y - bbb.y) *
+            (ccc.y - bbb.y));
+
+          pp := (ab + ac + bc) / 2;
+          Sabc := sqrt(pp * (pp - ab) * (pp - bc) * (pp - ac));
+          H := Sabc / ab;
+          wlog(ss + ':' + p11 + ':' + p22 + ':::' + p1 + ':' + p2 +
+            '  H=' + floattostr(H));
+          H := bc + ac - ab;
+          if H < minHH then
+          begin
+            minHH := H;
+            pcode1 := TlinePoint(lineList.Items[j]).beginPcode;
+            pcode2 := TlinePoint(lineList.Items[j]).endPcode;
+
+            wlog('H < minHH  ' + ss + ':' + p11 + ':' + p22 +
+              ':::' + p1 + ':' + p2 + '  H=' + floattostr(H));
+          end;
+        end;
+        ss := pcode00[i];
+        pcode01[i] := pcode1;
+        pcode02[i] := pcode2;
+        minH[i] := minHH;
+        wlog('minH[' + IntToStr(i) + ']  ' + ss + ':' + pcode1 + ':' + pcode2);
+
+      end;
+    end;
+    if k = 0 then
+    begin
+      application.ProcessMessages;
+      break;
+    end;
+    //if iii = cc then
+    //  //// 终于找到BUG ，iii=3时，正确，iii=4时，否，正是要研究之处
+    //  //// 终于找到BUG ，iii=8时，正确，iii=9时，否，正是要研究之处
+    //  break;
+    minHHH := 100000000;
+    j := -1;
+    for i := 0 to CityCount - 1 do
+    begin
+      if pcode00[i] <> '' then
+        if minH[i] < minHHH then
+        begin
+          minHHH := minH[i];
+          j := i;
+        end;
+    end;
+
+    if j = -1 then
+    begin
+      application.ProcessMessages;
+      break;
+    end;
+
+    pline := TlinePoint.Create(nil);
+    pcode1 := pcode00[j];
+    pcode2 := pcode01[j];
+    wlog('minH[' + IntToStr(j) + ']  ' + pcode00[j] + ':' + pcode1 + ':' + pcode2);
+
+    pcode1Shape := getpcode(pcode1);
+    pcode2Shape := getpcode(pcode2);
+    pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+    pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+    pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+    pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+
+    pline.beginPcode := pcode1;
+    pline.endPcode := pcode2;
+    pline.direction := 'from1to2';
+    pline.beginPoint := pcode1Pointer;
+    pline.endPoint := pcode2Pointer;
+    linelist.Add(pline);
+
+    pline := TlinePoint.Create(nil);
+    pcode1 := pcode00[j];
+    pcode2 := pcode02[j];
+    pcode1Shape := getpcode(pcode1);
+    pcode2Shape := getpcode(pcode2);
+    pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+    pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+    pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+    pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+
+    pline.beginPcode := pcode1;
+    pline.endPcode := pcode2;
+    pline.direction := 'from1to2';
+    pline.beginPoint := pcode1Pointer;
+    pline.endPoint := pcode2Pointer;
+    linelist.Add(pline);
+
+    pcode1 := pcode01[j];
+    pcode2 := pcode02[j];
+
+    //for i := lineList.Count - 1 downto 0 do
+    //  if (((TlinePoint(lineList.Items[i]).beginPcode = pcode01[j]) and
+    //    (TlinePoint(lineList.Items[i]).endPcode = pcode02[j])) or
+    //     ((TlinePoint(lineList.Items[i]).beginPcode = pcode02[j]) and
+    //      (TlinePoint(lineList.Items[i]).endPcode = pcode01[j])) ) then
+    //       if lineList.Items[i] <> nil then
+    //    begin
+    //      TlinePoint(lineList.Items[i]).Free;
+    //      lineList.Items[i] := nil;
+    //      lineList.Count := lineList.Count - 1;
+    //      application.ProcessMessages;
+    //      break;
+    //    end;
+    templinelist := TFPList.Create();
+    for i := lineList.Count - 1 downto 0 do
+    begin
+      if (((TlinePoint(lineList.Items[i]).beginPcode = pcode1) and
+        (TlinePoint(lineList.Items[i]).endPcode = pcode2)) or
+        ((TlinePoint(lineList.Items[i]).beginPcode = pcode2) and
+        (TlinePoint(lineList.Items[i]).endPcode = pcode1))) then
+        continue;
+      pline := TlinePoint.Create(nil);
+      pline.beginPcode := TlinePoint(lineList.Items[i]).beginPcode;
+      pline.endPcode := TlinePoint(lineList.Items[i]).endPcode;
+      pline.direction := TlinePoint(lineList.Items[i]).direction;
+      pline.beginPoint := TlinePoint(lineList.Items[i]).beginPoint;
+      pline.endPoint := TlinePoint(lineList.Items[i]).endPoint;
+      templinelist.Add(pline);
+    end;
+    application.ProcessMessages;
+    for i := lineList.Count - 1 downto 0 do
+    begin
+      try
+        //if tobject(shapeList.Items[i]) is TlinePoint then
+        if lineList.Items[i] <> nil then
+        begin
+          TlinePoint(lineList.Items[i]).Free;
+          lineList.Items[i] := nil;
+          lineList.Count := lineList.Count - 1;
+          application.ProcessMessages;
+        end;
+      except
+      end;
+      application.ProcessMessages;
+    end;
+    lineList.Clear;
+
+    for i := templinelist.Count - 1 downto 0 do
+    begin
+      pline := TlinePoint.Create(nil);
+      pline.beginPcode := TlinePoint(templinelist.Items[i]).beginPcode;
+      pline.endPcode := TlinePoint(templinelist.Items[i]).endPcode;
+      pline.direction := TlinePoint(templinelist.Items[i]).direction;
+      pline.beginPoint := TlinePoint(templinelist.Items[i]).beginPoint;
+      pline.endPoint := TlinePoint(templinelist.Items[i]).endPoint;
+      linelist.Add(pline);
+    end;
+    path := '';
+    oneline := '';
+    onelinelength := 0.0;
+    alllinelong := 0.0;
+    application.ProcessMessages;
+    oneline := '第' + IntToStr(iii + 1) + '层围城线围墙：点数:' +
+      IntToStr(templinelist.Count);
+    oneline := oneline + '==' + TlinePoint(templinelist.Items[0]).beginPcode;
+    memo_seaLine.Lines.Add(oneline);
+
+    oneline := '';
+    //if (iii>(cc-2))  then
+    ii := -1;
+    pathAlready := ',0,';
+    while ii <> 0 do
+    begin
+      if ii = -1 then ii := 0;
+      pline := TlinePoint(templinelist.Items[ii]);
+      pline.beginPcode := TlinePoint(templinelist.Items[ii]).beginPcode;
+      pline.endPcode := TlinePoint(templinelist.Items[ii]).endPcode;
+      onelinelength := sqrt((pline.beginPoint.x - pline.endPoint.x) *
+        (pline.beginPoint.x - pline.endPoint.x) +
+        (pline.beginPoint.y - pline.endPoint.y) *
+        (pline.beginPoint.y - pline.endPoint.y));
+      //if (iii > (cc - 2)) then
+      if (templinelist.Count > (citycount - 2)) then
+        oneline := oneline + pline.beginPcode + '-->' + pline.endPcode +
+          ':==' + floattostr(onelinelength) + #13#10;
+      alllinelong := alllinelong + onelinelength;
+      if pos('-->' + pline.beginPcode + '-->', path) <= 0 then
+        path := path + pline.beginPcode + '-->';
+      if pos('-->' + pline.endPcode + '-->', path) <= 0 then
+        path := path + pline.endPcode + '-->';
+      for i := templinelist.Count - 1 downto 0 do
+      begin
+        if pos(',' + IntToStr(i) + ',', pathAlready) > 0 then
+          continue;
+        ppline := TlinePoint(templinelist.Items[i]);
+        ppline.beginPcode := TlinePoint(templinelist.Items[i]).beginPcode;
+        ppline.endPcode := TlinePoint(templinelist.Items[i]).endPcode;
+        if ((ppline.beginPcode = pline.endPcode) and
+          (ppline.endPcode <> pline.beginPcode)) then
+          break;
+        if ((ppline.endPcode = pline.endPcode) and
+          (ppline.beginPcode <> pline.beginPcode)) then
+          break;
+        if ((ppline.beginPcode = pline.beginPcode) and
+          (ppline.endPcode <> pline.endPcode)) then
+          break;
+        if ((ppline.endPcode = pline.beginPcode) and
+          (ppline.beginPcode <> pline.endPcode)) then
+          break;
+      end;
+      pathAlready := pathAlready + IntToStr(i) + ',';
+      ii := i;
+
+    end;
+
+    //  if (iii > (cc - 2)) then
+    if (templinelist.Count > (citycount - 2)) then
+    begin
+      memo_seaLine.Lines.Add(path);
+    end;
+    memo_seaLine.Lines.Add('路径总长：' + floattostr(alllinelong));
+
+    //if (iii > (cc - 2)) then
+    if (templinelist.Count > (citycount - 2)) then
+      memo_seaLine.Lines.Add(oneline);
+    //if (iii > (cc - 2)) then
+    if (templinelist.Count > (citycount - 2)) then
+      memo_seaLine.Lines.Add('=======================');
+
+    for i := templinelist.Count - 1 downto 0 do
+    begin
+      try
+        //if tobject(shapeList.Items[i]) is TlinePoint then
+        if templinelist.Items[i] <> nil then
+        begin
+          TlinePoint(templinelist.Items[i]).Free;
+          templinelist.Items[i] := nil;
+          templinelist.Count := templinelist.Count - 1;
+          application.ProcessMessages;
+        end;
+      except
+      end;
+      application.ProcessMessages;
+    end;
+    templinelist.Clear;
+    templinelist.Free;
+
+  end;
+
+  ///////////////////////////////////////////////////////////////////
+  ////非TLine控件，所以canvas.drawline在超出屏幕坐标产生滚动条时，就难看到了
+  refreshFromLineList(nil);
+end;
+
+
+
+procedure TMain.btn_seaLineLineClick(Sender: TObject); //layer storey  floor
+var
+  i, j, k, jj, jjj, iii, ii: integer;      //memo_seaLine
+  minx0, miny0, maxx0, maxy0: integer;//TPoint;
+  //curp, curp0: integer;
+  pline, ppline: TlinePoint;
+  //pcode1, pcode2: string;
+  //pcode1Shape, pcode2Shape: tshape;
+  //pcode1Pointer, pcode2Pointer: tpoint;
+  //pcode00: array of string;
+  //pcode01: array of string;
+  //pcode02: array of string;
+  minH, curminH, onelong, alllong: double;
+  cc: integer;
+  ss: string;
+  //ab, ac, bc, H, Sabc, minHH, minHHH, pp: real;
+  //p, t, aaa, bbb, ccc, pp1, pp2: tpoint;
+  //path, pathAlready: string;
+  //p1, p2, p11, p22, oneline: string;
+  //onelinelength, alllinelong: double;
+  tempLineList: TFPList;//TPointerList;//TList;   // TlinePoint
+  storeyLineList: array of TStringList;//TPointerList;//TList;   // TlinePoint
+
+  function PPLong(a, b: Tpoint): double;
+  begin
+    Result := 0.0;
+    Result := sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+  end;
+
+  function wlog(w: string): integer;
+  begin
+    Result := 1;
+    cc := citycount;
+    //cc:=9;
+    //cc:=9;
+    if (iii > (cc - 2)) then
+      //if (iii>(7)) then
+      memo_seaLine.Lines.Add(w);
+  end;
+
+  function sealineLayer(minx, miny, maxx, maxy: integer): integer;
+  var
+    i, j, curTOPstorey: integer;      //memo_seaLine
+    curp, curp0, tempnextp: integer;//TPoint;
+    pline: TlinePoint;
+    pcode1, pcode2: string;
+    pcode1Shape, pcode2Shape: tshape;
+    pcode1Pointer, pcode2Pointer: tpoint;
+    path: string;
+    //tempLineList: TFPList;/
+    // minx, miny, maxx, maxy: integer;
+  begin
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+        break;
+    minx := i;//TPoint(PointList[0]);
+    miny := minx;
+    maxx := minx;
+    maxy := minx;
+    for i := 0 to PointList.Count - 1 do
+      // PointList: TFPList;//TPointerList;//TList;  //TPointline
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        // ss:= TPointLine(PointList[i]).pcode;
+        if TPointLine(PointList[i]).pcode = 'P9' then
+          application.ProcessMessages;
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[minx]).px) then
+          minx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[miny]).py) then
+          miny := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx]).px) then
+          maxx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy]).py) then
+          maxy := i;//  TPoint(PointList[i]);
+      end;
+    memo_seaLine.Lines.Add('第' + IntToStr(length(storeyLineList) + 1) +
+      '层围城线围墙：');
+    memo_seaLine.Lines.Add('minx=' + pcodes[minx]);
+    memo_seaLine.Lines.Add('miny=' + pcodes[miny]);
+    memo_seaLine.Lines.Add('maxx=' + pcodes[maxx]);
+    memo_seaLine.Lines.Add('maxy=' + pcodes[maxy]);
+    application.ProcessMessages;
+    //tempLineList:=TFPList.Create;//TPointerList;//TList;   // TlinePoint
+    curTOPstorey := length(storeyLineList);
+    setlength(storeyLineList, curTOPstorey + 1);
+    storeyLineList[curTOPstorey] := TStringList.Create;
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := minx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do
+    begin
+      //if curp<>-1 then
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[miny]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            //curp := i;
+            continue;
+          end;
+
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+
+            end;
+          end
+          else
+            curp := i;
+
+        end;
+
+      if curp0 <> curp then
+      begin
+        if pos('-->' + pcodes[curp0] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp0] + '-->';
+        if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp] + '-->';
+        pline := TlinePoint.Create(nil);
+        pcode1 := pcodes[curp0];
+        pcode2 := pcodes[curp];
+        pcode1Shape := getpcode(pcode1);
+        pcode2Shape := getpcode(pcode2);
+        pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+        pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+        pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+        pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+        //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+        if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+        begin
+          ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+          ScrollBox1.Canvas.pen.Width := 4;
+        end
+        else
+        begin
+          ScrollBox1.Canvas.pen.color := clgrayText;
+          ScrollBox1.Canvas.pen.Width := 2;
+        end;
+
+
+        self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+        pline.beginPcode := pcode1;
+        pline.endPcode := pcode2;
+        pline.beginPoint := pcode1Pointer;
+        pline.endPoint := pcode2Pointer;
+        pline.floor := curTOPstorey;
+        LineList.Add(pline);
+        //storeyLineList.Add(pline);
+        if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.beginPcode);
+        if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.endPcode);
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+        //TlinePoint(linelist[i]).floor:=length(storeyLineList) + 1;
+      end;
+    end;
+    if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[curp] + '-->';
+    if pos('-->' + pcodes[miny] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[miny] + '-->';
+    if miny <> curp then
+    begin
+      pline := TlinePoint.Create(nil);
+      pcode1 := pcodes[curp];
+      pcode2 := pcodes[miny];
+      pcode1Shape := getpcode(pcode1);
+      pcode2Shape := getpcode(pcode2);
+      pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+      pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+      pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+      pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+      //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+      if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+      begin
+        ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+        ScrollBox1.Canvas.pen.Width := 4;
+      end
+      else
+      begin
+        ScrollBox1.Canvas.pen.color := clgrayText;
+        ScrollBox1.Canvas.pen.Width := 2;
+      end;
+
+
+      self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+      pline.beginPcode := pcode1;
+      pline.endPcode := pcode2;
+      pline.beginPoint := pcode1Pointer;
+      pline.endPoint := pcode2Pointer;
+      pline.floor := curTOPstorey;
+      linelist.Add(pline);
+      if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.beginPcode);
+      if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.endPcode);
+    end;
+    TPointLine(pointlist[miny]).floor := curTOPstorey;
+    memo_seaLine.Lines.Add('1:' + path);
+    application.ProcessMessages;
+    ///////////////////////////////////////////////////////////////////
+
+    application.ProcessMessages;
+    curp := miny;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do
+    begin
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[maxx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+            continue;
+
+
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+
+            end;
+          end
+          else
+            curp := i;
+
+        end;
+      if curp0 <> curp then
+      begin
+        if pos('-->' + pcodes[curp0] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp0] + '-->';
+        if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp] + '-->';
+        pline := TlinePoint.Create(nil);
+        pcode1 := pcodes[curp0];
+        pcode2 := pcodes[curp];
+        pcode1Shape := getpcode(pcode1);
+        pcode2Shape := getpcode(pcode2);
+        pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+        pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+        pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+        pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+        //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+        if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+        begin
+          ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+          ScrollBox1.Canvas.pen.Width := 4;
+        end
+        else
+        begin
+          ScrollBox1.Canvas.pen.color := clgrayText;
+          ScrollBox1.Canvas.pen.Width := 2;
+        end;
+
+
+        self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+        pline.beginPcode := pcode1;
+        pline.endPcode := pcode2;
+        pline.beginPoint := pcode1Pointer;
+        pline.endPoint := pcode2Pointer;
+        pline.floor := curTOPstorey;
+        linelist.Add(pline);
+        if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.beginPcode);
+        if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.endPcode);
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+
+    end;
+    if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[curp] + '-->';
+    if pos('-->' + pcodes[maxx] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[maxx] + '-->';
+    if maxx <> curp then
+    begin
+      pline := TlinePoint.Create(nil);
+      pcode1 := pcodes[curp];
+      pcode2 := pcodes[maxx];
+      pcode1Shape := getpcode(pcode1);
+      pcode2Shape := getpcode(pcode2);
+      pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+      pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+      pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+      pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+      //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+      if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+      begin
+        ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+        ScrollBox1.Canvas.pen.Width := 4;
+      end
+      else
+      begin
+        ScrollBox1.Canvas.pen.color := clgrayText;
+        ScrollBox1.Canvas.pen.Width := 2;
+      end;
+
+
+      self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+      pline.beginPcode := pcode1;
+      pline.endPcode := pcode2;
+      pline.beginPoint := pcode1Pointer;
+      pline.endPoint := pcode2Pointer;
+      pline.floor := curTOPstorey;
+      linelist.Add(pline);
+      if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.beginPcode);
+      if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.endPcode);
+
+    end;
+    TPointLine(pointlist[maxx]).floor := curTOPstorey;
+    //path := path + '-->' + pcode2;
+    memo_seaLine.Lines.Add('2:' + path);
+    application.ProcessMessages;
+    ////////////////////////////////////////////////////////////////////
+    application.ProcessMessages;
+    curp := maxx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do
+    begin
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := PointList.Count - 1 downto 0 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[maxy]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+            continue;
+
+
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+
+            end;
+          end
+          else
+            curp := i;
+
+        end;
+      if curp0 <> curp then
+      begin
+        if pos('-->' + pcodes[curp0] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp0] + '-->';
+        if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp] + '-->';
+        pline := TlinePoint.Create(nil);
+        pcode1 := pcodes[curp0];
+        pcode2 := pcodes[curp];
+        pcode1Shape := getpcode(pcode1);
+        pcode2Shape := getpcode(pcode2);
+        pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+        pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+        pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+        pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+        //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+        if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+        begin
+          ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+          ScrollBox1.Canvas.pen.Width := 4;
+        end
+        else
+        begin
+          ScrollBox1.Canvas.pen.color := clgrayText;
+          ScrollBox1.Canvas.pen.Width := 2;
+        end;
+
+
+        self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+        pline.beginPcode := pcode1;
+        pline.endPcode := pcode2;
+        pline.beginPoint := pcode1Pointer;
+        pline.endPoint := pcode2Pointer;
+        pline.floor := curTOPstorey;
+        linelist.Add(pline);
+        if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.beginPcode);
+        if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.endPcode);
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+
+    end;
+    if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[curp] + '-->';
+    if pos('-->' + pcodes[maxy] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[maxy] + '-->';
+    if maxy <> curp then
+    begin
+      pline := TlinePoint.Create(nil);
+      pcode1 := pcodes[curp];
+      pcode2 := pcodes[maxy];
+      pcode1Shape := getpcode(pcode1);
+      pcode2Shape := getpcode(pcode2);
+      pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+      pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+      pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+      pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+      //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+      if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+      begin
+        ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+        ScrollBox1.Canvas.pen.Width := 4;
+      end
+      else
+      begin
+        ScrollBox1.Canvas.pen.color := clgrayText;
+        ScrollBox1.Canvas.pen.Width := 2;
+      end;
+
+
+      self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+      pline.beginPcode := pcode1;
+      pline.endPcode := pcode2;
+      pline.beginPoint := pcode1Pointer;
+      pline.endPoint := pcode2Pointer;
+      pline.floor := curTOPstorey;
+      linelist.Add(pline);
+      if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.beginPcode);
+      if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.endPcode);
+
+    end;
+    TPointLine(pointlist[maxy]).floor := curTOPstorey;
+    //path := path + '-->' + pcode2;
+    memo_seaLine.Lines.Add('3:' + path);
+    application.ProcessMessages;
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := maxy;
+    curp0 := -1;
+    path := '';
+    // tempnextp := -1;
+    while curp0 <> curp do
+    begin
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := PointList.Count - 1 downto 0 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          //memo_seaLine.Lines.Add('i:'+TPointLine(PointList[i]).pcode);
+          // memo_seaLine.Lines.Add('curp:'+TPointLine(PointList[curp]).pcode);
+          //memo_seaLine.Lines.Add('minx:'+TPointLine(PointList[minx]).pcode);
+          if TPointLine(PointList[i]).pcode = 'P9' then
+            application.ProcessMessages;
+
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[minx]).py) then
+            continue;
+
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[minx]).py) then
+            continue;
+
+
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+
+          if (curp0 <> curp) then
+          begin
+
+            //memo_seaLine.Lines.Add('curp0 <> curp   i:' + TPointLine(
+            //  PointList[i]).pcode + '-->' + TPointLine(PointList[curp0]).pcode);
+            //memo_seaLine.Lines.Add('curp0 <> curp   curp:' +
+            //  TPointLine(PointList[curp]).pcode + '-->' + TPointLine(PointList[curp0]).pcode);
+
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+              //showmessage(TPointLine(PointList[curp]).pcode+'-->'+TPointLine(PointList[curp0]).pcode);
+              // memo_seaLine.Lines.Add(TPointLine(PointList[curp]).pcode+'-->'+TPointLine(PointList[curp0]).pcode);
+              // memo_seaLine.Lines.Add('curp0 <> curp    curp := i;');
+              if TPointLine(PointList[i]).pcode = 'P9' then
+                application.ProcessMessages;
+            end;
+          end
+          else
+          begin
+            curp := i;
+            // tempnext:=i;
+
+
+            //memo_seaLine.Lines.Add('curp0 =curp  curp := i;');
+          end;
+
+        end;
+      if curp0 <> curp then
+      begin
+        if pos('-->' + pcodes[curp0] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp0] + '-->';
+        if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+          path := path + '-->' + pcodes[curp] + '-->';
+        pline := TlinePoint.Create(nil);
+        pcode1 := pcodes[curp0];
+        pcode2 := pcodes[curp];
+        pcode1Shape := getpcode(pcode1);
+        pcode2Shape := getpcode(pcode2);
+        pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+        pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+        pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+        pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+        //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+        if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+        begin
+          ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+          ScrollBox1.Canvas.pen.Width := 4;
+        end
+        else
+        begin
+          ScrollBox1.Canvas.pen.color := clgrayText;
+          ScrollBox1.Canvas.pen.Width := 2;
+        end;
+
+
+        self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+        pline.beginPcode := pcode1;
+        pline.endPcode := pcode2;
+        pline.beginPoint := pcode1Pointer;
+        pline.endPoint := pcode2Pointer;
+        pline.floor := curTOPstorey;
+        linelist.Add(pline);
+        if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.beginPcode);
+        if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+          storeyLineList[curTOPstorey].add(pline.endPcode);
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+        if TPointLine(PointList[curp]).pcode = 'P9' then
+          application.ProcessMessages;
+      end;
+
+    end;
+    if pos('-->' + pcodes[curp] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[curp] + '-->';
+    if pos('-->' + pcodes[minx] + '-->', path) <= 0 then
+      path := path + '-->' + pcodes[minx] + '-->';
+    if minx <> curp then
+    begin
+      pline := TlinePoint.Create(nil);
+      pcode1 := pcodes[curp];
+      pcode2 := pcodes[minx];
+      pcode1Shape := getpcode(pcode1);
+      pcode2Shape := getpcode(pcode2);
+      pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+      pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+      pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+      pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+      //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+      if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+      begin
+        ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+        ScrollBox1.Canvas.pen.Width := 4;
+      end
+      else
+      begin
+        ScrollBox1.Canvas.pen.color := clgrayText;
+        ScrollBox1.Canvas.pen.Width := 2;
+      end;
+
+
+      self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+
+      pline.beginPcode := pcode1;
+      pline.endPcode := pcode2;
+      pline.beginPoint := pcode1Pointer;
+      pline.endPoint := pcode2Pointer;
+      pline.floor := curTOPstorey;
+      linelist.Add(pline);
+      if storeyLineList[curTOPstorey].IndexOf(pline.beginPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.beginPcode);
+      if storeyLineList[curTOPstorey].IndexOf(pline.endPcode) <= 0 then
+        storeyLineList[curTOPstorey].add(pline.endPcode);
+
+    end;
+    TPointLine(pointlist[minx]).floor := curTOPstorey;
+    //path := path + '-->' + pcode2;
+    memo_seaLine.Lines.Add('4:' + path);
+    application.ProcessMessages;
+    //////////////////////////////////////
+    TPointLine(pointlist[miny]).floor := curTOPstorey;
+    TPointLine(pointlist[maxx]).floor := curTOPstorey;
+    TPointLine(pointlist[maxy]).floor := curTOPstorey;
+    TPointLine(pointlist[minx]).floor := curTOPstorey;
+    //for j := 0 to linelist.Count - 1 do
+    //begin
+    //  if  storeyLineList[i].IndexOf(TlinePoint(linelist[j]).beginPcode)<=0 then
+    //  storeyLineList[i].add(TlinePoint(linelist[j]).beginPcode);
+    //  if  storeyLineList[i].IndexOf(TlinePoint(linelist[j]).endPcode)<=0 then
+    //  storeyLineList[i].add(TlinePoint(linelist[j]).endPcode);
+    //end;
+
+    ///////////////////////////////////////////////////////////////////
+    //refreshFromLineList(nil);
+  end;
+
+begin
+  memo_seaLine.Lines.Clear;
+  pcodeAndPointLineListFromSQL;
+  for i := 1 to PointList.Count - 1 do
+    TPointLine(PointList[i]).floor := -1;
+  for i := 1 to lineList.Count - 1 do
+    TLinePoint(lineList[i]).floor := -1;
+  minx0 := 0;//TPoint(PointList[0]);
+  miny0 := minx0;
+  maxx0 := minx0;
+  maxy0 := minx0;
+  for i := 1 to PointList.Count - 1 do
+    // PointList: TFPList;//TPointerList;//TList;  //TPointline
+
+  begin
+    if (TPointLine(PointList[i]).px < TPointLine(PointList[minx0]).px) then
+      minx0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py < TPointLine(PointList[miny0]).py) then
+      miny0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx0]).px) then
+      maxx0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy0]).py) then
+      maxy0 := i;//  TPoint(PointList[i]);
+  end;
+  memo_seaLine.Lines.Add('minx=' + pcodes[minx0]);
+  memo_seaLine.Lines.Add('miny=' + pcodes[miny0]);
+  memo_seaLine.Lines.Add('maxx=' + pcodes[maxx0]);
+  memo_seaLine.Lines.Add('maxy=' + pcodes[maxy0]);
+  application.ProcessMessages;
+  memo_seaLine.Lines.Add('最外层围城线围墙：');
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      //if tobject(shapeList.Items[i]) is TlinePoint then
+      if lineList.Items[i] <> nil then
+      begin
+        TlinePoint(lineList.Items[i]).Free;
+        lineList.Items[i] := nil;
+        lineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  lineList.Clear;
+  for i := TPsubpPointList.Count - 1 downto 0 do
+  begin
+    try
+      if (TPsubpPointList.Items[i]) <> nil then
+      begin
+        TPsubpPoint(TPsubpPointList.Items[i]).Free;
+        TPsubpPointList.Items[i] := nil;
+        TPsubpPointList.Count := TPsubpPointList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  TPsubpPointList.Clear;
+
+  image1.Refresh;
+  /////////////////////////////////////////////////////////////////
+  sealine000(minx0, miny0, maxx0, maxy0);
+  ////////////////////////////////////////////////
+  setlength(storeyLineList, 1);
+  storeyLineList[0] := TStringList.Create;
+  for i := 0 to linelist.Count - 1 do
+  begin
+    if storeyLineList[0].IndexOf(TlinePoint(linelist[i]).beginPcode) <= 0 then
+      storeyLineList[0].add(TlinePoint(linelist[i]).beginPcode);
+    if storeyLineList[0].IndexOf(TlinePoint(linelist[i]).endPcode) <= 0 then
+      storeyLineList[0].add(TlinePoint(linelist[i]).endPcode);
+    TlinePoint(linelist[i]).floor := 0;
+    // TPointLine(pointlist[getPcodeIndex(TlinePoint(linelist[i]).beginPcode)]).floor := 0 ;
+    // TPointLine(pointlist[getPcodeIndex(TlinePoint(linelist[i]).endPcode)]).floor := 0 ;
+  end;
+
+  ss := storeyLineList[0].Text;
+  //for i := 0 to pointlist.Count - 1 do
+  //begin
+  //  if  TPointLine(pointlist[i]).Pcode='P3' then
+  //  application.ProcessMessages;
+  //  ss:= TPointLine(pointlist[i]).Pcode ;
+  //  j:= TPointLine(pointlist[i]).floor;
+  //  application.ProcessMessages;
+  ////  if storeyLineList[0].IndexOf(TPointLine(pointlist[i]).Pcode) <= 0 then
+  // //   TPointLine(pointlist[i]).floor := 0
+  // // else
+  //  //  TPointLine(pointlist[i]).floor := -1;
+  //end;
+  for i := 0 to storeyLineList[0].Count - 1 do
+  begin
+    ss := (storeyLineList[0][i]);
+    if ss = 'P1' then
+      application.ProcessMessages;
+    j := getPcodeIndex(ss);
+    TPointLine(pointlist[j]).floor := 0;
+    // ss := TlinePoint(storeyLineList[0][i]).endPcode;
+    // j := getPcodeIndex(ss);
+    // TPointLine(pointlist[j]).floor := 0;
+  end;
+  TPointLine(pointlist[miny0]).floor := 0;
+  TPointLine(pointlist[maxx0]).floor := 0;
+  TPointLine(pointlist[maxy0]).floor := 0;
+  TPointLine(pointlist[minx0]).floor := 0;
+  /////////////////////////
+  i := 2;
+  while i > 1 do
+  begin
+    i := 0;
+    for j := 0 to pointlist.Count - 1 do
+      if TPointLine(pointlist[j]).floor = -1 then
+        I := i + 1;
+
+    if i > 1 then
+      seaLineLayer(0, 0, 0, 0);
+
+  end;
+  ////////////////////////
+  // for j := low(storeyLineList) to high(storeyLineList) do
+  //   storeyLineList[j].Free;
+
+
+  for i := 0 to length(storeyLineList) - 2 do
+  begin
+    minH := 10000000;
+    ii := -1;
+    iii := -1;
+
+    for j := 0 to pointList.Count - 1 do
+    begin
+      jjj := -1;
+      for k := 0 to LineList.Count - 1 do
+        if (TlinePoint(linelist[j]).floor = (i + 1)) then   //      j in   high
+          if (TlinePoint(linelist[k]).floor = (i)) then     //      k  out lower
+          begin
+            curminH := (PPLong(TlinePoint(linelist[j]).beginPoint,
+              TlinePoint(linelist[k]).beginPoint) + PPLong(
+              TlinePoint(linelist[j]).beginPoint,
+              TlinePoint(linelist[k]).endPoint) - PPLong(
+              TlinePoint(linelist[k]).beginPoint, TlinePoint(linelist[k]).endPoint));
+            if curminH < minH then
+            begin
+              minH := curminH;
+              ii := j;    //ii  j    in   high
+              iii := k;   //iii   k  out  lower
+              jjj := 1;
+            end;
+
+          end;
+      /////////////////////////////////////////
+      if jjj = 1 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(linelist[ii]).beginPcode;
+        pline.endPcode := TlinePoint(linelist[iii]).beginPcode;
+        pline.beginPoint := TlinePoint(linelist[ii]).beginPoint;
+        pline.endPoint := TlinePoint(linelist[iii]).beginPoint;
+        // pline.floor := curTOPstorey;
+        linelist.Add(pline);
+        //   memo_seaLine.Lines.Add('storye=' + IntToStr(jjj) + ':' + 'L' +
+        //    IntToStr(ii) + 'L' + IntToStr(iii) + ':' + pline.beginPcode + pline.endPcode);
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(linelist[iii]).endPcode;
+        pline.endPcode := TlinePoint(linelist[ii]).beginPcode;
+        pline.beginPoint := TlinePoint(linelist[iii]).endPoint;
+        pline.endPoint := TlinePoint(linelist[ii]).beginPoint;
+        // pline.floor := curTOPstorey;
+        linelist.Add(pline);
+        // memo_seaLine.Lines.Add('storye=' + IntToStr(jjj) + ':' + 'L' +
+        //   IntToStr(ii) + 'L' + IntToStr(iii) + ':' + pline.beginPcode + pline.endPcode);
+        //TlinePoint(linelist[ii]).Free;
+        //TlinePoint(linelist[iii]).Free;
+        memo_seaLine.Lines.Add(TlinePoint(linelist[ii]).beginPcode +
+          TlinePoint(linelist[ii]).endPcode + '$$' +
+          TlinePoint(linelist[iii]).beginPcode + TlinePoint(linelist[iii]).endPcode);
+        TlinePoint(linelist[ii]).floor := -111;
+        TlinePoint(linelist[iii]).floor := -111;
+      end;
+
+
+      if jjj = 2 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(linelist[ii]).beginPcode;
+        pline.endPcode := TlinePoint(linelist[iii]).endPcode;
+        pline.beginPoint := TlinePoint(linelist[ii]).beginPoint;
+        pline.endPoint := TlinePoint(linelist[iii]).endPoint;
+        // pline.floor := curTOPstorey;
+        linelist.Add(pline);
+        //   memo_seaLine.Lines.Add('storye=' + IntToStr(jjj) + ':' + 'L' +
+        //     IntToStr(ii) + 'L' + IntToStr(iii) + ':' + pline.beginPcode + pline.endPcode);
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(linelist[ii]).endPcode;
+        pline.endPcode := TlinePoint(linelist[iii]).beginPcode;
+        pline.beginPoint := TlinePoint(linelist[ii]).endPoint;
+        pline.endPoint := TlinePoint(linelist[iii]).beginPoint;
+        // pline.floor := curTOPstorey;
+        linelist.Add(pline);
+        //  memo_seaLine.Lines.Add('storye=' + IntToStr(jjj) + ':' + 'L' +
+        //    IntToStr(ii) + 'L' + IntToStr(iii) + ':' + pline.beginPcode + pline.endPcode);
+        memo_seaLine.Lines.Add(TlinePoint(linelist[ii]).beginPcode +
+          TlinePoint(linelist[ii]).endPcode + '$$' +
+          TlinePoint(linelist[iii]).beginPcode + TlinePoint(linelist[iii]).endPcode);
+
+        //          TlinePoint(linelist[ii]).Free;
+        //      TlinePoint(linelist[iii]).Free;
+        TlinePoint(linelist[ii]).floor := -111;
+        TlinePoint(linelist[iii]).floor := -111;
+      end;
+
+    end;
+    ///////////////////////////////////////////
+  end;
+  tempLineList := TFPList.Create;
+
+
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      if TlinePoint(linelist[i]).floor <> -111 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(linelist[i]).beginPcode;
+        pline.endPcode := TlinePoint(linelist[i]).endPcode;
+        pline.beginPoint := TlinePoint(linelist[i]).beginPoint;
+        pline.endPoint := TlinePoint(linelist[i]).endPoint;
+        // pline.floor := curTOPstorey;
+        tempLineList.Add(pline);
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+
+
+
+
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(linelist[i]).floor<>-111 then
+      if lineList.Items[i] <> nil then
+      begin
+        TlinePoint(lineList.Items[i]).Free;
+        lineList.Items[i] := nil;
+        lineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  lineList.Clear;
+  for i := tempLineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(tempLineList[i]).floor<>-111 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(tempLineList[i]).beginPcode;
+        pline.endPcode := TlinePoint(tempLineList[i]).endPcode;
+        pline.beginPoint := TlinePoint(tempLineList[i]).beginPoint;
+        pline.endPoint := TlinePoint(tempLineList[i]).endPoint;
+        // pline.floor := curTOPstorey;
+        LineList.Add(pline);
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+
+  for i := tempLineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(linelist[i]).floor<>-111 then
+      if tempLineList.Items[i] <> nil then
+      begin
+        TlinePoint(tempLineList.Items[i]).Free;
+        tempLineList.Items[i] := nil;
+        tempLineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  tempLineList.Clear;
+  tempLineList.Free;
+
+  for i := pointList.Count - 1 downto 0 do
+    TPointLine(pointList[i]).floor := -1;
+  onelong := 0.0;
+  alllong := 0.0;
+  memo_seaLine.Lines.Add('总路径：总点数：' + IntToStr(lineList.Count));
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      onelong := pplong(TlinePoint(linelist[i]).beginPoint, TlinePoint(
+        linelist[i]).endPoint);
+      memo_seaLine.Lines.Add(TlinePoint(linelist[i]).beginPcode +
+        TlinePoint(linelist[i]).endPcode + ':' + floattostr(onelong));
+      alllong := alllong + onelong;
+      TPointLine(pointList[getpcodeindex(TlinePoint(linelist[i]).beginPcode)]).floor
+      := 1;
+      TPointLine(pointList[getpcodeindex(TlinePoint(linelist[i]).endPcode)]).floor := 1;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  memo_seaLine.Lines.Add('总路长：' + floattostr(alllong));
+  ss := '';
+  for i := pointList.Count - 1 downto 0 do
+    if TPointLine(pointList[i]).floor = -1 then
+      ss := ss + TPointLine(pointList[i]).pcode + ',';
+  if ss <> '' then
+    ShowMessage(ss + '这些点没有被处理');
+  //同心圆的中心点暂未处理，因为结果不理想，无兴趣理会
+  refrash.Click;
+end;
+
+function TMain.sealine000(minx, miny, maxx, maxy: integer): integer;
+var
+  i, ijk: integer;      //memo_seaLine
+  curp, curp0: integer;//TPoint;
+  pline: TlinePoint;
+  pcode1, pcode2: string;
+  pcode1Shape, pcode2Shape: tshape;
+  pcode1Pointer, pcode2Pointer: tpoint;
+  path, ss: string;
+  minpx, minpy, maxpx, maxpy: integer;
+  sortlist, floorLine: TStringList;
+  k1, k2, a, b, c, d: double;
+begin
+  sortlist := TStringList.Create;
+  floorLine := TStringList.Create;
+  sortlist.Clear;
+  floorLine.Clear;
+  //////////////////////////////////////四正     子午卯酉
+  //minpx,minpy,maxpx,maxpy:integer;
+  minpx := TPointLine(PointList[minx]).px;
+  minpy := TPointLine(PointList[miny]).py;
+  maxpx := TPointLine(PointList[maxx]).px;
+  maxpy := TPointLine(PointList[maxy]).py;
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+    //for i := PointList.Count - 1 downto 0 do
+  begin
+    //if    TPointLine(PointList[i]).floor<>-123 then
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+      // if  (TPointLine(PointList[i]).py <TPointLine(PointList[minx]).py) then
+    begin
+      //  minx:=i;
+      // TPointLine(PointList[i]).floor:=-123;
+      //sortlist.add(inttostr(TPointLine(PointList[i]).py)+'               '+TPointLine(PointList[i]).pcode);
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  //ss:=sortlist.text;
+  sortlist.sort;
+  //ss:=sortlist.text;
+  //for i := 0 to sortlist.Count - 1 do
+  for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));
+  //四正：酉正，从酉初到酉末
+  ss := floorLine.Text;
+  if sortlist.Count > 0 then
+    minx := StrToInt(trim(rightstr(sortlist[0], 10)));     //酉时末，顶上
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  if sortlist.Count > 0 then
+    miny := StrToInt(trim(rightstr(sortlist[0], 10)));//子时初
+  application.ProcessMessages;
+  curp := minx;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do//八极之四隅之亥，从酉末到子初也
+  begin
+    //if curp<>-1 then
+    application.ProcessMessages;
+    curp0 := curp;
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+          continue;
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[minx]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px <= TPointLine(PointList[minx]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py <= TPointLine(PointList[miny]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[miny]).px) then
+          continue;
+        //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+        // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+        if (i = curp0) then
+          continue;
+        if (i = miny) then
+          continue;
+        if (i = minx) then
+          continue;
+        if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+        begin        //k1,k2,a,b,c,d:double;
+          a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+          b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+          c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+          d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+          //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+          //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+          if ((b = 0) and (d <> 0)) then
+          begin
+            continue;
+          end;
+          if ((b <> 0) and (d = 0)) then
+          begin
+            curp := i;
+          end;
+          if ((b = 0) and (d = 0)) then
+          begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+            if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
+              //这里本可以加等号，也可不要等号
+              curp := i;
+          end;
+          if ((b <> 0) and (d <> 0)) then
+            if ((a * d) = (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+              if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end
+            else if ((a * d) < (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              curp := i;
+            end;
+        end
+        else     //第一次
+          curp := i;
+      end;
+    if curp0 <> curp then    //跳出循环后
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+      TPointLine(PointList[curp0]).floor := 0;
+      TPointLine(PointList[curp]).floor := 0;
+    end;
+  end;
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  // memo_seaLine.Lines.Add('1:' + path);
+  application.ProcessMessages;
+  ///////////////////////////////////////////////////////////////////
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  ss := sortlist.Text;
+  sortlist.sort;
+  for i := 0 to sortlist.Count - 1 do
+    // for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));//四正：子正，从子初到子末
+  // miny := StrToInt(sortlist[0]);
+  // if floorLine.IndexOf(IntToStr(miny)) <= -1 then
+  //   floorLine.add(IntToStr(miny));
+  if sortlist.Count > 0 then
+    miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+  //子时末，右侧
+  ///#####################################
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  ss := sortlist.Text;
+  sortlist.sort;
+  if sortlist.Count > 0 then
+    //maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//卯时初
+    maxx := StrToInt(trim(rightstr(sortlist[0], 10)));//卯时初
+  //////////////////////////////////////
+  application.ProcessMessages;
+  curp := miny;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do //八极之四隅之寅，从子末到卯初
+  begin
+    application.ProcessMessages;
+    curp0 := curp;
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+          continue;
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[maxx]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px >= TPointLine(PointList[maxx]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py <= TPointLine(PointList[miny]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[miny]).px) then
+          continue;
+        //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+        // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+        if (i = curp0) then
+          continue;
+        if (i = miny) then
+          continue;
+        if (i = maxx) then
+          continue;
+        if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+        begin        //k1,k2,a,b,c,d:double;
+          a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+          b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+          c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+          d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+          //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+          //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+          if ((b = 0) and (d <> 0)) then
+          begin
+            continue;
+          end;
+          if ((b <> 0) and (d = 0)) then
+          begin
+            curp := i;
+          end;
+          if ((b = 0) and (d = 0)) then
+          begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+            if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+              //这里本可以加等号，也可不要等号
+              curp := i;
+          end;
+          if ((b <> 0) and (d <> 0)) then
+            if ((a * d) = (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end
+            else if ((a * d) < (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              curp := i;
+            end;
+        end
+        else     //第一次
+          curp := i;
+      end;
+    if curp0 <> curp then    //跳出循环后
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+      TPointLine(PointList[curp0]).floor := 0;
+      TPointLine(PointList[curp]).floor := 0;
+    end;
+  end;
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  //  memo_seaLine.Lines.Add('2:' + path);
+  application.ProcessMessages;
+  ///////////////////////////////////////////////////////////////////
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  ss := sortlist.Text;
+  sortlist.sort;
+  for i := 0 to sortlist.Count - 1 do
+    // for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));//四正：卯正，从卯初到卯末
+  // maxx := StrToInt(sortlist[0]);
+  // if floorLine.IndexOf(IntToStr(maxx)) <= -1 then
+  //   floorLine.add(IntToStr(maxx));
+  if sortlist.Count > 0 then
+    maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+  //卯时末，右底
+
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  ss := sortlist.Text;
+  if sortlist.Count > 0 then
+    maxy := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//午时初
+  ///#####################################
+  //////////////////////////////////////
+  ss := floorLine.Text;
+  application.ProcessMessages;
+  curp := maxx;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do//八极之四隅之巳，从卯末到午初
+  begin
+    application.ProcessMessages;
+    curp0 := curp;
+    //for i := 0 to PointList.Count - 1 do
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+          continue;
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[maxx]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px >= TPointLine(PointList[maxx]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py >= TPointLine(PointList[maxy]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[maxy]).px) then
+          continue;
+        //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+        // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+        if (i = curp0) then
+          continue;
+        if (i = maxy) then
+          continue;
+        if (i = maxx) then
+          continue;
+        if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+        begin        //k1,k2,a,b,c,d:double;
+          a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+          b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+          c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+          d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+          //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+          //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+          if ((b = 0) and (d <> 0)) then
+          begin
+            continue;
+          end;
+          if ((b <> 0) and (d = 0)) then
+          begin
+            curp := i;
+          end;
+          if ((b = 0) and (d = 0)) then
+          begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+            if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+              //这里本可以加等号，也可不要等号
+              curp := i;
+          end;
+          if ((b <> 0) and (d <> 0)) then
+            if ((a * d) = (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end
+            else if ((a * d) < (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              curp := i;
+            end;
+        end
+        else     //第一次
+          curp := i;
+      end;
+    if curp0 <> curp then    //跳出循环后
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+      TPointLine(PointList[curp0]).floor := 0;
+      TPointLine(PointList[curp]).floor := 0;
+    end;
+  end;
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  //memo_seaLine.Lines.Add('3:' + path);
+  application.ProcessMessages;
+  //////////////////////////////////////
+  ///#####################################
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  //for i := 0 to sortlist.Count - 1 do
+  for i := sortlist.Count - 1 downto 0 do
+    floorLine.add(trim(rightstr(sortlist[i], 10)));//四正之午正（含午初）
+  //  maxy := StrToInt(sortlist[0]);
+  // if floorLine.IndexOf(IntToStr(maxy)) <= -1 then
+  //   floorLine.add(IntToStr(maxy));
+  if sortlist.Count > 0 then
+    maxy := StrToInt(trim(rightstr(sortlist[0], 10)));//午末
+  ss := floorLine.Text;
+  application.ProcessMessages;
+  sortlist.Clear;
+  for i := 0 to PointList.Count - 1 do
+  begin
+    if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+    begin
+      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+        '               ' + IntToStr(i));
+      application.ProcessMessages;
+    end;
+  end;
+  sortlist.sort;
+  if sortlist.Count > 0 then
+    minx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//酉之初
+
+  ss := floorLine.Text;
+  application.ProcessMessages;
+  //////////////////////////////////////
+  application.ProcessMessages;
+  curp := maxy;
+  curp0 := -1;
+  path := '';
+  while curp0 <> curp do//午末与酉初之间的四隅之申
+  begin
+    application.ProcessMessages;
+    curp0 := curp;
+    //for i := 0 to PointList.Count - 1 do
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+          continue;
+        if (TPointLine(PointList[i]).py >= TPointLine(PointList[maxy]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[maxy]).px) then
+          continue;
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[minx]).py) then
+          continue;
+        if (TPointLine(PointList[i]).px <= TPointLine(PointList[minx]).px) then
+          continue;
+        //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+        // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+        if (i = curp0) then
+          continue;
+        if (i = minx) then
+          continue;
+        if (i = maxx) then
+          continue;
+        if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+        begin        //k1,k2,a,b,c,d:double;
+          a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+          b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+          c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+          d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+          //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+          //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+          //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+          //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+          if ((b = 0) and (d <> 0)) then
+          begin
+            continue;
+          end;
+          if ((b <> 0) and (d = 0)) then
+          begin
+            curp := i;
+          end;
+          if ((b = 0) and (d = 0)) then
+          begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+            if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+              //这里本可以加等号，也可不要等号
+              curp := i;
+          end;
+          if ((b <> 0) and (d <> 0)) then
+            if ((a * d) = (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end
+            else if ((a * d) < (b * c)) then
+              //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            begin
+              curp := i;
+            end;
+        end
+        else     //第一次
+          curp := i;
+      end;
+    if curp0 <> curp then    //跳出循环后
+    begin
+      if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        floorLine.add(IntToStr(curp0));
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        floorLine.add(IntToStr(curp));
+      TPointLine(PointList[curp0]).floor := 0;
+      TPointLine(PointList[curp]).floor := 0;
+    end;
+  end;
+  if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+    floorLine.add(IntToStr(curp));
+  // memo_seaLine.Lines.Add('4:' + path);
+  application.ProcessMessages;
+  //////////////////////////////////////
+  //sortlist.Clear;
+  //for i := 0 to PointList.Count - 1 do
+  //begin
+  //  if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+  //  begin
+  //    sortlist.add(IntToStr(TPointLine(PointList[i]).py) + '               ' +
+  //      IntToStr(i));
+  //  end;
+  //end;
+  //sortlist.sort;
+  //for i := 0 to sortlist.Count - 1 do
+  //  // for i := sortlist.Count - 1 downto 0 do
+  //  floorLine.add(trim(rightstr(sortlist[i], 10)));
+  // minx := strtoint(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+  //if floorLine.IndexOf(IntToStr(minx)) <= 0 then
+  //  floorLine.add(IntToStr(minx));
+  //###############
+  ss := floorLine.Text;
+  path := '';
+  for i := 0 to floorLine.Count - 1 do
+  begin
+    TPointLine(PointList[StrToInt(floorLine[i mod floorLine.Count])]).floor := 0;
+    pline := TlinePoint.Create(nil);
+    pcode1 := pcodes[StrToInt(floorLine[i mod floorLine.Count])];
+    pcode2 := pcodes[StrToInt(floorLine[(i + 1) mod floorLine.Count])];
+    pcode1Shape := getpcode(pcode1);
+    pcode2Shape := getpcode(pcode2);
+    pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+    pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+    pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+    pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+    //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+    if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+    begin
+      ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+      ScrollBox1.Canvas.pen.Width := 4;
+    end
+    else
+    begin
+      ScrollBox1.Canvas.pen.color := clgrayText;
+      ScrollBox1.Canvas.pen.Width := 2;
+    end;
+    self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+    application.ProcessMessages;
+    pline.beginPcode := pcode1;
+    pline.endPcode := pcode2;
+    pline.beginPoint := pcode1Pointer;
+    pline.endPoint := pcode2Pointer;
+    pline.floor := 0;  ///想不到，后来修改时，少加这句，就难找不易
+    linelist.Add(pline);
+    if pos('-->' + pcode1, path) <= 0 then
+      path := path + '-->' + pcode1;
+    if pos('-->' + pcode2, path) <= 0 then
+      path := path + '-->' + pcode2;
+  end;
+  memo_seaLine.Lines.Add(path);
+
+  sortlist.Free;
+  floorLine.Free;
+  ///////////////////////////////////////////////////////////////////
+  //refreshFromLineList(nil);
+end;
+
+function TMain.ifCross(pcodeA, pcodeB, pcodeC, pcodeD: string): boolean;
+var
+  i: integer;
+  a, b, c, d: tpoint;
+  //sss:tstringlist;
+begin
+  // sss:=tstringlist.Create;
+  for i := 1 to PointList.Count - 1 do
+  begin
+    if TPointLine(PointList[i]).pcode = pcodeA then
+    begin
+      a.x := TPointLine(PointList[i]).px;
+      a.y := TPointLine(PointList[i]).py;
+      //  sss.add( 'a.x=' + inttostr(a.x) + '与' + 'a.y=' + inttostr(a.y));
+    end;
+    if TPointLine(PointList[i]).pcode = pcodeB then
+    begin
+      b.x := TPointLine(PointList[i]).px;
+      b.y := TPointLine(PointList[i]).py;
+      //  sss.add( 'b.x=' + inttostr(b.x) + '与' + 'b.y=' + inttostr(b.y));
+    end;
+    if TPointLine(PointList[i]).pcode = pcodeC then
+    begin
+      c.x := TPointLine(PointList[i]).px;
+      c.y := TPointLine(PointList[i]).py;
+      // sss.add( 'c.x=' + inttostr(c.x) + '与' + 'c.y=' + inttostr(c.y));
+    end;
+    if TPointLine(PointList[i]).pcode = pcodeD then
+    begin
+      d.x := TPointLine(PointList[i]).px;
+      d.y := TPointLine(PointList[i]).py;
+      //sss.add( 'd.x=' + inttostr(d.x) + '与' + 'd.y=' + inttostr(d.y));
+    end;
+
+  end;
+  //InputQueryLiMemo('www', sss.Text, nil);
+  //sss.free;
+  Result := isCross(a, b, c, d);
+end;
+
+function TMain.ifCrosswww(pcodeA, pcodeB, pcodeC, pcodeD: string): boolean;
+var
+  i: integer;
+  a, b, c, d: tpoint;
+  sss: TStringList;
+begin
+  sss := TStringList.Create;
+  for i := 1 to PointList.Count - 1 do
+  begin
+    if TPointLine(PointList[i]).pcode = pcodeA then
+    begin
+      a.x := TPointLine(PointList[i]).px;
+      a.y := TPointLine(PointList[i]).py;
+      sss.add(pcodeA + ':' + 'a.x=' + IntToStr(a.x) + '与' + 'a.y=' + IntToStr(a.y));
+    end;
+    if TPointLine(PointList[i]).pcode = pcodeB then
+    begin
+      b.x := TPointLine(PointList[i]).px;
+      b.y := TPointLine(PointList[i]).py;
+      sss.add(pcodeB + ':' + 'b.x=' + IntToStr(b.x) + '与' + 'b.y=' + IntToStr(b.y));
+    end;
+    if TPointLine(PointList[i]).pcode = pcodeC then
+    begin
+      c.x := TPointLine(PointList[i]).px;
+      c.y := TPointLine(PointList[i]).py;
+      sss.add(pcodeC + ':' + 'c.x=' + IntToStr(c.x) + '与' + 'c.y=' + IntToStr(c.y));
+    end;
+    if TPointLine(PointList[i]).pcode = pcodeD then
+    begin
+      d.x := TPointLine(PointList[i]).px;
+      d.y := TPointLine(PointList[i]).py;
+      sss.add(pcodeD + ':' + 'd.x=' + IntToStr(d.x) + '与' + 'd.y=' + IntToStr(d.y));
+    end;
+
+  end;
+  InputQueryLiMemo('www', sss.Text, nil);
+  sss.Free;
+  Result := isCross(a, b, c, d);
+end;
+
+function TMain.getPcodeIndex(vpcode: string): integer;
+var
+  i: integer;
+begin
+  Result := -1;
+  for i := 0 to pointlist.Count - 1 do
+  begin
+    if tpointline(pointlist[i]).pcode = vpcode then
+    begin
+      Result := i;
+      break;
+    end;
+  end;
+end;
+
+procedure TMain.sleepli(i: integer);
+var
+  ii: integer;
+begin
+  ii := gettickcount64;
+  while ((GetTickCount64 - ii) < i) do
+    application.ProcessMessages;
+  //application.Run;
+  // application.Tag := GetTickCount64 - ii;
+end;
+
+function TMain.fromPcodeGetPoint(spcode: string): tpoint;
+var
+  i: integer;
+begin
+  for i := 0 to PointList.Count - 1 do
+    if TPointLine(PointList[i]).pcode = spcode then
+    begin
+      Result.x := TPointLine(PointList[i]).px;
+      Result.y := TPointLine(PointList[i]).py;
+      break;
+    end;
+
+end;
+
+procedure TMain.btn_sealine_testClick(Sender: TObject);
+var
+  i, j: integer;                                     //  P70-->P31与P54-->P70
+  pline, www: TlinePoint;                            //  P63-->P88与P93-->P88
+  sss: TStringList;                                  //  P49-->P52与P93-->P52
+begin                                                //  P36-->P87与P46-->P87
+  //P20-->P62与P20-->P82
+  if (1 = 2) then                                   // P2-->P47与P9-->P2
+  begin                                             // P42-->P72与P7-->P72
+    //if ifcross('P5','P7','P18','P14') then
+    // if ifcrosswww('P70', 'P31', 'P54', 'P70') then
+    // if ifcross('P70', 'P31', 'P54', 'P70') then
+    if ifcrosswww('P93', 'P52', 'P93', 'P88') then
+      ShowMessage('cross')
+    else
+      ShowMessage('No');
+
+    // ShowMessage(IntToStr(ScrollBox1.HorzScrollBar.Position));
+    // ShowMessage(IntToStr(ScrollBox1.VertScrollBar.Position));
+    //self.ScrollBox1.HorzScrollBar.Position;
+    //self.ScrollBox1.VertScrollBar.Position;
+  end;
+  //if (1=2) then
+  begin
+    sss := TStringList.Create;
+    pline := TlinePoint.Create(nil);
+    www := TlinePoint.Create(nil);
+    for i := 0 to linelist.Count - 2 do
+    begin
+      for j := i + 1 to linelist.Count - 1 do
+      begin
+        pline.beginPcode := TlinePoint(linelist.Items[i]).beginPcode;
+        pline.endPcode := TlinePoint(linelist.Items[i]).endPcode;
+        pline.beginPoint := TlinePoint(linelist.Items[i]).beginPoint;
+        pline.endPoint := TlinePoint(linelist.Items[i]).endPoint;
+        www.beginPcode := TlinePoint(linelist.Items[j]).beginPcode;
+        www.endPcode := TlinePoint(linelist.Items[j]).endPcode;
+        www.beginPoint := TlinePoint(linelist.Items[j]).beginPoint;
+        www.endPoint := TlinePoint(linelist.Items[j]).endPoint;
+        // if iscross(pline.beginPoint, pline.endPoint, www.beginPoint, www.endPoint) then
+        if ifcross(pline.beginPcode, pline.endPcode, www.beginPcode, www.endPcode) then
+        begin
+          sss.add(pline.beginPcode + '-->' + pline.endPcode + '与' +
+            www.beginPcode + '-->' + www.endPcode);
+          sss.add(pline.beginPcode + ':' + 'a.x=' + IntToStr(pline.beginPoint.x) +
+            '与' + 'a.y=' + IntToStr(pline.beginPoint.y) + '与' +
+            pline.endPcode + ':' + 'b.x=' + IntToStr(pline.endPoint.x) +
+            '与' + 'b.y=' + IntToStr(pline.endPoint.y));
+          sss.add(www.beginPcode + ':' + 'c.x=' + IntToStr(www.beginPoint.x) +
+            '与' + 'c.y=' + IntToStr(www.beginPoint.y) + '与' +
+            www.endPcode + ':' + 'd.x=' + IntToStr(www.endPoint.x) +
+            '与' + 'd.y=' + IntToStr(www.endPoint.y));
+        end;
+      end;
+    end;
+    if sss.Count > 0 then
+      InputQueryLiMemo('下面共有' + IntToStr(sss.Count div 3) +
+        '组的两条边相交了:', sss.Text, nil);
+
+    if sss.Count = 0 then
+      ShowMessage('全部边没有相交的');
+
+    sss.Free;
+    pline.Free;
+    www.Free;
+  end;
+end;
+{ //////
+  procedure TMain.btn_seaLineFloorPointClick(Sender: TObject);
+
+
+   function sealineLayer000(minx, miny, maxx, maxy: integer): integer;
+  var
+    i, j, curTOPstorey: integer;      //memo_seaLine
+    curp, curp0, tempnextp: integer;//TPoint;
+    pline: TlinePoint;
+    pcode1, pcode2: string;
+    pcode1Shape, pcode2Shape: tshape;
+    pcode1Pointer, pcode2Pointer: tpoint;
+    path, ss: string;
+    minpx, minpy, maxpx, maxpy: integer;
+    sortlist, floorLine: TStringList;
+  begin
+    sortlist := TStringList.Create;
+    floorLine := TStringList.Create;
+    sortlist.Clear;
+    floorLine.Clear;
+    //////////////////////////////////////     四正     子午卯酉
+    //minpx,minpy,maxpx,maxpy:integer;
+    minpx := TPointLine(PointList[minx]).px;
+    minpy := TPointLine(PointList[miny]).py;
+    maxpx := TPointLine(PointList[maxx]).px;
+    maxpy := TPointLine(PointList[maxy]).py;
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+        break;
+    minx := i;//TPoint(PointList[0]);
+    miny := minx;
+    maxx := minx;
+    maxy := minx;
+    for i := 0 to PointList.Count - 1 do
+      // PointList: TFPList;//TPointerList;//TList;  //TPointline
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        // ss:= TPointLine(PointList[i]).pcode;
+        if TPointLine(PointList[i]).pcode = 'P9' then
+          application.ProcessMessages;
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[minx]).px) then
+          minx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[miny]).py) then
+          miny := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx]).px) then
+          maxx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy]).py) then
+          maxy := i;//  TPoint(PointList[i]);
+      end;
+    memo_seaLine.Lines.Add('第' + IntToStr(length(storeyLineList) + 1) +
+      '层围城线围墙：');
+    memo_seaLine.Lines.Add('minx=' + pcodes[minx]);
+    memo_seaLine.Lines.Add('miny=' + pcodes[miny]);
+    memo_seaLine.Lines.Add('maxx=' + pcodes[maxx]);
+    memo_seaLine.Lines.Add('maxy=' + pcodes[maxy]);
+    application.ProcessMessages;
+    //tempLineList:=TFPList.Create;//TPointerList;//TList;   // TlinePoint
+    curTOPstorey := length(storeyLineList);
+    setlength(storeyLineList, curTOPstorey + 1);
+    storeyLineList[curTOPstorey] := TStringList.Create;
+
+    ////////////////////////////////////// 四正     子午卯酉
+    //minpx,minpy,maxpx,maxpy:integer;
+    minpx := TPointLine(PointList[minx]).px;
+    minpy := TPointLine(PointList[miny]).py;
+    maxpx := TPointLine(PointList[maxx]).px;
+    maxpy := TPointLine(PointList[maxy]).py;
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+      //for i := PointList.Count - 1 downto 0 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+        begin
+          //TPointLine(PointList[i]).floor := curTOPstorey;
+          //sortlist.add(inttostr(TPointLine(PointList[i]).py)+'               '+TPointLine(PointList[i]).pcode);
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    //ss:=sortlist.text;
+    sortlist.sort;
+    //ss:=sortlist.text;
+    //for i := 0 to sortlist.Count - 1 do
+    for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：酉正，从酉初到酉末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    ss := floorLine.Text;
+    if sortlist.Count > 0 then
+      minx := StrToInt(trim(rightstr(sortlist[0], 10)));  //酉时末，顶上
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    if sortlist.Count > 0 then
+      miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//子时初
+    application.ProcessMessages;
+    curp := minx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do    //八极之四隅之亥，从酉末到子初也
+    begin
+      application.ProcessMessages;
+      //if curp<>-1 then
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[miny]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            //curp := i;
+            continue;
+          end;
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+            end;
+          end
+          else
+            curp := i;
+        end;
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+      end;
+    end;
+    if miny <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    //TPointLine(pointlist[miny]).floor := curTOPstorey;
+    //memo_seaLine.Lines.Add('1:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    ///////////////////////////////////////////////////////////////////
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    for i := 0 to sortlist.Count - 1 do
+      // for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：子正，从子初到子末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    ss := sortlist.Text;
+    if sortlist.Count > 0 then
+      miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+    //子时末，右侧
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    if sortlist.Count > 0 then
+      // maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//卯时初
+      maxx := StrToInt(trim(rightstr(sortlist[0], 10)));//卯时初
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := miny;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do     //八极之四隅之寅，从子末到卯初
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[maxx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[curp0]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+
+            end;
+          end
+          else
+            curp := i;
+        end;
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+      end;
+    end;
+    if maxx <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    // memo_seaLine.Lines.Add('2:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    ////////////////////////////////////////////////////////////////////
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    for i := 0 to sortlist.Count - 1 do
+      // for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：卯正，从卯初到卯末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    if sortlist.Count > 0 then
+      maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+    //卯时末，右底
+
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    ss := sortlist.Text;
+    if sortlist.Count > 0 then
+      maxy := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//午时初
+
+    ///#####################################
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    curp := maxx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do//八极之四隅之巳，从卯末到午初
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := PointList.Count - 1 downto 0 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[maxy]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+            end;
+          end
+          else
+            curp := i;
+        end;
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+        ss := floorLine.Text;
+      end;
+    end;
+    if maxy <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    //  memo_seaLine.Lines.Add('3:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    //////////////////////////////////////
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    //for i := 0 to sortlist.Count - 1 do
+    for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));  //四正之午正（含午初）
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    //  maxy := StrToInt(sortlist[0]);
+    // if floorLine.IndexOf(IntToStr(maxy)) <= -1 then
+    //   floorLine.add(IntToStr(maxy));
+    if sortlist.Count > 0 then
+      maxy := StrToInt(trim(rightstr(sortlist[0], 10)));//午末
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    //sortlist.Clear;
+    //for i := 0 to PointList.Count - 1 do
+    //begin
+    //  if TPointLine(PointList[i]).floor = -1 then  //这里又产生BUG，如果为floor = -1，则没有数据，下标-1报错
+    //    if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+    //    begin
+    //      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+    //        '               ' + IntToStr(i));
+    //    end;
+    //end;
+    //sortlist.sort;
+    // minx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//酉之初
+    minx := StrToInt(floorLine[0]);//酉之初
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := maxy;
+    curp0 := -1;
+    path := '';
+    // tempnextp := -1;
+    while curp0 <> curp do//午末与酉初之间的四隅之申
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := PointList.Count - 1 downto 0 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if TPointLine(PointList[i]).pcode = 'P9' then
+            application.ProcessMessages;
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).px = TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[minx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).py = TPointLine(PointList[minx]).py) then
+            continue;
+          if (i = curp0) then
+          begin
+            continue;
+          end;
+          if (curp0 <> curp) then
+          begin
+            if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+              ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+              (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            begin
+              curp := i;
+            end;
+          end
+          else
+          begin
+            curp := i;
+          end;
+        end;
+      if curp0 <> curp then
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(pointlist[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(pointlist[curp]).floor := curTOPstorey;
+        end;
+      end;
+    end;
+    if minx <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    // memo_seaLine.Lines.Add('4:' + path);
+    application.ProcessMessages;
+    //////////////////////////////////////
+    TPointLine(pointlist[miny]).floor := curTOPstorey;
+    TPointLine(pointlist[maxx]).floor := curTOPstorey;
+    TPointLine(pointlist[maxy]).floor := curTOPstorey;
+    TPointLine(pointlist[minx]).floor := curTOPstorey;
+
+    if storeyLineList[curTOPstorey].Count = 0 then
+      //这是仅剩下最后一点圆心的情况
+    begin
+      //ss := TPointLine(pointlist[minx]).Pcode;
+      //storeyLineList[curTOPstorey].add(ss);
+      //storeyLineList[curTOPstorey].add(ss);
+    end;
+
+    //for j := 0 to linelist.Count - 1 do
+    //begin
+    //  if  storeyLineList[i].IndexOf(TlinePoint(linelist[j]).beginPcode)<=0 then
+    //  storeyLineList[i].add(TlinePoint(linelist[j]).beginPcode);
+    //  if  storeyLineList[i].IndexOf(TlinePoint(linelist[j]).endPcode)<=0 then
+    //  storeyLineList[i].add(TlinePoint(linelist[j]).endPcode);
+    //end;
+
+    ///////////////////////////////////////////////////////////////////
+    //refreshFromLineList(nil);
+    ss := floorLine.Text;
+    path := '';
+    for i := 0 to floorLine.Count - 1 do
+    begin
+
+      pline := TlinePoint.Create(nil);
+      pcode1 := pcodes[StrToInt(floorLine[i mod floorLine.Count])];
+      pcode2 := pcodes[StrToInt(floorLine[(i + 1) mod floorLine.Count])];
+      pcode1Shape := getpcode(pcode1);
+      pcode2Shape := getpcode(pcode2);
+      pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+      pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+      pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+      pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+      //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+      if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+      begin
+        ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+        ScrollBox1.Canvas.pen.Width := 4;
+      end
+      else
+      begin
+        ScrollBox1.Canvas.pen.color := clgrayText;
+        ScrollBox1.Canvas.pen.Width := 2;
+      end;
+      self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+      pline.beginPcode := pcode1;
+      pline.endPcode := pcode2;
+      pline.beginPoint := pcode1Pointer;
+      pline.endPoint := pcode2Pointer;
+      pline.floor := curTOPstorey;
+      ///想不到，后来修改时，少加这句，就难找不易
+      linelist.Add(pline);
+      if pos('-->' + pcode1, path) <= 0 then
+        path := path + '-->' + pcode1;
+      if pos('-->' + pcode2, path) <= 0 then
+        path := path + '-->' + pcode2;
+
+      TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).floor :=
+        curTOPstorey;
+      if storeyLineList[curTOPstorey].IndexOf(
+        TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).Pcode) <=
+        -1 then
+        storeyLineList[curTOPstorey].add(
+          TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).Pcode);
+    end;
+    storeyLineList[curTOPstorey].add(
+      TPointLine(pointlist[StrToInt(floorLine[0])]).Pcode);
+    memo_seaLine.Lines.Add(path);
+
+    sortlist.Free;
+    floorLine.Free;
+    ///////////////////////////////////////////////////////////////////
+    //refreshFromLineList(nil);
+  end;
+
+
+ /////}
+
+procedure TMain.btn_seaLineFloorPointClick(Sender: TObject);
+var
+  i, j, k, jj, jjj, ij, ik, lmn: integer;      //memo_seaLine
+  minx0, miny0, maxx0, maxy0: integer;//TPoint;
+  //curp, curp0: integer;
+  pline, ppline: TlinePoint;
+  //pcode1, pcode2: string;
+  //pcode1Shape, pcode2Shape: tshape;
+  //pcode1Pointer, pcode2Pointer: tpoint;
+  //pcode00: array of string;
+  //pcode01: array of string;
+  //pcode02: array of string;
+  minH, curminH, onelong, alllong: double;
+  cc: integer;
+  ss: string;
+  //ab, ac, bc, H, Sabc, minHH, minHHH, pp: real;
+  //p, t, aaa, bbb, ccc, pp1, pp2: tpoint;
+  //path, pathAlready: string;
+  //p1, p2, p11, p22, oneline: string;
+  //onelinelength, alllinelong: double;
+  tempLineList: TFPList;//TPointerList;//TList;   // TlinePoint
+  storeyLineList: array of TStringList;//TPointerList;//TList;   // TlinePoint
+
+  floorSumCurminH: double;
+  floorSumCurminHto: double;
+  floorSumCurminHdownto: double;
+
+//////////////////////////////////////////////////////
+  function PPLong(a, b: Tpoint): double;
+  begin
+    Result := 0.0;
+    Result := sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+  end;
+
+  function wlog(w: string): integer;
+  begin
+    Result := 1;
+    cc := citycount;
+    //cc:=9;
+    //cc:=9;
+    if (ik > (cc - 2)) then
+      //if (iii>(7)) then
+      memo_seaLine.Lines.Add(w);
+  end;
+
+
+  function sealineLayer(minx, miny, maxx, maxy: integer): integer;
+  var
+    i, j, curTOPstorey: integer;      //memo_seaLine
+    curp, curp0, tempnextp: integer;//TPoint;
+    pline: TlinePoint;
+    pcode1, pcode2: string;
+    pcode1Shape, pcode2Shape: tshape;
+    pcode1Pointer, pcode2Pointer: tpoint;
+    path, ss: string;
+    minpx, minpy, maxpx, maxpy: integer;
+    sortlist, floorLine: TStringList;
+    k1, k2, a, b, c, d: double;
+  begin
+    sortlist := TStringList.Create;
+    floorLine := TStringList.Create;
+    sortlist.Clear;
+    floorLine.Clear;
+    //////////////////////////////////////     四正     子午卯酉
+    //minpx,minpy,maxpx,maxpy:integer;
+    minpx := TPointLine(PointList[minx]).px;
+    minpy := TPointLine(PointList[miny]).py;
+    maxpx := TPointLine(PointList[maxx]).px;
+    maxpy := TPointLine(PointList[maxy]).py;
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+      if TPointLine(PointList[i]).floor = -1 then
+        break;
+    minx := i;//TPoint(PointList[0]);
+    miny := minx;
+    maxx := minx;
+    maxy := minx;
+    for i := 0 to PointList.Count - 1 do
+      // PointList: TFPList;//TPointerList;//TList;  //TPointline
+      if TPointLine(PointList[i]).floor = -1 then
+      begin
+        // ss:= TPointLine(PointList[i]).pcode;
+        if TPointLine(PointList[i]).pcode = 'P9' then
+          application.ProcessMessages;
+        if (TPointLine(PointList[i]).px < TPointLine(PointList[minx]).px) then
+          minx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py < TPointLine(PointList[miny]).py) then
+          miny := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx]).px) then
+          maxx := i;//  TPoint(PointList[i]);
+        if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy]).py) then
+          maxy := i;//  TPoint(PointList[i]);
+      end;
+    memo_seaLine.Lines.Add('第' + IntToStr(length(storeyLineList) + 1) +
+      '层围城线围墙：');
+    memo_seaLine.Lines.Add('minx=' + pcodes[minx]);
+    memo_seaLine.Lines.Add('miny=' + pcodes[miny]);
+    memo_seaLine.Lines.Add('maxx=' + pcodes[maxx]);
+    memo_seaLine.Lines.Add('maxy=' + pcodes[maxy]);
+    application.ProcessMessages;
+    //tempLineList:=TFPList.Create;//TPointerList;//TList;   // TlinePoint
+    curTOPstorey := length(storeyLineList);
+    setlength(storeyLineList, curTOPstorey + 1);
+    storeyLineList[curTOPstorey] := TStringList.Create;
+
+    ////////////////////////////////////// 四正     子午卯酉
+    //minpx,minpy,maxpx,maxpy:integer;
+    minpx := TPointLine(PointList[minx]).px;
+    minpy := TPointLine(PointList[miny]).py;
+    maxpx := TPointLine(PointList[maxx]).px;
+    maxpy := TPointLine(PointList[maxy]).py;
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+      //for i := PointList.Count - 1 downto 0 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+        begin
+          //TPointLine(PointList[i]).floor := curTOPstorey;
+          //sortlist.add(inttostr(TPointLine(PointList[i]).py)+'               '+TPointLine(PointList[i]).pcode);
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    //ss:=sortlist.text;
+    sortlist.sort;
+    //ss:=sortlist.text;
+    //for i := 0 to sortlist.Count - 1 do
+    for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：酉正，从酉初到酉末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    ss := floorLine.Text;
+    if sortlist.Count > 0 then
+      minx := StrToInt(trim(rightstr(sortlist[0], 10)));  //酉时末，顶上
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    if sortlist.Count > 0 then
+      //miny := StrToInt(trim(rightstr(sortlist[sortlist.Count-1], 10)));//子时初
+      miny := StrToInt(trim(rightstr(sortlist[0], 10)));//子时初
+    application.ProcessMessages;
+    curp := minx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do//八极之四隅之亥，从酉末到子初也
+    begin
+      //if curp<>-1 then
+      application.ProcessMessages;
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[minx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px <= TPointLine(PointList[minx]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py <= TPointLine(PointList[miny]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[miny]).px) then
+            continue;
+          //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+          // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+          if (i = curp0) then
+            continue;
+          if (i = miny) then
+            continue;
+          if (i = minx) then
+            continue;
+          if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+          begin        //k1,k2,a,b,c,d:double;
+            a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+            b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+            c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+            d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+            //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+            //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            if ((b = 0) and (d <> 0)) then
+            begin
+              continue;
+            end;
+            if ((b <> 0) and (d = 0)) then
+            begin
+              curp := i;
+            end;
+            if ((b = 0) and (d = 0)) then
+            begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+              if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end;
+            if ((b <> 0) and (d <> 0)) then
+              if ((a * d) = (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+                if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
+                  //这里本可以加等号，也可不要等号
+                  curp := i;
+              end
+              else if ((a * d) < (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                curp := i;
+              end;
+          end
+          else     //第一次
+            curp := i;
+        end;
+      if curp0 <> curp then    //跳出循环后
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+          floorLine.add(IntToStr(curp0));
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+          floorLine.add(IntToStr(curp));
+        TPointLine(PointList[curp0]).floor := curTOPstorey;
+        TPointLine(PointList[curp]).floor := curTOPstorey;
+      end;
+    end;
+
+
+    if miny <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    //TPointLine(pointlist[miny]).floor := curTOPstorey;
+    //memo_seaLine.Lines.Add('1:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    ///////////////////////////////////////////////////////////////////
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[miny]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    for i := 0 to sortlist.Count - 1 do
+      // for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：子正，从子初到子末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    ss := sortlist.Text;
+    if sortlist.Count > 0 then
+      miny := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+    //子时末，右侧
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    if sortlist.Count > 0 then
+      // maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//卯时初
+      maxx := StrToInt(trim(rightstr(sortlist[0], 10)));//卯时初
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := miny;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do //八极之四隅之寅，从子末到卯初
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[maxx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px >= TPointLine(PointList[maxx]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py <= TPointLine(PointList[miny]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[miny]).px) then
+            continue;
+          //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+          // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+          if (i = curp0) then
+            continue;
+          if (i = miny) then
+            continue;
+          if (i = maxx) then
+            continue;
+          if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+          begin        //k1,k2,a,b,c,d:double;
+            a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+            b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+            c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+            d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+            //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+            //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            if ((b = 0) and (d <> 0)) then
+            begin
+              continue;
+            end;
+            if ((b <> 0) and (d = 0)) then
+            begin
+              curp := i;
+            end;
+            if ((b = 0) and (d = 0)) then
+            begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end;
+            if ((b <> 0) and (d <> 0)) then
+              if ((a * d) = (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+                if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                  //这里本可以加等号，也可不要等号
+                  curp := i;
+              end
+              else if ((a * d) < (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                curp := i;
+              end;
+          end
+          else     //第一次
+            curp := i;
+        end;
+      if curp0 <> curp then    //跳出循环后
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+          floorLine.add(IntToStr(curp0));
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+          floorLine.add(IntToStr(curp));
+        TPointLine(PointList[curp0]).floor := curTOPstorey;
+        TPointLine(PointList[curp]).floor := curTOPstorey;
+      end;
+    end;
+    if maxx <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    // memo_seaLine.Lines.Add('2:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    ////////////////////////////////////////////////////////////////////
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).px = TPointLine(PointList[maxx]).px) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    for i := 0 to sortlist.Count - 1 do
+      // for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));
+      //四正：卯正，从卯初到卯末
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    if sortlist.Count > 0 then
+      maxx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));
+    //卯时末，右底
+
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    ss := sortlist.Text;
+    if sortlist.Count > 0 then
+      maxy := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//午时初
+
+    ///#####################################
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    curp := maxx;
+    curp0 := -1;
+    path := '';
+    while curp0 <> curp do//八极之四隅之巳，从卯末到午初
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[maxx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px >= TPointLine(PointList[maxx]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py >= TPointLine(PointList[maxy]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px < TPointLine(PointList[maxy]).px) then
+            continue;
+          //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+          // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+          if (i = curp0) then
+            continue;
+          if (i = maxy) then
+            continue;
+          if (i = maxx) then
+            continue;
+          if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+          begin        //k1,k2,a,b,c,d:double;
+            a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+            b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+            c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+            d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+            //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+            //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            if ((b = 0) and (d <> 0)) then
+            begin
+              continue;
+            end;
+            if ((b <> 0) and (d = 0)) then
+            begin
+              curp := i;
+            end;
+            if ((b = 0) and (d = 0)) then
+            begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end;
+            if ((b <> 0) and (d <> 0)) then
+              if ((a * d) = (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+                if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                  //这里本可以加等号，也可不要等号
+                  curp := i;
+              end
+              else if ((a * d) < (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                curp := i;
+              end;
+          end
+          else     //第一次
+            curp := i;
+        end;
+      if curp0 <> curp then    //跳出循环后
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+          floorLine.add(IntToStr(curp0));
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+          floorLine.add(IntToStr(curp));
+        TPointLine(PointList[curp0]).floor := curTOPstorey;
+        TPointLine(PointList[curp]).floor := curTOPstorey;
+      end;
+    end;
+    if maxy <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    //  memo_seaLine.Lines.Add('3:' + path);
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    //////////////////////////////////////
+    ///#####################################
+    sortlist.Clear;
+    for i := 0 to PointList.Count - 1 do
+    begin
+      if TPointLine(PointList[i]).floor = -1 then
+        if (TPointLine(PointList[i]).py = TPointLine(PointList[maxy]).py) then
+        begin
+          sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).px),
+            10) + '               ' + IntToStr(i));
+        end;
+    end;
+    sortlist.sort;
+    //for i := 0 to sortlist.Count - 1 do
+    for i := sortlist.Count - 1 downto 0 do
+    begin
+      floorLine.add(trim(rightstr(sortlist[i], 10)));  //四正之午正（含午初）
+      TPointLine(PointList[StrToInt(trim(rightstr(sortlist[i], 10)))]).floor :=
+        curTOPstorey;
+    end;
+    //  maxy := StrToInt(sortlist[0]);
+    // if floorLine.IndexOf(IntToStr(maxy)) <= -1 then
+    //   floorLine.add(IntToStr(maxy));
+    if sortlist.Count > 0 then
+      maxy := StrToInt(trim(rightstr(sortlist[0], 10)));//午末
+    ss := floorLine.Text;
+    application.ProcessMessages;
+    //sortlist.Clear;
+    //for i := 0 to PointList.Count - 1 do
+    //begin
+    //  if TPointLine(PointList[i]).floor = -1 then  //这里又产生BUG，如果为floor = -1，则没有数据，下标-1报错
+    //    if (TPointLine(PointList[i]).px = TPointLine(PointList[minx]).px) then
+    //    begin
+    //      sortlist.add(rightstr('0000000000' + IntToStr(TPointLine(PointList[i]).py), 10) +
+    //        '               ' + IntToStr(i));
+    //    end;
+    //end;
+    //sortlist.sort;
+    // minx := StrToInt(trim(rightstr(sortlist[sortlist.Count - 1], 10)));//酉之初
+    minx := StrToInt(floorLine[0]);//酉之初
+    //////////////////////////////////////
+    application.ProcessMessages;
+    curp := maxy;
+    curp0 := -1;
+    path := '';
+    // tempnextp := -1;
+    while curp0 <> curp do//午末与酉初之间的四隅之申
+    begin
+      application.ProcessMessages;
+      curp0 := curp;
+      //for i := 0 to PointList.Count - 1 do
+      for i := 0 to PointList.Count - 1 do
+        if TPointLine(PointList[i]).floor = -1 then
+        begin
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[curp0]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py > TPointLine(PointList[curp0]).py) then
+            continue;
+          if (TPointLine(PointList[i]).py >= TPointLine(PointList[maxy]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px > TPointLine(PointList[maxy]).px) then
+            continue;
+          if (TPointLine(PointList[i]).py < TPointLine(PointList[minx]).py) then
+            continue;
+          if (TPointLine(PointList[i]).px <= TPointLine(PointList[minx]).px) then
+            continue;
+          //if (TPointLine(PointList[i]).py = TPointLine(PointList[maxx]).py) then
+          // if (TPointLine(PointList[i]).px = TPointLine(PointList[miny]).px) then
+          if (i = curp0) then
+            continue;
+          if (i = minx) then
+            continue;
+          if (i = maxx) then
+            continue;
+          if (curp0 <> curp) then  //  中间    curp0--curp   curp0--i
+          begin        //k1,k2,a,b,c,d:double;
+            a := (TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py);
+            b := (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px);
+            c := (TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py);
+            d := (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px);
+            //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+            //if ((TPointLine(PointList[i]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[i]).px - TPointLine(PointList[curp0]).px)) <
+            //  ((TPointLine(PointList[curp]).py - TPointLine(PointList[curp0]).py) /
+            //  (TPointLine(PointList[curp]).px - TPointLine(PointList[curp0]).px)) then
+            if ((b = 0) and (d <> 0)) then
+            begin
+              continue;
+            end;
+            if ((b <> 0) and (d = 0)) then
+            begin
+              curp := i;
+            end;
+            if ((b = 0) and (d = 0)) then
+            begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
+              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                //这里本可以加等号，也可不要等号
+                curp := i;
+            end;
+            if ((b <> 0) and (d <> 0)) then
+              if ((a * d) = (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
+                if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                  //这里本可以加等号，也可不要等号
+                  curp := i;
+              end
+              else if ((a * d) < (b * c)) then
+                //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
+              begin
+                curp := i;
+              end;
+          end
+          else     //第一次
+            curp := i;
+        end;
+      if curp0 <> curp then    //跳出循环后
+      begin
+        if floorLine.IndexOf(IntToStr(curp0)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp0));
+          TPointLine(PointList[curp0]).floor := curTOPstorey;
+        end;
+        if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+        begin
+          floorLine.add(IntToStr(curp));
+          TPointLine(PointList[curp]).floor := curTOPstorey;
+        end;
+      end;
+    end;
+    if minx <> curp then
+    begin
+      if floorLine.IndexOf(IntToStr(curp)) <= -1 then
+      begin
+        floorLine.add(IntToStr(curp));
+        TPointLine(pointlist[curp]).floor := curTOPstorey;
+      end;
+    end;
+    // memo_seaLine.Lines.Add('4:' + path);
+    application.ProcessMessages;
+    //////////////////////////////////////
+    TPointLine(pointlist[miny]).floor := curTOPstorey;
+    TPointLine(pointlist[maxx]).floor := curTOPstorey;
+    TPointLine(pointlist[maxy]).floor := curTOPstorey;
+    TPointLine(pointlist[minx]).floor := curTOPstorey;
+
+    if storeyLineList[curTOPstorey].Count = 0 then
+      //这是仅剩下最后一点圆心的情况
+    begin
+      //ss := TPointLine(pointlist[minx]).Pcode;
+      //storeyLineList[curTOPstorey].add(ss);
+      //storeyLineList[curTOPstorey].add(ss);
+    end;
+
+    //for j := 0 to linelist.Count - 1 do
+    //begin
+    //  if  storeyLineList[i].IndexOf(TlinePoint(linelist[j]).beginPcode)<=0 then
+    //  storeyLineList[i].add(TlinePoint(linelist[j]).beginPcode);
+    //  if  storeyLineList[i].IndexOf(TlinePoint(linelist[j]).endPcode)<=0 then
+    //  storeyLineList[i].add(TlinePoint(linelist[j]).endPcode);
+    //end;
+
+    ///////////////////////////////////////////////////////////////////
+    //refreshFromLineList(nil);
+    ss := floorLine.Text;
+    path := '';
+    //if curTOPstorey>=2 then
+    // exit;
+    for i := 0 to floorLine.Count - 1 do
+    begin
+
+      pline := TlinePoint.Create(nil);
+      pcode1 := pcodes[StrToInt(floorLine[i mod floorLine.Count])];
+      pcode2 := pcodes[StrToInt(floorLine[(i + 1) mod floorLine.Count])];
+      pcode1Shape := getpcode(pcode1);
+      pcode2Shape := getpcode(pcode2);
+      pcode1Pointer.x := pcode1Shape.Left + (pcode1Shape.Width div 2);
+      pcode1Pointer.y := pcode1Shape.top + (pcode1Shape.Height div 2);
+      pcode2Pointer.x := pcode2Shape.Left + (pcode2Shape.Width div 2);
+      pcode2Pointer.y := pcode2Shape.top + (pcode2Shape.Height div 2);
+      //self.Image1.Canvas.Line(pcode1Pointer,pcode2Pointer);
+
+      if ResultPathEdgesRed.IndexOf(pcode1 + pcode2) >= 0 then
+      begin
+        ScrollBox1.Canvas.pen.color := clHighlight;//clred;
+        ScrollBox1.Canvas.pen.Width := 4;
+      end
+      else
+      begin
+        ScrollBox1.Canvas.pen.color := clgrayText;
+        ScrollBox1.Canvas.pen.Width := 2;
+      end;
+      self.ScrollBox1.Canvas.Line(pcode1Pointer, pcode2Pointer);  //ok
+      pline.beginPcode := pcode1;
+      pline.endPcode := pcode2;
+      pline.beginPoint := pcode1Pointer;
+      pline.endPoint := pcode2Pointer;
+      pline.floor := curTOPstorey;
+      ///想不到，后来修改时，少加这句，就难找不易
+      linelist.Add(pline);
+      if pos('-->' + pcode1, path) <= 0 then
+        path := path + '-->' + pcode1;
+      if pos('-->' + pcode2, path) <= 0 then
+        path := path + '-->' + pcode2;
+
+      TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).floor :=
+        curTOPstorey;
+      if storeyLineList[curTOPstorey].IndexOf(
+        TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).Pcode) <=
+        -1 then
+        storeyLineList[curTOPstorey].add(
+          TPointLine(pointlist[StrToInt(floorLine[i mod floorLine.Count])]).Pcode);
+    end;
+    storeyLineList[curTOPstorey].add(
+      TPointLine(pointlist[StrToInt(floorLine[0])]).Pcode);
+    memo_seaLine.Lines.Add(path);
+
+    sortlist.Free;
+    floorLine.Free;
+    ///////////////////////////////////////////////////////////////////
+    //refreshFromLineList(nil);
+  end;
+
+begin
+  memo_seaLine.Lines.Clear;
+  pcodeAndPointLineListFromSQL;
+
+  //for i := 1 to PointList.Count - 2 do
+  //  for j := i + 1 to PointList.Count - 1 do
+  //    if TPointLine(PointList[i]).px = TPointLine(PointList[j]).px then
+  //      if TPointLine(PointList[i]).py = TPointLine(PointList[j]).py then
+  //      begin
+  //        ss := TPointLine(PointList[i]).Pcode + '坐标相同' +
+  //          TPointLine(PointList[j]).Pcode + '暂将' +
+  //          TPointLine(PointList[j]).Pcode +
+  //          '的x与y坐标像素值各加1像素临时处理';
+  //        ShowMessage(ss);    //P229
+  //         // TPointLine(PointList[j]).px := TPointLine(PointList[j]).px + 1;
+  //          TPointLine(PointList[j]).py := TPointLine(PointList[j]).py + 1;
+  //      end;
+
+  for i := 1 to PointList.Count - 1 do
+    TPointLine(PointList[i]).floor := -1;
+  for i := 1 to lineList.Count - 1 do
+    TLinePoint(lineList[i]).floor := -1;
+  minx0 := 0;//TPoint(PointList[0]);
+  miny0 := minx0;
+  maxx0 := minx0;
+  maxy0 := minx0;
+
+  for i := 1 to PointList.Count - 1 do
+    // PointList: TFPList;//TPointerList;//TList;  //TPointline
+  begin
+    if (TPointLine(PointList[i]).px < TPointLine(PointList[minx0]).px) then
+      minx0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py < TPointLine(PointList[miny0]).py) then
+      miny0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).px > TPointLine(PointList[maxx0]).px) then
+      maxx0 := i;//  TPoint(PointList[i]);
+    if (TPointLine(PointList[i]).py > TPointLine(PointList[maxy0]).py) then
+      maxy0 := i;//  TPoint(PointList[i]);
+  end;
+  memo_seaLine.Lines.Add('minx=' + pcodes[minx0]);
+  memo_seaLine.Lines.Add('miny=' + pcodes[miny0]);
+  memo_seaLine.Lines.Add('maxx=' + pcodes[maxx0]);
+  memo_seaLine.Lines.Add('maxy=' + pcodes[maxy0]);
+  application.ProcessMessages;
+  memo_seaLine.Lines.Add('最外层围城线围墙：');
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      //if tobject(shapeList.Items[i]) is TlinePoint then
+      if lineList.Items[i] <> nil then
+      begin
+        TlinePoint(lineList.Items[i]).Free;
+        lineList.Items[i] := nil;
+        lineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  lineList.Clear;
+  for i := TPsubpPointList.Count - 1 downto 0 do
+  begin
+    try
+      if (TPsubpPointList.Items[i]) <> nil then
+      begin
+        TPsubpPoint(TPsubpPointList.Items[i]).Free;
+        TPsubpPointList.Items[i] := nil;
+        TPsubpPointList.Count := TPsubpPointList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  TPsubpPointList.Clear;
+
+  image1.Refresh;
+  /////////////////////////////////////////////////////////////////
+  sealine000(minx0, miny0, maxx0, maxy0);        //最外层，另外计算
+  //exit;
+  ////////////////////////////////////////////////
+  setlength(storeyLineList, 1);
+  storeyLineList[0] := TStringList.Create;
+  for i := 0 to linelist.Count - 1 do
+  begin
+    if storeyLineList[0].IndexOf(TlinePoint(linelist[i]).beginPcode) <= -1 then
+      storeyLineList[0].add(TlinePoint(linelist[i]).beginPcode);
+    if storeyLineList[0].IndexOf(TlinePoint(linelist[i]).endPcode) <= -1 then
+      storeyLineList[0].add(TlinePoint(linelist[i]).endPcode);
+    TlinePoint(linelist[i]).floor := 0;
+    // TPointLine(pointlist[getPcodeIndex(TlinePoint(linelist[i]).beginPcode)]).floor := 0 ;
+    // TPointLine(pointlist[getPcodeIndex(TlinePoint(linelist[i]).endPcode)]).floor := 0 ;
+  end;
+  // storeyLineList[0].add(tstringlist(storeyLineList[0])[0]);
+  ss := storeyLineList[0].Text;    //第一层，已是首尾相接
+  //for i := 0 to pointlist.Count - 1 do
+  //begin
+  //  if  TPointLine(pointlist[i]).Pcode='P3' then
+  //  application.ProcessMessages;
+  //  ss:= TPointLine(pointlist[i]).Pcode ;
+  //  j:= TPointLine(pointlist[i]).floor;
+  //  application.ProcessMessages;
+  ////  if storeyLineList[0].IndexOf(TPointLine(pointlist[i]).Pcode) <= 0 then
+  // //   TPointLine(pointlist[i]).floor := 0
+  // // else
+  //  //  TPointLine(pointlist[i]).floor := -1;
+  //end;
+  for i := 0 to storeyLineList[0].Count - 1 do
+  begin
+    ss := (storeyLineList[0][i]);
+    j := getPcodeIndex(ss);
+    TPointLine(pointlist[j]).floor := 0;
+  end;
+  TPointLine(pointlist[miny0]).floor := 0;
+  TPointLine(pointlist[maxx0]).floor := 0;
+  TPointLine(pointlist[maxy0]).floor := 0;
+  TPointLine(pointlist[minx0]).floor := 0;
+  /////////////////////////
+  i := 1;
+  while i > 0 do
+  begin
+    i := 0;
+    for j := 0 to pointlist.Count - 1 do
+      //pointlist所有点集，未分层的全点集
+      if TPointLine(pointlist[j]).floor = -1 then
+        I := i + 1;
+    if i = 1 then
+      application.ProcessMessages;
+    if i > 0 then
+      seaLineLayer(0, 0, 0, 0);    //求出所有层
+    //seaLineLayer000(0, 0, 0, 0);    //求出所有层
+    //sealineLayerTEST(0, 0, 0, 0);    //求出所有层
+  end;
+  ////////////////////////
+  //exit;
+  for i := 0 to length(storeyLineList) - 1 do  //每一层点集
+    memo_seaLine.Lines.Add(IntToStr(i) + '=' + storeyLineList[i].Text);
+  //  exit;
+  for i := 0 to length(storeyLineList) - 2 do  //每一层点集
+    //for i := 0 to length(storeyLineList) - 3 do  //每一层点集 for test
+  begin
+    // for j := 0 to pointList.Count - 1 do   //pointlist所有点集，未分层的全点集
+    //正是这种循环不行，要用层内的for j := 0 to storeyLineList[i].Count - 1 do
+    //  for j := 0 to storeyLineList[i].Count - 1 do
+    //  begin
+    //    jjj := -1;
+    //  for k := 0 to LineList.Count - 1 do     //pointlist所有点集，未分层的全点集
+    //正是这种循环不行，要用层内的for k := 0 to storeyLineList[i+1].Count - 1 do
+    // lmn := storeyLineList[i + 1].Count;
+    //  ss:= storeyLineList[i].text;
+    //  ss:= storeyLineList[i + 1].text;
+
+    /////////////////////////////////////////////
+    if TButton(Sender).Caption = '海岸线算法(逐层且再逐点)或顺时或逆时'
+    then
+      // if 1 = 2 then
+    begin
+      floorSumCurminH := 0;
+      for k := 0 to storeyLineList[i + 1].Count - 2 do
+        // j  out lower  k要高层内层，j在低层外层
+        //for k :=  storeyLineList[i+1].Count - 2 downto 0 do     //  k in   high  k要高层内层，j在低层外层
+      begin
+        for lmn := pointList.Count - 1 downto 0 do
+          if TPointLine(pointList[lmn]).pcode = ((storeyLineList[i + 1])[k]) then
+            break;
+        if TPointLine(pointList[lmn]).floor = -111 then
+          continue;
+        minH := 10000000;
+        ij := -1;
+        ik := -1;
+        jjj := -1;
+        for j := 0 to storeyLineList[i].Count - 2 do
+          // j  out lower  k要高层内层，j在低层外层
+          //for j :=  storeyLineList[i].Count - 2 downto 0 do           //  k in   high  k要高层内层，j在低层外层
+        begin
+          curminH := (PPLong(fromPcodeGetPoint((storeyLineList[i + 1])
+            [k]), fromPcodeGetPoint((storeyLineList[i])[j])) +
+            PPLong(fromPcodeGetPoint((storeyLineList[i + 1])[k]),
+            fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])) - PPLong(fromPcodeGetPoint(
+            (storeyLineList[i])[j]), fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])));
+          if curminH <= minH then
+            //if curminH < minH then
+            //此处加上等号，在三种坐标中，在坐标点是十分规则的矩形分布坐标轴一样整点时，也比原先的解优胜了
+          begin   //此处未处理是不是相交线，所以可能时或偶有相交线出现乎
+            minH := curminH;
+            ij := j;    //ii  j    in   high
+            ik := k;   //iii   k  out  lower
+            jjj := 1;
+          end;
+        end;  //for j
+        /////////////////////////////////////////
+
+        if jjj = 1 then
+        begin
+          floorSumCurminH := floorSumCurminH + minH;
+          for jjj := pointList.Count - 1 downto 0 do
+            //将原先内层高层的点，先标记，到时全删除乎
+            if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+              TPointLine(pointList[jjj]).floor := -111;
+        end;
+      end;  //for k
+
+      floorSumCurminHto := floorSumCurminH;
+
+
+      for jjj := pointList.Count - 1 downto 0 do
+        for ik := (storeyLineList[i + 1]).Count - 1 downto 0 do
+          if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+            TPointLine(pointList[jjj]).floor := i + 1;
+
+      floorSumCurminH := 0;
+      //for k := 0 to storeyLineList[i + 1].Count - 2 do       // j  out lower  k要高层内层，j在低层外层
+      for k := storeyLineList[i + 1].Count - 2 downto 0 do
+        //  k in   high  k要高层内层，j在低层外层
+      begin
+        for lmn := pointList.Count - 1 downto 0 do
+          if TPointLine(pointList[lmn]).pcode = ((storeyLineList[i + 1])[k]) then
+            break;
+        if TPointLine(pointList[lmn]).floor = -111 then
+          continue;
+        minH := 10000000;
+        ij := -1;
+        ik := -1;
+        jjj := -1;
+        for j := 0 to storeyLineList[i].Count - 2 do
+          // j  out lower  k要高层内层，j在低层外层
+          //for j :=  storeyLineList[i].Count - 2 downto 0 do           //  k in   high  k要高层内层，j在低层外层
+        begin
+          curminH := (PPLong(fromPcodeGetPoint((storeyLineList[i + 1])
+            [k]), fromPcodeGetPoint((storeyLineList[i])[j])) +
+            PPLong(fromPcodeGetPoint((storeyLineList[i + 1])[k]),
+            fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])) - PPLong(fromPcodeGetPoint(
+            (storeyLineList[i])[j]), fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])));
+          if curminH <= minH then
+            //if curminH < minH then
+            //此处加上等号，在三种坐标中，在坐标点是十分规则的矩形分布坐标轴一样整点时，也比原先的解优胜了
+          begin   //此处未处理是不是相交线，所以可能时或偶有相交线出现乎
+            minH := curminH;
+            ij := j;    //ii  j    in   high
+            ik := k;   //iii   k  out  lower
+            jjj := 1;
+          end;
+        end;  //for j
+        /////////////////////////////////////////
+
+        if jjj = 1 then
+        begin
+          floorSumCurminH := floorSumCurminH + minH;
+          for jjj := pointList.Count - 1 downto 0 do
+            //将原先内层高层的点，先标记，到时全删除乎
+            if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+              TPointLine(pointList[jjj]).floor := -111;
+        end;
+      end;  //for k
+
+      floorSumCurminHdownto := floorSumCurminH;
+
+      for jjj := pointList.Count - 1 downto 0 do
+        for ik := (storeyLineList[i + 1]).Count - 1 downto 0 do
+          if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+            TPointLine(pointList[jjj]).floor := i + 1;
+
+      if floorSumCurminHto < floorSumCurminHdownto then
+      begin
+        for k := 0 to storeyLineList[i + 1].Count - 2 do
+          // j  out lower  k要高层内层，j在低层外层
+          //for k := storeyLineList[i + 1].Count - 2 downto 0 do      // k in   high k要高层内层，j在低层外层
+          //  k in   high  k要高层内层，j在低层外层
+          // if (TlinePoint(linelist[j]).floor = (i)) then
+          //   if (TlinePoint(linelist[k]).floor = (i+1)) then
+          //if (TlinePoint(linelist[k]).floor <>-111) then
+        begin
+          for lmn := pointList.Count - 1 downto 0 do
+            if TPointLine(pointList[lmn]).pcode = ((storeyLineList[i + 1])[k]) then
+              break;
+          if TPointLine(pointList[lmn]).floor = -111 then
+            continue;
+          minH := 10000000;
+          ij := -1;
+          ik := -1;
+          jjj := -1;
+          for j := 0 to storeyLineList[i].Count - 2 do
+            // j  out lower  k要高层内层，j在低层外层
+            //for j :=  storeyLineList[i].Count - 2 downto 0 do           //  k in   high  k要高层内层，j在低层外层
+          begin
+            curminH := (PPLong(fromPcodeGetPoint((storeyLineList[i + 1])
+              [k]), fromPcodeGetPoint((storeyLineList[i])[j])) +
+              PPLong(fromPcodeGetPoint((storeyLineList[i + 1])[k]),
+              fromPcodeGetPoint((storeyLineList[i])
+              [(j + 1) mod storeyLineList[i].Count])) -
+              PPLong(fromPcodeGetPoint((storeyLineList[i])[j]),
+              fromPcodeGetPoint((storeyLineList[i])
+              [(j + 1) mod storeyLineList[i].Count])));
+            if curminH <= minH then
+              //if curminH < minH then
+              //此处加上等号，在三种坐标中，在坐标点是十分规则的矩形分布坐标轴一样整点时，也比原先的解优胜了
+            begin   //此处未处理是不是相交线，所以可能时或偶有相交线出现乎
+              minH := curminH;
+              ij := j;    //ii  j    in   high
+              ik := k;   //iii   k  out  lower
+              jjj := 1;
+            end;
+          end;  //for j
+          /////////////////////////////////////////
+          if jjj = 1 then
+          begin
+            pline := TlinePoint.Create(nil);
+            pline.beginPcode := ((storeyLineList[i])[ij]);
+            pline.endPcode := ((storeyLineList[i + 1])[ik]);
+            pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])[ij]);
+            pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+            pline.floor := i;
+            linelist.Add(pline);
+
+            pline := TlinePoint.Create(nil);
+            pline.beginPcode := ((storeyLineList[i])
+              [(ij + 1) mod storeyLineList[i].Count]);
+            pline.endPcode := ((storeyLineList[i + 1])[ik]);
+            pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])
+              [(ij + 1) mod storeyLineList[i].Count]);
+            pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+            pline.floor := i;
+            linelist.Add(pline);
+            // 三角形中两边替换一边，一种类似最短路径算法中的弗洛伊德算法中的松弛操作relax operation
+            //memo_seaLine.Lines.Add(((storeyLineList[i])[ij]) +
+            //  ((storeyLineList[i + 1])[ik]) + '和' + ((storeyLineList[i])
+            //  [(ij + 1) mod storeyLineList[i].Count]) + ((storeyLineList[i + 1])
+            //  [ik]) + '替换' + ((storeyLineList[i])[ij]) + ((storeyLineList[i])
+            //  [(ij + 1) mod storeyLineList[i].Count]));
+
+            for jjj := lineList.Count - 1 downto 0 do
+            begin
+              //三角形中两边替换一边，将另一边先标记，到时统一删除，系统功能限制，不能立即删除乎
+              if (TlinePoint(linelist[jjj]).beginPcode + TlinePoint(
+                linelist[jjj]).endPcode) = ((storeyLineList[i])
+                [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+                TlinePoint(linelist[jjj]).floor := -111;
+              if (TlinePoint(linelist[jjj]).endPcode + TlinePoint(
+                linelist[jjj]).beginPcode) = ((storeyLineList[i])
+                [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+                TlinePoint(linelist[jjj]).floor := -111;
+            end;
+            for jjj := pointList.Count - 1 downto 0 do
+              //将原先内层高层的点，先标记，到时全删除乎
+              if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+                TPointLine(pointList[jjj]).floor := -111;
+
+            //tstringlist(storeyLineList[i])[ij+1].Delete;
+            //tstringlist(storeyLineList[i])[ij].Delete;
+            TStringList(storeyLineList[i]).insert(ij + 1,
+              TStringList(storeyLineList[i + 1])[ik]);
+            //三角形中两边替换一边，实际相当于在原来的两点路径中插入一个新点
+          end;
+          //if jjj = 2 then
+          begin
+          end;
+        end;  //for k
+      end;
+      if floorSumCurminHdownto <= floorSumCurminHto then
+      begin
+        //     for k := 0 to storeyLineList[i + 1].Count - 2 do       // j  out lower  k要高层内层，j在低层外层
+        for k := storeyLineList[i + 1].Count - 2 downto 0 do
+          // k in   high k要高层内层，j在低层外层
+          //  k in   high  k要高层内层，j在低层外层
+          // if (TlinePoint(linelist[j]).floor = (i)) then
+          //   if (TlinePoint(linelist[k]).floor = (i+1)) then
+          //if (TlinePoint(linelist[k]).floor <>-111) then
+        begin
+          for lmn := pointList.Count - 1 downto 0 do
+            if TPointLine(pointList[lmn]).pcode = ((storeyLineList[i + 1])[k]) then
+              break;
+          if TPointLine(pointList[lmn]).floor = -111 then
+            continue;
+          minH := 10000000;
+          ij := -1;
+          ik := -1;
+          jjj := -1;
+          for j := 0 to storeyLineList[i].Count - 2 do
+            // j  out lower  k要高层内层，j在低层外层
+            //for j :=  storeyLineList[i].Count - 2 downto 0 do           //  k in   high  k要高层内层，j在低层外层
+          begin
+            curminH := (PPLong(fromPcodeGetPoint((storeyLineList[i + 1])
+              [k]), fromPcodeGetPoint((storeyLineList[i])[j])) +
+              PPLong(fromPcodeGetPoint((storeyLineList[i + 1])[k]),
+              fromPcodeGetPoint((storeyLineList[i])
+              [(j + 1) mod storeyLineList[i].Count])) -
+              PPLong(fromPcodeGetPoint((storeyLineList[i])[j]),
+              fromPcodeGetPoint((storeyLineList[i])
+              [(j + 1) mod storeyLineList[i].Count])));
+            if curminH <= minH then
+              //if curminH < minH then
+              //此处加上等号，在三种坐标中，在坐标点是十分规则的矩形分布坐标轴一样整点时，也比原先的解优胜了
+            begin   //此处未处理是不是相交线，所以可能时或偶有相交线出现乎
+              minH := curminH;
+              ij := j;    //ii  j    in   high
+              ik := k;   //iii   k  out  lower
+              jjj := 1;
+            end;
+          end;  //for j
+          /////////////////////////////////////////
+          if jjj = 1 then
+          begin
+            pline := TlinePoint.Create(nil);
+            pline.beginPcode := ((storeyLineList[i])[ij]);
+            pline.endPcode := ((storeyLineList[i + 1])[ik]);
+            pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])[ij]);
+            pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+            pline.floor := i;
+            linelist.Add(pline);
+
+            pline := TlinePoint.Create(nil);
+            pline.beginPcode := ((storeyLineList[i])
+              [(ij + 1) mod storeyLineList[i].Count]);
+            pline.endPcode := ((storeyLineList[i + 1])[ik]);
+            pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])
+              [(ij + 1) mod storeyLineList[i].Count]);
+            pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+            pline.floor := i;
+            linelist.Add(pline);
+            // 三角形中两边替换一边，一种类似最短路径算法中的弗洛伊德算法中的松弛操作relax operation
+            //memo_seaLine.Lines.Add(((storeyLineList[i])[ij]) +
+            //  ((storeyLineList[i + 1])[ik]) + '和' + ((storeyLineList[i])
+            //  [(ij + 1) mod storeyLineList[i].Count]) + ((storeyLineList[i + 1])
+            //  [ik]) + '替换' + ((storeyLineList[i])[ij]) + ((storeyLineList[i])
+            //  [(ij + 1) mod storeyLineList[i].Count]));
+
+            for jjj := lineList.Count - 1 downto 0 do
+            begin
+              //三角形中两边替换一边，将另一边先标记，到时统一删除，系统功能限制，不能立即删除乎
+              if (TlinePoint(linelist[jjj]).beginPcode + TlinePoint(
+                linelist[jjj]).endPcode) = ((storeyLineList[i])
+                [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+                TlinePoint(linelist[jjj]).floor := -111;
+              if (TlinePoint(linelist[jjj]).endPcode + TlinePoint(
+                linelist[jjj]).beginPcode) = ((storeyLineList[i])
+                [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+                TlinePoint(linelist[jjj]).floor := -111;
+            end;
+            for jjj := pointList.Count - 1 downto 0 do
+              //将原先内层高层的点，先标记，到时全删除乎
+              if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+                TPointLine(pointList[jjj]).floor := -111;
+
+            //tstringlist(storeyLineList[i])[ij+1].Delete;
+            //tstringlist(storeyLineList[i])[ij].Delete;
+            TStringList(storeyLineList[i]).insert(ij + 1,
+              TStringList(storeyLineList[i + 1])[ik]);
+            //三角形中两边替换一边，实际相当于在原来的两点路径中插入一个新点
+          end;
+          //if jjj = 2 then
+          begin
+          end;
+        end;  //for k
+      end;
+    end;
+
+
+
+    //////////////////////////////////////////////
+    if TButton(Sender).Caption = '海岸线算法(逐层且再逐点)全顺时' then
+      //if 1 = 2 then
+      for k := 0 to storeyLineList[i + 1].Count - 2 do
+        // j  out lower  k要高层内层，j在低层外层
+        // for k := storeyLineList[i + 1].Count - 2 downto 0 do
+        // k in   high k要高层内层，j在低层外层
+        //  k in   high  k要高层内层，j在低层外层
+        // if (TlinePoint(linelist[j]).floor = (i)) then
+        //   if (TlinePoint(linelist[k]).floor = (i+1)) then
+        //if (TlinePoint(linelist[k]).floor <>-111) then
+      begin
+        for lmn := pointList.Count - 1 downto 0 do
+          if TPointLine(pointList[lmn]).pcode = ((storeyLineList[i + 1])[k]) then
+            break;
+        if TPointLine(pointList[lmn]).floor = -111 then
+          continue;
+        minH := 10000000;
+        ij := -1;
+        ik := -1;
+        jjj := -1;
+        for j := 0 to storeyLineList[i].Count - 2 do
+          // j  out lower  k要高层内层，j在低层外层
+          //for j :=  storeyLineList[i].Count - 2 downto 0 do           //  k in   high  k要高层内层，j在低层外层
+        begin
+          curminH := (PPLong(fromPcodeGetPoint((storeyLineList[i + 1])
+            [k]), fromPcodeGetPoint((storeyLineList[i])[j])) +
+            PPLong(fromPcodeGetPoint((storeyLineList[i + 1])[k]),
+            fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])) -
+            PPLong(fromPcodeGetPoint((storeyLineList[i])[j]),
+            fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])));
+          if curminH <= minH then
+            //if curminH < minH then
+            //此处加上等号，在三种坐标中，在坐标点是十分规则的矩形分布坐标轴一样整点时，也比原先的解优胜了
+          begin   //此处未处理是不是相交线，所以可能时或偶有相交线出现乎
+            minH := curminH;
+            ij := j;    //ii  j    in   high
+            ik := k;   //iii   k  out  lower
+            jjj := 1;
+          end;
+        end;  //for j
+        /////////////////////////////////////////
+        if jjj = 1 then
+        begin
+          pline := TlinePoint.Create(nil);
+          pline.beginPcode := ((storeyLineList[i])[ij]);
+          pline.endPcode := ((storeyLineList[i + 1])[ik]);
+          pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])[ij]);
+          pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+          pline.floor := i;
+          linelist.Add(pline);
+
+          pline := TlinePoint.Create(nil);
+          pline.beginPcode := ((storeyLineList[i])
+            [(ij + 1) mod storeyLineList[i].Count]);
+          pline.endPcode := ((storeyLineList[i + 1])[ik]);
+          pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])
+            [(ij + 1) mod storeyLineList[i].Count]);
+          pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+          pline.floor := i;
+          linelist.Add(pline);
+          // 三角形中两边替换一边，一种类似最短路径算法中的弗洛伊德算法中的松弛操作relax operation
+          //memo_seaLine.Lines.Add(((storeyLineList[i])[ij]) +
+          //  ((storeyLineList[i + 1])[ik]) + '和' + ((storeyLineList[i])
+          //  [(ij + 1) mod storeyLineList[i].Count]) + ((storeyLineList[i + 1])
+          //  [ik]) + '替换' + ((storeyLineList[i])[ij]) + ((storeyLineList[i])
+          //  [(ij + 1) mod storeyLineList[i].Count]));
+
+          for jjj := lineList.Count - 1 downto 0 do
+          begin
+            //三角形中两边替换一边，将另一边先标记，到时统一删除，系统功能限制，不能立即删除乎
+            if (TlinePoint(linelist[jjj]).beginPcode + TlinePoint(
+              linelist[jjj]).endPcode) = ((storeyLineList[i])
+              [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+              TlinePoint(linelist[jjj]).floor := -111;
+            if (TlinePoint(linelist[jjj]).endPcode + TlinePoint(
+              linelist[jjj]).beginPcode) = ((storeyLineList[i])
+              [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+              TlinePoint(linelist[jjj]).floor := -111;
+          end;
+          for jjj := pointList.Count - 1 downto 0 do
+            //将原先内层高层的点，先标记，到时全删除乎
+            if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+              TPointLine(pointList[jjj]).floor := -111;
+
+          //tstringlist(storeyLineList[i])[ij+1].Delete;
+          //tstringlist(storeyLineList[i])[ij].Delete;
+          TStringList(storeyLineList[i]).insert(ij + 1,
+            TStringList(storeyLineList[i + 1])[ik]);
+          //三角形中两边替换一边，实际相当于在原来的两点路径中插入一个新点
+        end;
+        //if jjj = 2 then
+        begin
+        end;
+      end;  //for k
+
+
+
+
+    if TButton(Sender).Caption = '海岸线算法(逐层且再逐点)全逆时' then
+      //if 1 = 2 then
+      //for k := 0 to storeyLineList[i + 1].Count - 2 do       // j  out lower  k要高层内层，j在低层外层
+      for k := storeyLineList[i + 1].Count - 2 downto 0 do
+        // k in   high k要高层内层，j在低层外层
+        //  k in   high  k要高层内层，j在低层外层
+        // if (TlinePoint(linelist[j]).floor = (i)) then
+        //   if (TlinePoint(linelist[k]).floor = (i+1)) then
+        //if (TlinePoint(linelist[k]).floor <>-111) then
+      begin
+        for lmn := pointList.Count - 1 downto 0 do
+          if TPointLine(pointList[lmn]).pcode = ((storeyLineList[i + 1])[k]) then
+            break;
+        if TPointLine(pointList[lmn]).floor = -111 then
+          continue;
+        minH := 10000000;
+        ij := -1;
+        ik := -1;
+        jjj := -1;
+        for j := 0 to storeyLineList[i].Count - 2 do
+          // j  out lower  k要高层内层，j在低层外层
+          //for j :=  storeyLineList[i].Count - 2 downto 0 do           //  k in   high  k要高层内层，j在低层外层
+        begin
+          curminH := (PPLong(fromPcodeGetPoint((storeyLineList[i + 1])
+            [k]), fromPcodeGetPoint((storeyLineList[i])[j])) +
+            PPLong(fromPcodeGetPoint((storeyLineList[i + 1])[k]),
+            fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])) -
+            PPLong(fromPcodeGetPoint((storeyLineList[i])[j]),
+            fromPcodeGetPoint((storeyLineList[i])
+            [(j + 1) mod storeyLineList[i].Count])));
+          if curminH <= minH then
+            //if curminH < minH then
+            //此处加上等号，在三种坐标中，在坐标点是十分规则的矩形分布坐标轴一样整点时，也比原先的解优胜了
+          begin   //此处未处理是不是相交线，所以可能时或偶有相交线出现乎
+            minH := curminH;
+            ij := j;    //ii  j    in   high
+            ik := k;   //iii   k  out  lower
+            jjj := 1;
+          end;
+        end;  //for j
+        /////////////////////////////////////////
+        if jjj = 1 then
+        begin
+          pline := TlinePoint.Create(nil);
+          pline.beginPcode := ((storeyLineList[i])[ij]);
+          pline.endPcode := ((storeyLineList[i + 1])[ik]);
+          pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])[ij]);
+          pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+          pline.floor := i;
+          linelist.Add(pline);
+
+          pline := TlinePoint.Create(nil);
+          pline.beginPcode := ((storeyLineList[i])
+            [(ij + 1) mod storeyLineList[i].Count]);
+          pline.endPcode := ((storeyLineList[i + 1])[ik]);
+          pline.beginPoint := fromPcodeGetPoint((storeyLineList[i])
+            [(ij + 1) mod storeyLineList[i].Count]);
+          pline.endPoint := fromPcodeGetPoint((storeyLineList[i + 1])[ik]);
+          pline.floor := i;
+          linelist.Add(pline);
+          // 三角形中两边替换一边，一种类似最短路径算法中的弗洛伊德算法中的松弛操作relax operation
+          //memo_seaLine.Lines.Add(((storeyLineList[i])[ij]) +
+          //  ((storeyLineList[i + 1])[ik]) + '和' + ((storeyLineList[i])
+          //  [(ij + 1) mod storeyLineList[i].Count]) + ((storeyLineList[i + 1])
+          //  [ik]) + '替换' + ((storeyLineList[i])[ij]) + ((storeyLineList[i])
+          //  [(ij + 1) mod storeyLineList[i].Count]));
+
+          for jjj := lineList.Count - 1 downto 0 do
+          begin
+            //三角形中两边替换一边，将另一边先标记，到时统一删除，系统功能限制，不能立即删除乎
+            if (TlinePoint(linelist[jjj]).beginPcode + TlinePoint(
+              linelist[jjj]).endPcode) = ((storeyLineList[i])
+              [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+              TlinePoint(linelist[jjj]).floor := -111;
+            if (TlinePoint(linelist[jjj]).endPcode + TlinePoint(
+              linelist[jjj]).beginPcode) = ((storeyLineList[i])
+              [ij]) + ((storeyLineList[i])[(ij + 1) mod storeyLineList[i].Count]) then
+              TlinePoint(linelist[jjj]).floor := -111;
+          end;
+          for jjj := pointList.Count - 1 downto 0 do
+            //将原先内层高层的点，先标记，到时全删除乎
+            if TPointLine(pointList[jjj]).pcode = ((storeyLineList[i + 1])[ik]) then
+              TPointLine(pointList[jjj]).floor := -111;
+
+          //tstringlist(storeyLineList[i])[ij+1].Delete;
+          //tstringlist(storeyLineList[i])[ij].Delete;
+          TStringList(storeyLineList[i]).insert(ij + 1,
+            TStringList(storeyLineList[i + 1])[ik]);
+          //三角形中两边替换一边，实际相当于在原来的两点路径中插入一个新点
+        end;
+        //if jjj = 2 then
+        begin
+        end;
+      end;  //for k
+    ///////////////////////////////////////////
+    // for j := 0 to storeyLineList[i+1].Count - 1 do
+    for j := lineList.Count - 1 downto 0 do
+      if TlinePoint(linelist[j]).floor = i + 1 then
+        //将原先内层高层的边，先标记，到时全删除乎
+        TlinePoint(linelist[j]).floor := -111;
+    TStringList(storeyLineList[i + 1]).Clear;
+    for j := 0 to TStringList(storeyLineList[i]).Count - 1 do
+      TStringList(storeyLineList[i + 1]).add(TStringList(storeyLineList[i])[j]);
+    TStringList(storeyLineList[i]).Clear;
+  end;   //i
+  //新线立即加上，原线标记下次删除之，下面的就是互换的代码，替代不能直接删除而已
+  tempLineList := TFPList.Create;
+  // for i := lineList.Count - 1 downto 0 do
+  //for j := i-1 downto 0 do
+  //if TlinePoint(linelist[i]).floor <> -111 then
+  //if TlinePoint(linelist[j]).floor <> -111 then
+  //if   TlinePoint(linelist[i]).beginPcode+TlinePoint(linelist[i]).endPcode=
+  //TlinePoint(linelist[j]).beginPcode+TlinePoint(linelist[j]).endPcode  then
+  //     TlinePoint(linelist[i]).floor:=-111;
+  //    memo_seaLine.Lines.Add(    TlinePoint(linelist[i]).beginPcode+TlinePoint(linelist[i]).endPcode);
+  //P91P91:0   P1P1:0  P10P10:0    P100P100:0  如此造成统计点数出错的
+
+  for i := lineList.Count - 1 downto 0 do
+    if TlinePoint(linelist[i]).floor <> -111 then
+      if TlinePoint(linelist[i]).beginPcode = TlinePoint(linelist[i]).endPcode then
+        TlinePoint(linelist[i]).floor := -111;
+  //P91P91:0   P1P1:0  P10P10:0    P100P100:0  如此造成统计点数出错的
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      if TlinePoint(linelist[i]).floor <> -111 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(linelist[i]).beginPcode;
+        pline.endPcode := TlinePoint(linelist[i]).endPcode;
+        pline.beginPoint := TlinePoint(linelist[i]).beginPoint;
+        pline.endPoint := TlinePoint(linelist[i]).endPoint;
+        pline.floor := TlinePoint(linelist[i]).floor;
+        tempLineList.Add(pline);
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(linelist[i]).floor<>-111 then
+      if lineList.Items[i] <> nil then
+      begin
+        TlinePoint(lineList.Items[i]).Free;
+        lineList.Items[i] := nil;
+        lineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  lineList.Clear;
+  for i := tempLineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(tempLineList[i]).floor<>-111 then
+      begin
+        pline := TlinePoint.Create(nil);
+        pline.beginPcode := TlinePoint(tempLineList[i]).beginPcode;
+        pline.endPcode := TlinePoint(tempLineList[i]).endPcode;
+        pline.beginPoint := TlinePoint(tempLineList[i]).beginPoint;
+        pline.endPoint := TlinePoint(tempLineList[i]).endPoint;
+        pline.floor := TlinePoint(tempLineList[i]).floor;
+        LineList.Add(pline);
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  for i := tempLineList.Count - 1 downto 0 do
+  begin
+    try
+      // if TlinePoint(linelist[i]).floor<>-111 then
+      if tempLineList.Items[i] <> nil then
+      begin
+        TlinePoint(tempLineList.Items[i]).Free;
+        tempLineList.Items[i] := nil;
+        tempLineList.Count := lineList.Count - 1;
+        application.ProcessMessages;
+      end;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+  tempLineList.Clear;
+  tempLineList.Free;
+  for i := pointList.Count - 1 downto 0 do
+    TPointLine(pointList[i]).floor := -1;
+  onelong := 0.0;
+  alllong := 0.0;
+  memo_seaLine.Lines.Add('总路径：总点数：' + IntToStr(lineList.Count));
+  //P91P91:0   P1P1:0  P10P10:0    P100P100:0  如此造成统计点数出错的
+  for i := lineList.Count - 1 downto 0 do
+  begin
+    try
+      onelong := pplong(TlinePoint(linelist[i]).beginPoint, TlinePoint(
+        linelist[i]).endPoint);
+      memo_seaLine.Lines.Add(TlinePoint(linelist[i]).beginPcode +
+        TlinePoint(linelist[i]).endPcode + ':' + floattostr(onelong));
+      alllong := alllong + onelong;
+      TPointLine(pointList[getpcodeindex(TlinePoint(linelist[i]).beginPcode)]).floor
+      := 1;
+      TPointLine(pointList[getpcodeindex(TlinePoint(linelist[i]).endPcode)]).floor := 1;
+    except
+    end;
+    application.ProcessMessages;
+  end;
+
+  memo_seaLine.Lines.Add('总路长：' + floattostr(alllong));
+  ss := '';
+  for i := pointList.Count - 1 downto 0 do
+    if TPointLine(pointList[i]).floor = -1 then
+      ss := ss + TPointLine(pointList[i]).pcode + ',';
+  if ss <> '' then
+    ShowMessage(ss + '这些点没有被处理');
+  //同心圆的中心点暂未处理，因为结果不理想，无兴趣理会
+
+  //sleepli(2);
+  //refreshFromLineList(nil);
+  refrash.Click;
+  //refreshClick(sender);
+end;
 { TPsubpPoint }
 
 constructor TPsubpPoint.Create(TheOwner: TComponent);

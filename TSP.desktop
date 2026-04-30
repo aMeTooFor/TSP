@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Icon=/media/w/data/日记类/TSP_ubuntu_Lazarus/ttsp
+Path=/media/w/data/日记类/TSP_ubuntu_Lazarus
+Database=/media/w/data/日记类/TSP_ubuntu_Lazarus/TSP.sqlite3
+Exec=/media/w/data/日记类/TSP_ubuntu_Lazarus/TSP
+Name=TSP算法小软件－海岸线算法123
+Category=Application;
+Categories=Development;Database;

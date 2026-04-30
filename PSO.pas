@@ -366,7 +366,7 @@ begin
       fff.bestTour[i] := 0;
 
   end;
-
+    fff.PSOLine.Lines.Add('总路长:: ' + floattostr(gbest));
 end;
 
 procedure TPSO.Rand_popu;
