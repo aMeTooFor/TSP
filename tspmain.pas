@@ -7625,7 +7625,7 @@ begin
           end;
           if ((b = 0) and (d = 0)) then
           begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
-            if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+            if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
               //这里本可以加等号，也可不要等号
               curp := i;
           end;
@@ -7634,7 +7634,7 @@ begin
               //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
             begin
               //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
-              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+              if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
                 //这里本可以加等号，也可不要等号
                 curp := i;
             end
@@ -9108,7 +9108,7 @@ var
             end;
             if ((b = 0) and (d = 0)) then
             begin           //curp0,curp,i 同为垂直时，取垂直最近curp0者
-              if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+              if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
                 //这里本可以加等号，也可不要等号
                 curp := i;
             end;
@@ -9117,7 +9117,7 @@ var
                 //  k1:=a/b ;  k2:=c/d;      k1<k2    a/b<c/d   ad<bc
               begin
                 //curp0,curp,i 同为同一条斜率直线上时，取最近curp0者
-                if TPointLine(PointList[i]).py < TPointLine(PointList[curp]).py then
+                if TPointLine(PointList[i]).py > TPointLine(PointList[curp]).py then
                   //这里本可以加等号，也可不要等号
                   curp := i;
               end
